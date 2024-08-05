@@ -91,7 +91,7 @@ void respawn(entvars_t* pev)
 	}
 	else
 	{	// restart the entire server
-		SERVER_COMMAND("reload\n");
+		SERVER_COMMAND("restart\n");
 	}
 }
 
