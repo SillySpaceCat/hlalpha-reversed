@@ -47,7 +47,8 @@ MTL=mktyplib.exe
 # PROP Output_Dir "Release"
 # PROP Intermediate_Dir "Release"
 # PROP Target_Dir ""
-OUTDIR=.\Release
+#OUTDIR=.\Release
+OUTDIR="C:\Users\Alex SSD\Downloads\hl1-alpha\Half-Life\valve\dlls"
 INTDIR=.\Release
 
 ALL : "$(OUTDIR)\hl.dll"
@@ -71,11 +72,11 @@ CLEAN :
 "$(OUTDIR)" :
     if not exist "$(OUTDIR)/$(NULL)" mkdir "$(OUTDIR)"
 
-# ADD BASE CPP /nologo /MT /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /YX /c
-# ADD CPP /nologo /G5 /MT /W3 /GX /Zi /O2 /I "..\engine" /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /D "QUIVER" /D "VOXEL" /D "QUAKE2" /D "VALVE_DLL" /YX /c
-CPP_PROJ=/nologo /G5 /MT /W3 /GX /Zi /O2 /I "..\engine" /D "NDEBUG" /D "WIN32"\
+# ADD BASE CPP /nologo /MT /W3 /EHsc /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /c
+# ADD CPP /nologo /MT /W3 /EHsc /Zi /O2 /I "..\engine" /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /D "QUIVER" /D "VOXEL" /D "QUAKE2" /D "VALVE_DLL" /c
+CPP_PROJ=/nologo /MT /W3 /EHsc /Zi /O2 /I "..\engine" /D "NDEBUG" /D "WIN32"\
  /D "_WINDOWS" /D "QUIVER" /D "VOXEL" /D "QUAKE2" /D "VALVE_DLL"\
- /Fp"$(INTDIR)/hl.pch" /YX /Fo"$(INTDIR)/" /Fd"$(INTDIR)/" /c 
+ /Fp"$(INTDIR)/hl.pch" /Fo"$(INTDIR)/" /Fd"$(INTDIR)/" /c 
 CPP_OBJS=.\Release/
 CPP_SBRS=.\.
 # ADD BASE MTL /nologo /D "NDEBUG" /win32
@@ -127,7 +128,8 @@ LINK32_OBJS= \
 # PROP Output_Dir "Debug"
 # PROP Intermediate_Dir "Debug"
 # PROP Target_Dir ""
-OUTDIR=.\Debug
+# OUTDIR=.\Debug
+OUTDIR=C:\Users\Alex SSD\Downloads\hl1-alpha\Half-Life\valve\dlls
 INTDIR=.\Debug
 
 ALL : "$(OUTDIR)\hl.dll"
@@ -145,6 +147,7 @@ CLEAN :
 	-@erase "$(INTDIR)\vc40.pdb"
 	-@erase "$(INTDIR)\weapons.obj"
 	-@erase "$(INTDIR)\world.obj"
+        -@erase "$(INTDIR)\door.obj"
 	-@erase "$(OUTDIR)\hl.dll"
 	-@erase "$(OUTDIR)\hl.exp"
 	-@erase "$(OUTDIR)\hl.ilk"
@@ -154,11 +157,11 @@ CLEAN :
 "$(OUTDIR)" :
     if not exist "$(OUTDIR)/$(NULL)" mkdir "$(OUTDIR)"
 
-# ADD BASE CPP /nologo /MTd /W3 /Gm /GX /Zi /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /YX /c
-# ADD CPP /nologo /G5 /MTd /W3 /Gm /GX /Zi /Od /I "..\engine" /D "_DEBUG" /D "WIN32" /D "_WINDOWS" /D "QUIVER" /D "VOXEL" /D "QUAKE2" /D "VALVE_DLL" /YX /c
-CPP_PROJ=/nologo /G5 /MTd /W3 /Gm /GX /Zi /Od /I "..\engine" /D "_DEBUG" /D\
+# ADD BASE CPP /nologo /MTd /W3 /Gm /EHsc /Zi /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /c
+# ADD CPP /nologo /MTd /W3 /Gm /EHsc /Zi /Od /I "..\engine" /D "_DEBUG" /D "WIN32" /D "_WINDOWS" /D "QUIVER" /D "VOXEL" /D "QUAKE2" /D "VALVE_DLL" /c
+CPP_PROJ=/nologo /MTd /W3 /Gm /EHsc /Zi /Od /I "..\engine" /D "_DEBUG" /D\
  "WIN32" /D "_WINDOWS" /D "QUIVER" /D "VOXEL" /D "QUAKE2" /D "VALVE_DLL"\
- /Fp"$(INTDIR)/hl.pch" /YX /Fo"$(INTDIR)/" /Fd"$(INTDIR)/" /c 
+ /Fp"$(INTDIR)/hl.pch" /Fo"$(INTDIR)/" /Fd"$(INTDIR)/" /c 
 CPP_OBJS=.\Debug/
 CPP_SBRS=.\.
 # ADD BASE MTL /nologo /D "_DEBUG" /win32
@@ -191,7 +194,8 @@ LINK32_OBJS= \
 	"$(INTDIR)\subs.obj" \
 	"$(INTDIR)\util.obj" \
 	"$(INTDIR)\weapons.obj" \
-	"$(INTDIR)\world.obj"
+	"$(INTDIR)\world.obj"\
+        "$(INTDIR)\door.obj"
 
 "$(OUTDIR)\hl.dll" : "$(OUTDIR)" $(DEF_FILE) $(LINK32_OBJS)
     $(LINK32) @<<
@@ -253,6 +257,39 @@ DEP_CPP_CBASE=\
 # Begin Source File
 
 SOURCE=.\cbase.h
+
+!IF  "$(CFG)" == "hl - Win32 Release"
+
+!ELSEIF  "$(CFG)" == "hl - Win32 Debug"
+
+!ENDIF 
+
+# End Source File
+################################################################################
+# Begin Source File
+
+SOURCE=.\door.cpp
+DEP_CPP_CBASE=\
+	"..\engine\const.h"\
+	"..\engine\eiface.h"\
+	"..\engine\progdefs.h"\
+        "..\engine\edict.h"\
+	".\cbase.h"\
+	".\enginecallback.h"\
+	".\extdll.h"\
+	".\util.h"\
+	".\vector.h"\
+        ".\doors.h"\
+	
+
+"$(INTDIR)\cbase.obj" : $(SOURCE) $(DEP_CPP_CBASE) "$(INTDIR)"
+
+
+# End Source File
+################################################################################
+# Begin Source File
+
+SOURCE=.\doors.h
 
 !IF  "$(CFG)" == "hl - Win32 Release"
 

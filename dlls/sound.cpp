@@ -65,14 +65,14 @@ void CAmbientGeneric :: Spawn ( void )
 
 	// allow on/off switching via 'use' function.
 
-	SetUse( ToggleUse );
+	SetUse( &CAmbientGeneric::ToggleUse );
 
 	if ( FBitSet ( pev->spawnflags, AMBIENT_SOUND_NOT_LOOPING ) )
 		m_fLooping = FALSE;
 	else
 		m_fLooping = TRUE;
 
-	SetThink( SpawnThink );
+	SetThink( &CAmbientGeneric::SpawnThink );
 	pev->nextthink = pev->pSystemGlobals->time + 1.0;
 }
 
@@ -93,7 +93,7 @@ void CAmbientGeneric :: SpawnThink ( void )
 		EMIT_SOUND( ENT(pev), CHAN_WEAPON, szSoundFile, flvolume, flattenuation );
 	}
 
-	SetThink( SUB_DoNothing );
+	SetThink( &CBaseEntity::SUB_DoNothing );
 }
 
 //

@@ -18,14 +18,15 @@
 class CBasePlayer : public CBaseEntity
 {
 public:
+	float jumpflag;
 	virtual void Spawn( void );
 
 	virtual void Jump( void );
 	virtual void Duck( void );
 	virtual void PreThink( void );
 	virtual void PostThink( void );
-
 	void W_SetCurrentAmmo( void );
+	void W_Attack(void);
 };
 
 #endif // PLAYER_H

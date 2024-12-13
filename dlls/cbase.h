@@ -45,6 +45,7 @@ public:
 	void (CBaseEntity ::*m_pfnTouch)( entvars_t *pevOther );
 	void (CBaseEntity ::*m_pfnUse)( entvars_t *pevOther );
 	void (CBaseEntity ::*m_pfnBlocked)( entvars_t *pevOther );
+	void (CBaseEntity ::*m_pfnCallWhenMoveDone)(void);
 
 	virtual void Think( void ) { if (m_pfnThink) (this->*m_pfnThink)(); };
 	virtual void Touch( entvars_t *pevOther ) { if (m_pfnTouch) (this->*m_pfnTouch)( pevOther ); };
@@ -71,6 +72,14 @@ public:
 #define SetTouch( a ) m_pfnTouch = static_cast <void (CBaseEntity::*)(entvars_t*)> (a);
 #define SetUse( a ) m_pfnUse = static_cast <void (CBaseEntity::*)(entvars_t*)> (a);
 #define SetBlocked( a ) m_pfnBlocked = static_cast <void (CBaseEntity::*)(entvars_t*)> (a);
+#define SetMoveDone( a ) m_pfnCallWhenMoveDone = static_cast <void (CBaseEntity::*)(void)> (a)
+
+class CPointEntity : public CBaseEntity
+{
+public:
+	void	Spawn(void);
+private:
+};
 
 //
 // Converts a entvars_t * to a class pointer
@@ -96,3 +105,23 @@ template <class T> T * GetClassPtr( T *a )
 	}
 	return a;
 }
+
+//
+// EHANDLE. Safe way to point to CBaseEntities who may die between frames
+//
+class EHANDLE
+{
+private:
+	edict_t* m_pent;
+	int		m_serialnumber;
+public:
+	edict_t* Get(void);
+	edict_t* Set(edict_t* pent);
+
+	operator int();
+
+	operator CBaseEntity* ();
+
+	CBaseEntity* operator = (CBaseEntity* pEntity);
+	CBaseEntity* operator ->();
+};

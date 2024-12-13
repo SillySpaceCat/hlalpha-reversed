@@ -25,9 +25,33 @@
 #include "cbase.h"
 
 // These are the new entry points to entities.
+
+
+class CNullEntity : public CBaseEntity
+{
+public:
+	void Spawn(void);
+};
+
+
+// Null Entity, remove on startup
+void CNullEntity::Spawn(void)
+{
+	REMOVE_ENTITY(ENT(pev));
+}
+
+
+LINK_ENTITY_TO_CLASS(info_null, CNullEntity);
 LINK_ENTITY_TO_CLASS(info_player_deathmatch,CBaseEntity);
 LINK_ENTITY_TO_CLASS(info_player_start,CBaseEntity);
+LINK_ENTITY_TO_CLASS(info_landmark, CPointEntity);
 
+// Landmark class
+void CPointEntity :: Spawn( void )
+{
+	pev->solid = SOLID_NOT;
+//	UTIL_SetSize(pev, g_vecZero, g_vecZero);
+}
 
 // Convenient way to explicitly do nothing (passed to functions that require a method)
 void CBaseEntity :: SUB_DoNothing( void )

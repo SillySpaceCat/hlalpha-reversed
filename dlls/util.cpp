@@ -24,7 +24,6 @@
 #include "util.h"
 #include "cbase.h"
 
-
 void UTIL_EmitAmbientSound( Vector vecOrigin, const char *samp, float vol, float attenuation )
 {
 	float rgfl[3];
@@ -43,4 +42,33 @@ void UTIL_SetSize( entvars_t *pev, Vector vecMin, Vector vecMax )
 void UTIL_SetOrigin( entvars_t *pev, Vector vecOrigin )
 {
 	SET_ORIGIN(ENT(pev), vecOrigin );
+}
+
+void UTIL_MakeVectors( const Vector& vecAngles )
+{
+	MAKE_VECTORS( vecAngles );
+}
+
+void UTIL_TraceLine(const Vector& vecStart, const Vector& vecEnd, edict_t* pentIgnore, TraceResult* ptr)
+{
+	TRACE_LINE(vecStart, vecEnd, 0, pentIgnore, ptr);
+}
+
+void SetMovedir(entvars_t* pev)
+{
+	if (pev->angles == Vector(0, -1, 0))
+	{
+		pev->movedir = Vector(0, 0, 1);
+	}
+	else if (pev->angles == Vector(0, -2, 0))
+	{
+		pev->movedir = Vector(0, 0, -1);
+	}
+	else
+	{
+		UTIL_MakeVectors(pev->angles);
+		pev->movedir = pev->pSystemGlobals->v_forward;
+	}
+
+	pev->angles = g_vecZero;
 }

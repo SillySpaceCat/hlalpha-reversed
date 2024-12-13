@@ -32,6 +32,14 @@
 // this bogus "empty" define to mark things as constant.
 #define CONSTANT
 
+typedef enum
+{
+	TS_AT_TOP,
+	TS_AT_BOTTOM,
+	TS_GOING_UP,
+	TS_GOING_DOWN
+} TOGGLE_STATE;
+
 // More explicit than "int"
 typedef int EOFFSET;
 
@@ -81,8 +89,10 @@ inline BOOL FStringNull(int iString)			{ return iString == iStringNull; }
 extern void			UTIL_SetSize			(entvars_t *pev, Vector vecMin, Vector vecMax);
 
 extern void			UTIL_SetOrigin			( entvars_t *pev, Vector vecOrigin );
+extern void         UTIL_MakeVectors        (const Vector& vecangles);
+extern void         UTIL_TraceLine          (const Vector& vecStart, const Vector& vecEnd, edict_t* pentIgnore, TraceResult* ptr);
 extern void			UTIL_EmitAmbientSound	( Vector vecOrigin, const char *samp, float vol, float attenuation );
-
+extern void         SetMovedir              (entvars_t* pev);
 inline float		UTIL_RandomFloat		( float flLow, float flHigh)
 {
 	float num;
@@ -98,6 +108,10 @@ extern DLL_GLOBAL const Vector g_vecZero;
 #define AMBIENT_SOUND_EVERYWHERE		1
 #define AMBIENT_SOUND_NOT_LOOPING		2
 
+#define VEC_DUCK_HULL_MIN		Vector(-16, -16, -18 )
+#define VEC_DUCK_HULL_MAX		Vector( 16,  16,  18)
+#define VEC_DUCK_VIEW			Vector( 0, 0, 12 )
+
 #define VEC_HULL_MIN		Vector(-16, -16, -36)
 #define VEC_HULL_MAX		Vector( 16,  16,  36)
 #define VEC_HUMAN_HULL_MIN	Vector( -16, -16, 0 )
@@ -105,6 +119,8 @@ extern DLL_GLOBAL const Vector g_vecZero;
 #define VEC_HUMAN_HULL_DUCK	Vector( 16, 16, 36 )
 
 #define VEC_VIEW			Vector( 0, 0, 28 )
+
+#define SVC_TEMPENTITY		23
 
 // Misc useful
 inline BOOL FStrEq(const char*sz1, const char*sz2)

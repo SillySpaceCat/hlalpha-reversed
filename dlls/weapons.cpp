@@ -91,3 +91,26 @@ void CBasePlayer::W_SetCurrentAmmo( void )
 		pev->currentammo = 0;
 	}
 }
+
+void CBasePlayer::W_Attack(void)
+{
+	if (pev->deadflag != DEAD_DEAD)
+	{
+		pev->weaponframe = 0;
+		switch (pev->weapon)
+		{
+		case 1:
+			//swing_crowbar();
+			//player_shot1();
+			break;
+		case 2:
+			//shoot_pistol();
+			//player_shot1();
+			break;
+		case 3:
+			//shoot_mp5;
+			//player_shot1();
+			break;
+		}
+	}
+}

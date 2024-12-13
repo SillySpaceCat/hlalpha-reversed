@@ -124,6 +124,7 @@ void DLLEXPORT SetChangeParms( globalvars_t *pgv )
 		return;
 	}
 
+
 // cap super health
 	if (pev->health >= 100)
 		pev->health = 100;
@@ -240,6 +241,7 @@ void DLLEXPORT SetNewParms( globalvars_t *pgv )
 //
 void DLLEXPORT StartFrame( globalvars_t *pgv )
 {
+	pgv->teamplay = CVAR_GET_FLOAT("teamplay");
 	g_iSkillLevel = CVAR_GET_FLOAT("skill");
 	g_ulFrameCount++;
 }

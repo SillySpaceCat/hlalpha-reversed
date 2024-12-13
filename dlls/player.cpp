@@ -20,6 +20,10 @@
 
 */
 
+#include <string>
+
+using namespace std;
+
 #include "extdll.h"
 #include "util.h"
 
@@ -31,6 +35,24 @@ extern DLL_GLOBAL ULONG		g_ulModelIndexPlayer;
 
 extern void DLLEXPORT SetChangeParms( globalvars_t *pgv );
 extern edict_t *EntSelectSpawnPoint( globalvars_t *pgv );
+
+float VectorNormalize(Vector v)
+{
+	float	length, ilength;
+
+	length = v[0] * v[0] + v[1] * v[1] + v[2] * v[2];
+	length = sqrt(length);		// FIXME
+
+	if (length)
+	{
+		ilength = 1 / length;
+		v[0] *= ilength;
+		v[1] *= ilength;
+		v[2] *= ilength;
+	}
+
+	return length;
+}
 
 
 // used by kill command and disconnect command
@@ -47,6 +69,119 @@ void set_suicide_frame(entvars_t *pev)
 	pev->nextthink	= -1;
 }
 
+void CheckWaterJump(entvars_t* pev)
+{
+	// check for a jump-out-of-water
+	UTIL_MakeVectors(pev->angles);
+	Vector start = pev->origin;
+	start.z += 8;
+	pev->pSystemGlobals->v_forward.z = 0;
+	VectorNormalize(pev->pSystemGlobals->v_forward);
+	Vector end = start + pev->pSystemGlobals->v_forward * 24;
+	TraceResult *trace = NULL;
+	UTIL_TraceLine(start, end, ENT(pev), trace);
+	if (trace->flFraction < 1)
+	{
+		// solid at waist
+		start.z += pev->maxs.z - 8;
+		end = start + pev->pSystemGlobals->v_forward * 24;
+		pev->movedir = trace->vecPlaneNormal * -50;
+		UTIL_TraceLine(start, end, ENT(pev), trace);
+		if (trace->flFraction == 1)
+		{   // open at eye level
+			SetBits(pev->flags, FL_WATERJUMP);
+			pev->velocity.z = 225;
+			ClearBits(pev->flags, FL_JUMPRELEASED);
+			pev->teleport_time = pev->pSystemGlobals->time + 2;  // safety net
+			return;
+		}
+	}
+	
+}
+
+void WaterMove(entvars_t* pev)
+{
+	if (pev->movetype == MOVETYPE_NOCLIP)
+		return;
+
+	if (pev->health < 0)
+		return;
+
+	// waterlevel 0 - not in water
+	// waterlevel 1 - feet in water
+	// waterlevel 2 - waist in water
+	// waterlevel 3 - head in water
+
+	if (pev->waterlevel != 3)
+	{
+		// not underwater
+
+		// play 'up for air' sound
+		if ((pev->air_finished < pev->pSystemGlobals->time) && (pev->pain_finished < pev->pSystemGlobals->time))
+		{
+			pev->dmg += 2.0;
+			if (pev->dmg > 15)
+				pev->dmg = 10;
+			//takedamage
+			pev->pain_finished = pev->pSystemGlobals->time + 1.0;
+		}
+	}
+	else
+	{
+		if (pev->pSystemGlobals->time > pev->air_finished)
+			EMIT_SOUND(ENT(pev), CHAN_VOICE, "player/gasp2.wav", 1, ATTN_NORM);
+		else if (pev->pSystemGlobals->time + 9 > pev->air_finished)
+			EMIT_SOUND(ENT(pev), CHAN_VOICE, "player/gasp1.wav", 1, ATTN_NORM);
+		pev->air_finished = pev->pSystemGlobals->time + 12;
+		pev->dmg = 2;
+	}
+
+	if (!pev->waterlevel)
+	{
+		if (FBitSet(pev->flags, FL_INWATER))
+			EMIT_SOUND(ENT(pev), CHAN_BODY, "common/outwater.wav", 1, ATTN_NORM);
+		    ClearBits(pev->flags, FL_INWATER);
+			return;
+	}
+
+	if (pev->watertype == CONTENT_LAVA)
+	{
+		if (pev->pSystemGlobals->time > pev->dmgtime)
+		{
+			//takedamage
+		}
+	}
+	else if (pev->watertype == CONTENT_SLIME)
+	{
+		pev->dmgtime = pev->pSystemGlobals->time + 1;
+	}
+
+	if (!(FBitSet(pev->flags, FL_INWATER)))
+	{
+		if (pev->watertype == CONTENT_LAVA)
+			EMIT_SOUND(ENT(pev), CHAN_BODY, "player/inlava.wav", 1, ATTN_NORM);
+		if (pev->watertype == CONTENT_WATER)
+			EMIT_SOUND(ENT(pev), CHAN_BODY, "player/inh2o.wav", 1, ATTN_NORM);
+		if (pev->watertype == CONTENT_SLIME)
+			EMIT_SOUND(ENT(pev), CHAN_BODY, "player/slimbrn2.wav", 1, ATTN_NORM);
+
+		SetBits(pev->flags, FL_INWATER);
+		pev->dmgtime = 0;
+	}
+
+	/*
+	if (((__int64)v21[95] & 2048) == 0)
+	{
+		v22 = *(float*)(*v3 + 128) * v21[102] * 0.8;
+		v27 = v21[16] - v21[16] * v22;                no idea what this means but there's vectors involved
+		v28 = v21[17] - v21[17] * v22;
+		v29 = v21[18] - v22 * v21[18];
+		v21[16] = v27;
+		v21[17] = v28;
+		v21[18] = v29;
+	}
+	*/
+}
 
 void CBasePlayer::Spawn( void )
 {
@@ -132,6 +267,17 @@ void CBasePlayer::Jump( void )
 
 void CBasePlayer::Duck( void )
 {
+	if (pev->button & IN_DUCK)
+	{
+		if (!FBitSet(pev->flags, FL_DUCKING))
+		{
+			UTIL_SetSize(pev, VEC_DUCK_HULL_MIN, VEC_DUCK_HULL_MAX);
+		}
+	}
+	else
+	{
+		UTIL_SetSize(pev, VEC_HULL_MIN, VEC_HULL_MAX);
+	}
 }
 
 
@@ -149,14 +295,14 @@ void CBasePlayer::PreThink( void )
 	if (pev->view_ofs == g_vecZero)
 		return;	// intermission or finale
 
-	//UTIL_MakeVectors(pev->v_angle);		// is this still used?
+	UTIL_MakeVectors(pev->v_angle);		// is this still used?
 
 	//Something1();
 	//Something2();
-	//WaterMove();
+	WaterMove(pev);
 
-	//if (pev->waterlevel == 2)
-	//	CheckWaterJump();
+	if (pev->waterlevel == 2)
+		CheckWaterJump(pev);
 
 	if (pev->deadflag >= DEAD_DYING)
 	{
@@ -169,9 +315,16 @@ void CBasePlayer::PreThink( void )
 		// If on a latter, jump off the ladder
 		// else Jump
 		Jump();
+		
 	}
 	else
 		SetBits(pev->flags, FL_JUMPRELEASED);
+
+	// If trying to duck, already ducked, or in the process of ducking
+	if ((pev->button & IN_DUCK) || FBitSet(pev->flags, FL_DUCKING))
+		Duck();
+	else
+		UTIL_SetSize(pev, VEC_HULL_MIN, VEC_HULL_MAX); // broken hack, player's gonna get stuck on the ground
 }
 
 
@@ -186,4 +339,33 @@ void DLLEXPORT PlayerPostThink( globalvars_t *pgv )
 
 void CBasePlayer::PostThink( void )
 {
+	char* v13;
+	float v12;
+	if (pev->view_ofs == g_vecZero || pev->deadflag)
+		return;
+	//W_WeaponFrame()
+	//char str[64];
+	//sprintf(str, "%.2f", pev->velocity[2]);
+	//EMIT_SOUND(ENT(pev), CHAN_BODY, str, 1, ATTN_NORM);
+	
+	if ((jumpflag < -300) && (FBitSet(pev->flags, FL_ONGROUND)))
+	{
+		if (pev->watertype == CONTENT_WATER)
+			EMIT_SOUND(ENT(pev), CHAN_BODY, "player/h2ojump.wav", 1, ATTN_NORM);
+		else if (jumpflag < -650)
+		{
+			//T_Damage(self, world, world, 5);
+			pev->health -= 5; // TakeDamage(pev, pOwner->pev, 5, DMG_GENERIC) im too lazy to implement that
+			if (UTIL_RandomFloat(0.0, 1.0) <= 0.66)
+			    EMIT_SOUND(ENT(pev), CHAN_VOICE, "player/pl_fallpain2.wav", 1, ATTN_NORM);
+			else
+				EMIT_SOUND(ENT(pev), CHAN_VOICE, "player/pl_fallpain3.wav", 1, ATTN_NORM);
+		}
+		else
+			EMIT_SOUND(ENT(pev), CHAN_VOICE, "player/pl_jumpland2.wav", 1, ATTN_NORM);
+	}
+	// bunch of punch angle code i think its related to punch angle
+	jumpflag = pev->velocity[2];
+
+
 }
