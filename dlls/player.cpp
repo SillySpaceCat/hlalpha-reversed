@@ -78,7 +78,7 @@ void CheckWaterJump(entvars_t* pev)
 	pev->pSystemGlobals->v_forward.z = 0;
 	VectorNormalize(pev->pSystemGlobals->v_forward);
 	Vector end = start + pev->pSystemGlobals->v_forward * 24;
-	TraceResult *trace = NULL;
+	TraceResult *trace = new TraceResult;
 	UTIL_TraceLine(start, end, ENT(pev), trace);
 	if (trace->flFraction < 1)
 	{

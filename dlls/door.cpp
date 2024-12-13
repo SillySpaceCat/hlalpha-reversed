@@ -348,14 +348,6 @@ void CBaseDoor::Precache( void )
 
 void CBaseDoor::DoorTouch(entvars_t* pOther)
 {
-	if (pOther)
-	{
-		EMIT_SOUND(ENT(pev), CHAN_VOICE, "pOther is not null", 1, ATTN_NORM);
-	}
-	else
-	{
-		EMIT_SOUND(ENT(pev), CHAN_VOICE, "pOther is null peanits aa", 1, ATTN_NORM);
-	}
 	//CBaseEntity* pEntity = (CBaseEntity*)GET_PRIVATE(ENT(pOther));
 	//if (FClassnameIs(pEntity->pev, "player")) why is pev nullptr
 	//{
