@@ -82,6 +82,13 @@
 // temp entity events
 //
 
+
+#define	TE_SMOKE			5		// alphablend sprite, move vertically 30 pps
+// coord coord coord (position) 
+// short (sprite index) i think
+
+
+
 #define	MSG_BROADCAST	0		// unreliable to all
 #define	MSG_ONE			1		// reliable to one (msg_entity)
 #define	MSG_ALL			2		// reliable to all
