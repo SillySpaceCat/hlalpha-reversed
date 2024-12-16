@@ -19,14 +19,29 @@ class CBasePlayer : public CBaseEntity
 {
 public:
 	float jumpflag;
+	int firegrenade;
+	float nextattack;
+	int weaponactivity;
+	int showlines;
+	int selectedweapon;
+	float nextgrenade;
+	float nextstep;
 	virtual void Spawn( void );
 
 	virtual void Jump( void );
 	virtual void Duck( void );
 	virtual void PreThink( void );
 	virtual void PostThink( void );
+	virtual void Killed(void);
+	void ImpulseCommands();
+	//void gunattack(int number, Vector aim, Vector idk, float v_angle0, float v_angle1, int idk2);
+	void Swing_Crowbar();
+	void Shoot_Pistol();
+	void Shoot_Mp5();
+	void W_ChangeWeapon( int weapon );
 	void W_SetCurrentAmmo( void );
 	void W_Attack(void);
+	void W_WeaponFrame(void);
 };
 
 #endif // PLAYER_H

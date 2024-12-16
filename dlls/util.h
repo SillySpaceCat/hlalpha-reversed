@@ -48,6 +48,7 @@ typedef int BOOL;
 
 // In case this ever changes
 #define M_PI			3.14159265358979323846
+#define SF_LIGHT_START_OFF		1
 
 // Keeps clutter down a bit, when declaring external entity/global method prototypes
 #define DECLARE_GLOBAL_METHOD(MethodName) \
@@ -74,6 +75,7 @@ inline EOFFSET OFFSET(entvars_t *pev)			{ return OFFSET(ENT(pev)); }
 inline entvars_t *VARS(entvars_t *pev)					{ return pev; }
 inline entvars_t *VARS(edict_t *pent)			{ return (*g_engfuncs.pfnGetVarsOfEnt)(pent); }
 inline entvars_t* VARS(EOFFSET eoffset)				{ return VARS(ENT(eoffset)); }
+inline int	  ENTINDEX(edict_t* pEdict) { return (*g_engfuncs.pfnIndexOfEdict)(pEdict); }
 
 // Testing the three types of "entity" for nullity
 #define eoNullEntity 0
@@ -83,6 +85,7 @@ inline BOOL FNullEnt(entvars_t* pev)				{ return pev == NULL || FNullEnt(OFFSET(
 
 // Testing strings for nullity
 #define iStringNull 0
+#define		BLOOD_COLOR_RED		(BYTE)247
 inline BOOL FStringNull(int iString)			{ return iString == iStringNull; }
 
 // Misc. Prototypes
@@ -91,6 +94,8 @@ extern void			UTIL_SetSize			(entvars_t *pev, Vector vecMin, Vector vecMax);
 extern void			UTIL_SetOrigin			( entvars_t *pev, Vector vecOrigin );
 extern void         UTIL_MakeVectors        (const Vector& vecangles);
 extern void         UTIL_TraceLine          (const Vector& vecStart, const Vector& vecEnd, edict_t* pentIgnore, TraceResult* ptr);
+extern Vector       UTIL_GetAimVector       (edict_t* pent, float flSpeed);
+extern int          UTIL_FindEntityInSphere(Vector vec1, float radius);
 extern void			UTIL_EmitAmbientSound	( Vector vecOrigin, const char *samp, float vol, float attenuation );
 extern void         SetMovedir              (entvars_t* pev);
 inline float		UTIL_RandomFloat		( float flLow, float flHigh)
@@ -100,6 +105,10 @@ inline float		UTIL_RandomFloat		( float flLow, float flHigh)
 	num = (rand() & 0x7fff) / ((float)0x7fff);
 
 	return num * ( flHigh - flLow ) + flLow;
+}
+inline int		UTIL_RandomLong(int flLow, int flHigh)
+{
+	return flLow + rand() % (flHigh - flLow + 1);
 }
 
 extern DLL_GLOBAL const Vector g_vecZero;
@@ -121,6 +130,13 @@ extern DLL_GLOBAL const Vector g_vecZero;
 #define VEC_VIEW			Vector( 0, 0, 28 )
 
 #define SVC_TEMPENTITY		23
+#define SVC_INTERMISSION	30
+#define SVC_CDTRACK			32
+#define SVC_WEAPONANIM		35
+#define SVC_ROOMTYPE		37
+#define SVC_ADDANGLE	    38			// [vec3] add this angle to the view angle
+#define SVC_NEWUSERMSG      39
+#define	SVC_DIRECTOR		51
 
 // Misc useful
 inline BOOL FStrEq(const char*sz1, const char*sz2)

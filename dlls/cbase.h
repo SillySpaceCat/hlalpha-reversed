@@ -24,6 +24,14 @@ extern void DispatchBlocked( entvars_t *pevBlocked, entvars_t *pevOther );
 extern void DispatchSave( entvars_t *pev, void *pSaveData );
 extern void DispatchRestore( entvars_t *pev, void *pSaveData );
 
+typedef enum { USE_OFF = 0, USE_ON = 1, USE_SET = 2, USE_TOGGLE = 3 } USE_TYPE;
+
+#ifdef _WIN32
+#define EXPORT _declspec( dllexport )
+#else
+#define EXPORT __attribute__ ((visibility("default")))
+#endif
+
 
 //
 // Base Entity. All entity types derive from this
@@ -39,6 +47,8 @@ public:
 	virtual void	Unknown() { return; }
 	virtual int		Save( void *pSaveData );
 	virtual void	Restore( void *pSaveData );
+	virtual void    TakeDamage(entvars_t* pevInflictor, entvars_t* pevAttacker, float flDamage);
+	virtual void    Killed(int pevAttacker);
 
 	// fundamental callbacks
 	void (CBaseEntity ::*m_pfnThink)( void );
@@ -58,8 +68,39 @@ public:
 		return (void *)ALLOC_PRIVATE(ENT(pev), stAllocateBlock);
 	};
 
+	static CBaseEntity* Instance(edict_t* pent)
+	{
+		if (!pent)
+			pent = ENT(0);
+		CBaseEntity* pEnt = (CBaseEntity*)GET_PRIVATE(pent);
+		return pEnt;
+	}
+
 	// common member functions
+	void SUB_Remove(void);
 	void SUB_DoNothing( void );
+	void SUB_CallUseToggle(void) { this->Use(this->pev); }
+
+};
+
+//
+// EHANDLE. Safe way to point to CBaseEntities who may die between frames
+//
+class EHANDLE
+{
+private:
+	edict_t* m_pent;
+	int		m_serialnumber;
+public:
+	edict_t* Get(void);
+	edict_t* Set(edict_t* pent);
+
+	operator int();
+
+	operator CBaseEntity* ();
+
+	CBaseEntity* operator = (CBaseEntity* pEntity);
+	CBaseEntity* operator ->();
 };
 
 
@@ -79,6 +120,69 @@ class CPointEntity : public CBaseEntity
 public:
 	void	Spawn(void);
 private:
+};
+
+//
+// generic Delay entity.
+//
+class CBaseDelay : public CBaseEntity
+{
+public:
+	float		m_flDelay;
+	int			m_iszKillTarget;
+
+	//virtual void	KeyValue(KeyValueData* pkvd); dunno if it exists in the original dll
+	// common member functions
+	void SUB_UseTargets(entvars_t * pActivator);
+	void EXPORT DelayThink(void);
+};
+
+class CBaseToggle : public CBaseDelay //CBaseAnimating
+{
+public:
+	//void				KeyValue(KeyValueData* pkvd); also dunno if it exists in the original dll
+
+	TOGGLE_STATE		m_toggle_state;
+	float				m_flActivateFinished;//like attack_finished, but for doors
+	float				m_flMoveDistance;// how far a door should slide or rotate
+	float				m_flWait;
+	float				m_flLip;
+	float				m_flTWidth;// for plats
+	float				m_flTLength;// for plats
+
+	Vector				m_vecPosition1;
+	Vector				m_vecPosition2;
+	Vector				m_vecAngle1;
+	Vector				m_vecAngle2;
+
+	int					m_cTriggersLeft;		// trigger_counter only, # of activations remaining
+	float				m_flHeight;
+	//EHANDLE				m_hActivator;
+	int                 m_hActivator;
+	void (CBaseToggle::* m_pfnCallWhenMoveDone)(void);
+	Vector				m_vecFinalDest;
+	Vector				m_vecFinalAngle;
+
+	int					m_bitsDamageInflict;	// DMG_ damage type that the door or tigger does
+
+	virtual int		GetToggleState(void) { return m_toggle_state; }
+	virtual float	GetDelay(void) { return m_flWait; }
+
+	// common member functions
+	void LinearMove(Vector	vecDest, float flSpeed);
+	void EXPORT LinearMoveDone(void);
+	void AngularMove(Vector vecDestAngle, float flSpeed);
+	void EXPORT AngularMoveDone(void);
+
+	virtual CBaseToggle* MyTogglePointer(void) { return this; }
+	static void			AxisDir(entvars_t* pev);
+	static float		AxisDelta(int flags, const Vector& angle1, const Vector& angle2);
+
+	string_t m_sMaster;		// If this button has a master switch, this is the targetname.
+	// A master switch must be of the multisource type. If all 
+	// of the switches in the multisource have been triggered, then
+	// the button will be allowed to operate. Otherwise, it will be
+	// deactivated.
 };
 
 //
@@ -105,23 +209,3 @@ template <class T> T * GetClassPtr( T *a )
 	}
 	return a;
 }
-
-//
-// EHANDLE. Safe way to point to CBaseEntities who may die between frames
-//
-class EHANDLE
-{
-private:
-	edict_t* m_pent;
-	int		m_serialnumber;
-public:
-	edict_t* Get(void);
-	edict_t* Set(edict_t* pent);
-
-	operator int();
-
-	operator CBaseEntity* ();
-
-	CBaseEntity* operator = (CBaseEntity* pEntity);
-	CBaseEntity* operator ->();
-};

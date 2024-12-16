@@ -31,6 +31,7 @@ DLL_GLOBAL ULONG		g_ulFrameCount;
 DLL_GLOBAL ULONG		g_ulModelIndexEyes;
 DLL_GLOBAL ULONG		g_ulModelIndexPlayer;
 DLL_GLOBAL Vector		g_vecAttackDir;
+DLL_GLOBAL float		g_flDamage;
 DLL_GLOBAL int			g_iSkillLevel;
 DLL_GLOBAL int			gDisplayTitle;
 DLL_GLOBAL BOOL			g_fGameOver;

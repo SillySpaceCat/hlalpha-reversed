@@ -20,7 +20,7 @@ class CBasePlayer;
 #define WEAPON_NONE				0
 #define WEAPON_CROWBAR			1
 #define	WEAPON_GLOCK			2
-#define	WEAPON_MP5				3
+#define	WEAPON_MP5				4
 
 extern DLL_GLOBAL		short g_sModelIndexShell;
 extern DLL_GLOBAL		short g_sModelIndexShrapnel;

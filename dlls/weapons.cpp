@@ -68,6 +68,16 @@ PLAYER WEAPON USE
 ===============================================================================
 */
 
+void CBasePlayer::W_ChangeWeapon(int weapon)
+{
+	if (weapon == 2)
+		selectedweapon = WEAPON_CROWBAR;
+	else if (weapon == 3)
+		selectedweapon = WEAPON_GLOCK;
+	else if (weapon == 4)
+		selectedweapon = WEAPON_MP5;
+}
+
 void CBasePlayer::W_SetCurrentAmmo( void )
 {
 	if ( pev->weapon == WEAPON_CROWBAR )
@@ -92,6 +102,128 @@ void CBasePlayer::W_SetCurrentAmmo( void )
 	}
 }
 
+void CBasePlayer::ImpulseCommands()
+{
+	if (pev->button & IN_USE) //&& (pev->pSystemGlobals->time > nextuse? )
+	{
+		//LinkEntForLink(pev);
+		//nextuse = pev->pSystemGlobals->time + 0.5
+	}
+	if (pev->impulse >= 1 && pev->impulse <= 8)
+		W_ChangeWeapon(pev->impulse);
+	if (pev->impulse == 10)
+		W_ChangeWeapon(pev->weapon + 1);
+	//char str[64];
+	//char str2[64];
+	//sprintf_s(str, "%d", pev->weapon);
+	//sprintf_s(str2, "%s", STRING(pev->weaponmodel));
+	//EMIT_SOUND(ENT(pev), CHAN_BODY, str, 1, ATTN_NORM);
+	//EMIT_SOUND(ENT(pev), CHAN_BODY, str2, 1, ATTN_NORM);
+
+	//if (pev->impulse == 11)
+	//{
+	//	if ((pev->weapon - 1) < 0)
+	//		ServerflagsCommand(pev, 31);
+	//	else
+	//		ServerflagsCommand(pev, pev->weapon - 1);
+	//}
+	if (pev->impulse == 100)
+	{
+		if (pev->effects == 8)
+		{
+			//v44[0] = v8 & 0xFFFFFFF7;
+			//*v7 = (float)(v8 & 0xFFFFFFF7);
+		}
+		else
+		{
+			//v44[0] = v8 | 8;
+			//*v7 = (float)(int)(v8 | 8);
+		}
+	}
+	if (pev->impulse == 200)
+	{
+		if (showlines)
+		{
+			showlines = 0;
+			ALERT(at_console, "Lines Off");
+		}
+		else
+		{
+			showlines = 1;
+			ALERT(at_console, "Lines On");
+		}
+	}
+}
+
+//void CBasePlayer::gunattack(int number, Vector aim, Vector idk, float v_angle0, float v_angle1, int idk2)
+//{
+//	int v46 = 0;
+//	Vector v10 = pev->v_angle;
+//	UTIL_MakeVectors(v10);
+//	float v11 = pgv->parm12;
+//	float v69 = v11 * 10
+//
+//}
+
+void CBasePlayer::Swing_Crowbar()
+{
+	pev->pSystemGlobals->msg_entity = OFFSET(pev); //i think
+
+	WRITE_BYTE(1, SVC_WEAPONANIM);
+	int anim = abs(rand());
+	if ((anim) % 2 == 1)
+		WRITE_BYTE(1, 1);
+	else
+		WRITE_BYTE(1, 2);
+	pev->pSystemGlobals->msg_entity = 0;
+	UTIL_MakeVectors(pev->v_angle);
+	Vector aim = UTIL_GetAimVector(ENT(pev), 1000);
+	//gunattack(1, aim, Vector(0.025, 0.025, 0.025), pev->v_angle[0], pev->v_angle[1], 64);
+	nextattack = pgv->time + 1.0;
+}
+
+void CBasePlayer::Shoot_Pistol()
+{
+	pev->effects == static_cast<int>(pev->effects) | 2;
+
+	pev->pSystemGlobals->msg_entity = OFFSET(pev); //i think
+
+	WRITE_BYTE(1, SVC_WEAPONANIM);
+	WRITE_BYTE(1, 0);
+	pev->pSystemGlobals->msg_entity = 0;
+
+	int sound = abs(rand());
+	if ((sound) % 2 == 1)
+		EMIT_SOUND(ENT(pev), CHAN_WEAPON, "weapons/pl_gun1.wav", 1, ATTN_NORM);
+	else
+		EMIT_SOUND(ENT(pev), CHAN_WEAPON, "weapons/pl_gun2.wav", 1, ATTN_NORM);
+
+	nextattack = pgv->time + 0.3;
+
+}
+void CBasePlayer::Shoot_Mp5()
+{
+	pev->effects == static_cast<int>(pev->effects) | 2;
+
+	pev->pSystemGlobals->msg_entity = OFFSET(pev); //i think
+
+	WRITE_BYTE(1, SVC_WEAPONANIM);
+	WRITE_BYTE(1, 0);
+	pev->pSystemGlobals->msg_entity = 0;
+
+	int sound = UTIL_RandomFloat(0.0, 1.0);
+	//if (v8) damn you ida pro and your undefined values
+	//	EMIT_SOUND(ENT(pev), CHAN_WEAPON, "weapons/hks1.wav", 1, ATTN_NORM);
+	if (sound < 0.66)
+		EMIT_SOUND(ENT(pev), CHAN_WEAPON, "weapons/hks2.wav", 1, ATTN_NORM);
+	else
+		EMIT_SOUND(ENT(pev), CHAN_WEAPON, "weapons/hks3.wav", 1, ATTN_NORM);
+
+	nextattack = pgv->time + 0.1;
+	//variable = pgv->time + 1.0; not sure what this is
+
+}
+
 void CBasePlayer::W_Attack(void)
 {
 	if (pev->deadflag != DEAD_DEAD)
@@ -100,17 +232,74 @@ void CBasePlayer::W_Attack(void)
 		switch (pev->weapon)
 		{
 		case 1:
-			//swing_crowbar();
+			Swing_Crowbar();
 			//player_shot1();
 			break;
 		case 2:
-			//shoot_pistol();
+			Shoot_Pistol();
 			//player_shot1();
 			break;
-		case 3:
-			//shoot_mp5;
+		case 4:
+			Shoot_Mp5();
 			//player_shot1();
 			break;
 		}
+	}
+}
+void CBasePlayer::W_WeaponFrame(void)
+{
+	if (pgv->time >= nextattack)
+	{
+		ImpulseCommands();
+		if (pev->button & IN_CANCEL)
+		{
+			if (pev->weapons)
+				pev->weapon = (pev->weapon & 0xFF0000u) >> 16; // not sure if this'll work
+		}
+		else if (pev->button & IN_ATTACK2)
+		{
+			if (pev->weapons && !firegrenade)
+			{
+				//shootgrenade()
+				pev->button &= ~IN_ATTACK2;
+				firegrenade = 1;
+				return;
+			}
+			if (pev->weapon == 4 && pev->pSystemGlobals->time > nextgrenade)
+			{
+				firegrenade = 1;
+				UTIL_MakeVectors(pev->v_angle);
+				pev->pSystemGlobals->msg_entity = OFFSET(pev);
+				WRITE_BYTE(1, SVC_WEAPONANIM);
+				WRITE_BYTE(1, 2);
+				pev->pSystemGlobals->msg_entity = 0;
+				if (UTIL_RandomFloat(0.0, 1.0) < 0.5)
+					EMIT_SOUND(ENT(pev), CHAN_WEAPON, "weapons/glauncher.wav", 0.75, ATTN_NORM);
+				else
+					EMIT_SOUND(ENT(pev), CHAN_WEAPON, "weapons/glauncher2.wav", 0.75, ATTN_NORM);
+				
+				//spawn grenade i think
+				nextgrenade = pev->pSystemGlobals->time + 1.0;
+			}
+		}
+		else
+			firegrenade = 0;
+		if ((pev->button & IN_ATTACK) != 0)
+		{
+			if (!weaponactivity)
+			{
+				if (pev->weapon != selectedweapon)
+				{
+					pev->weapon = selectedweapon; //???
+					pev->button &= ~1u;
+					W_SetCurrentAmmo();
+					weaponactivity = 1;
+				}
+				else
+					W_Attack();
+			}
+		}
+		else
+			weaponactivity = 0;
 	}
 }

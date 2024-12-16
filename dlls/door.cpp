@@ -23,14 +23,14 @@
 #include "cbase.h"
 #include "doors.h"
 
-class CBaseDoor : public CBaseEntity
+class CBaseDoor : public CBaseToggle
 {
 public:
 	void Spawn(void);
 	void SmokeThing(void);
 	void Precache(void);
 	virtual void KeyValue(KeyValueData* pkvd);
-	virtual void Use(CBaseEntity* pActivator);
+	virtual void Use(entvars_t* pActivator);
 	//virtual void Blocked(CBaseEntity* pOther);
 
 	// used to selectivly override defaults
@@ -47,24 +47,6 @@ public:
 
 	BYTE	m_bMoveSnd;			// sound a door makes while moving
 	BYTE	m_bStopSnd;			// sound a door makes when it stops
-
-	//locksound_t m_ls;			// door lock sounds
-
-	BYTE	m_bLockedSound;		// ordinals from entity selection
-	BYTE	m_bLockedSentence;
-	BYTE	m_bUnlockedSound;
-	BYTE	m_bUnlockedSentence;
-	float   m_flLip; // variables & functions from here to below need to be moved to cbasetoggle
-	float   m_flWait;
-	float   m_flMoveDistance;
-	Vector				m_vecPosition1;
-	Vector				m_vecPosition2;
-	TOGGLE_STATE m_toggle_state;
-	EHANDLE m_hActivator;
-	void LinearMove(Vector	vecDest, float flSpeed);
-	void LinearMoveDone(void);
-	Vector				m_vecFinalDest;
-	Vector				m_vecFinalAngle;
 };
 
 LINK_ENTITY_TO_CLASS(func_door, CBaseDoor);
@@ -72,49 +54,6 @@ LINK_ENTITY_TO_CLASS(func_door, CBaseDoor);
 // func_water - same as a door. 
 //
 LINK_ENTITY_TO_CLASS(func_water, CBaseDoor);
-
-void CBaseDoor::LinearMoveDone(void)
-{
-	Vector delta = m_vecFinalDest - pev->origin;
-	float error = delta.Length();
-	if (error > 0.03125)
-	{
-		LinearMove(m_vecFinalDest, 100);
-		return;
-	}
-
-	UTIL_SetOrigin(pev, m_vecFinalDest);
-	pev->velocity = g_vecZero;
-	pev->nextthink = -1;
-	if (m_pfnCallWhenMoveDone)
-		(this->*m_pfnCallWhenMoveDone)();
-}
-
-void CBaseDoor::LinearMove(Vector	vecDest, float flSpeed)
-{
-	m_vecFinalDest = vecDest;
-
-	// Already there?
-	if (vecDest == pev->origin)
-	{
-		LinearMoveDone();
-		return;
-	}
-
-	// set destdelta to the vector needed to move
-	Vector vecDestDelta = vecDest - pev->origin;
-
-	// divide vector length by speed to get time to reach dest
-	float flTravelTime = vecDestDelta.Length() / flSpeed;
-
-	// set nextthink to trigger a call to LinearMoveDone when dest is reached
-	pev->nextthink = pev->ltime + flTravelTime;
-	SetThink(&CBaseDoor::LinearMoveDone);
-
-	// scale the destdelta vector by the time spent traveling to get velocity
-	pev->velocity = vecDestDelta / flTravelTime;
-}
-
 
 void CBaseDoor::DoorHitBottom(void)
 {
@@ -180,7 +119,7 @@ void CBaseDoor::DoorActivate(void)
 	{
 		if (!FBitSet(pev->spawnflags, SF_DOOR_NO_AUTO_RETURN) && m_toggle_state == TS_AT_BOTTOM)
 		{// door should close
-			if (m_hActivator != NULL && FClassnameIs(m_hActivator->pev, "player"))
+			if (m_hActivator != NULL && FClassnameIs(VARS(m_hActivator), "player"))
 			{
 				VARS(m_hActivator)->health += m_bHealthValue;
 			}
@@ -348,16 +287,16 @@ void CBaseDoor::Precache( void )
 
 void CBaseDoor::DoorTouch(entvars_t* pOther)
 {
-	//CBaseEntity* pEntity = (CBaseEntity*)GET_PRIVATE(ENT(pOther));
-	//if (FClassnameIs(pEntity->pev, "player")) why is pev nullptr
-	//{
-		//if (!pev->targetname)
-		//{
-			//m_hActivator = pOther->pev->pSystemGlobals->self;  doesnt work idk why i dont understand
-			//m_hActivator = pEntity;
+	entvars_t *thing = VARS(pev->pSystemGlobals->other);
+	if (FClassnameIs(thing, "player"))
+	{
+		if (!pev->targetname)
+		{
+			SetTouch(NULL);
+			m_hActivator = pev->pSystemGlobals->other;
 			DoorActivate();
-		//}
-	//}
+		}
+	}
 }
 
 void CBaseDoor::Spawn(void)
@@ -403,9 +342,58 @@ void CBaseDoor::Spawn(void)
 		SetTouch(&CBaseDoor::DoorTouch);
 }
 
-void CBaseDoor::Use(CBaseEntity* pActivator)
+void CBaseDoor::Use(entvars_t* pActivator)
 {
-	m_hActivator = pActivator;
 	if (m_toggle_state == TS_AT_BOTTOM || FBitSet(pev->spawnflags, SF_DOOR_NO_AUTO_RETURN) && m_toggle_state == TS_AT_TOP)
 		DoorActivate();
+}
+
+class CRotDoor : public CBaseDoor
+{
+public:
+	void Spawn(void);
+};
+
+void CRotDoor::Spawn(void)
+{
+	Precache();
+	// set the axis of rotation
+	CBaseToggle::AxisDir(pev);
+
+	// check for clockwise rotation
+	if (FBitSet(pev->spawnflags, SF_DOOR_ROTATE_BACKWARDS))
+		pev->movedir = pev->movedir * -1;
+
+	m_flWait			= 2;
+	m_vecAngle1 = pev->angles;
+	m_vecAngle2 = pev->angles + pev->movedir * m_flMoveDistance;
+	pev->solid = SOLID_BSP;
+	pev->movetype = MOVETYPE_PUSH;
+	UTIL_SetOrigin(pev, pev->origin);
+	SET_MODEL(ENT(pev), STRING(pev->model));
+
+	if (pev->speed == 0)
+		pev->speed = 100;
+	if (pev->dmg == 0)
+		pev->dmg = 2;
+
+	// DOOR_START_OPEN is to allow an entity to be lighted in the closed position
+	// but spawn in the open position
+	if (FBitSet(pev->spawnflags, SF_DOOR_START_OPEN))
+	{	// swap pos1 and pos2, put door at pos2, invert movement direction
+		pev->angles = m_vecAngle2;
+		Vector vecSav = m_vecAngle1;
+		m_vecAngle2 = m_vecAngle1;
+		m_vecAngle1 = vecSav;
+		pev->movedir = pev->movedir * -1;
+	}
+
+	m_toggle_state = TS_AT_BOTTOM;
+
+	if (FBitSet(pev->spawnflags, SF_DOOR_USE_ONLY))
+	{
+		SetTouch(NULL);
+	}
+	else // touchable button
+		SetTouch(&CRotDoor::DoorTouch);
 }

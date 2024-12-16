@@ -16,6 +16,13 @@
 #include	"util.h"
 #include	"cbase.h"
 #pragma warning(disable : 4996)
+extern DLL_GLOBAL Vector		g_vecAttackDir;
+extern DLL_GLOBAL float		g_flDamage;
+
+Vector VecBModelOrigin(entvars_t* pevBModel)
+{
+	return pevBModel->absmin + (pevBModel->size * 0.5);
+}
 
 void DispatchSpawn( entvars_t *pev )
 {
@@ -105,6 +112,94 @@ int CBaseEntity::Save( void *pSaveData )
 
 void CBaseEntity::Restore( void *pSaveData )
 {
+}
+
+void CBaseEntity::TakeDamage(entvars_t* pevInflictor, entvars_t* pevAttacker, float flDamage)
+{
+	Vector			vecTemp;
+
+	if (!pev->takedamage)
+		return;
+
+	if (pevAttacker == pevInflictor)
+	{
+		vecTemp = pevInflictor->origin - (VecBModelOrigin(pev));
+	}
+	else
+		// an actual missile was involved.
+	{
+		vecTemp = pevInflictor->origin - (VecBModelOrigin(pev));
+	}
+
+	// this global is still used for glass and other non-monster killables, along with decals.
+	g_vecAttackDir = vecTemp.Normalize();
+
+	// save damage based on the target's armor level
+	g_flDamage = flDamage;
+
+	if (FBitSet(pev->flags, FL_CLIENT))
+	{
+		pev->dmg_take += ceil(flDamage - ceil(pev->armortype * flDamage));
+		pev->dmg_save += ceil(pev->armortype * flDamage);
+		pev->dmg_inflictor = OFFSET(pevInflictor);
+	}
+	if (pevInflictor && OFFSET(pevInflictor))
+	{
+		if (pev->movetype == MOVETYPE_WALK && pev->solid != SOLID_TRIGGER)
+		{
+			Vector v15 = pev->origin;
+			float v16 = v15[2] - pev->absmax.z + pev->absmin.z * 0.5;
+			float v17 = v15[1] - pev->absmax.y + pev->absmin.y * 0.5;
+			Vector v38 = v15 - pev->absmin + pev->absmax * 0.5;
+			float v39 = v17;
+			float v40 = v16;
+			Vector v18 = v38.Normalize();
+			Vector v41 = v18;
+			//if (v20)
+			//{
+			//	v35 = Vector(0, 0, 0);
+			//}
+			//else
+			//{
+				float v21 = 1.0 / v41.x;
+				Vector v35 = v38 * v21;
+				float v36 = v39 * v21;
+				float v37 = v21 * v40;
+			//}
+			v38 = v35;
+			v39 = v36;
+			v40 = v37;
+			Vector v22 = pev->velocity;
+			v35.x = v35.x * flDamage * 8.0 + v22.x;
+			v36 = v36 * flDamage * 8.0 + v22[1];
+			v37 = v37 * flDamage * 8.0 + v22[2];
+			pev->velocity[0] = v35[0];
+			pev->velocity[1] = v36;
+			pev->velocity[2] = v37;
+		}
+	}
+
+	if ((!FClassnameIs(pev, "player") || (!FBitSet(pev->flags, FL_GODMODE) && !pgv->coop || pev->team <= 0 || pev->team != pevAttacker->team)))
+	{
+		pev->health -= ceil(flDamage - ceil(pev->armortype * flDamage));
+		if (pev->health <= 0)
+		{
+			Killed(OFFSET(ENT(pevAttacker)));
+		}
+		//else if (FBitSet(pev->flags, FL_MONSTER) && OFFSET(ENT(pevAttacker)) && FBitSet(pevAttacker->flags, 40))
+		//{
+			//if ()
+		//}
+	}
+}
+
+void CBaseEntity::Killed(int pevAttacker)
+{
+	EMIT_SOUND(ENT(pev), CHAN_WEAPON, "common/null.wav", 1, ATTN_NORM);
+	pev->solid = SOLID_NOT;
+	entvars_t* no = NULL;
+	SetThink(NULL);
+	SetTouch(NULL)
 }
 
 

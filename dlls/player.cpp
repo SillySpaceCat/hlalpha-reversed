@@ -54,6 +54,14 @@ float VectorNormalize(Vector v)
 	return length;
 }
 
+void CheckPowerUps(entvars_t* pev)
+{
+	if (pev->health <= 0)
+		return;
+
+	pev->modelindex = g_ulModelIndexPlayer;    // don't use eyes
+}
+
 
 // used by kill command and disconnect command
 void set_suicide_frame(entvars_t *pev)
@@ -183,6 +191,28 @@ void WaterMove(entvars_t* pev)
 	*/
 }
 
+void CBasePlayer::Killed(void)
+{
+	pev->modelindex = g_ulModelIndexPlayer;
+	pev->weaponmodel = 0;
+	pev->deadflag = DEAD_DYING;
+	pev->solid = SOLID_NOT;
+	pev->movetype = MOVETYPE_TOSS;
+	ClearBits(pev->flags, FL_ONGROUND);
+
+	if (pev->velocity.z < 10)
+		pev->velocity.z += UTIL_RandomFloat(0.0, 300);
+
+	if (pev->health < -40)
+	{
+		//Pain();
+		pev->angles.x = 0;
+		pev->angles.z = 0;
+		//DeathSound();
+		//SetThink(&CBasePlayer::PlayerDeathThink)
+	}
+}
+
 void CBasePlayer::Spawn( void )
 {
 	pev->classname		= ALLOC_STRING("player");
@@ -204,7 +234,9 @@ void CBasePlayer::Spawn( void )
 		// default to normal spawn
 		edict_t* pentSpawnSpot = EntSelectSpawnPoint( pgv );
 		pev->weapon = 2;
+		selectedweapon = 2;
 		pev->origin = VARS(pentSpawnSpot)->origin;
+		pev->angles = VARS(pentSpawnSpot)->angles;
 	}
 
 	pev->origin;
@@ -239,8 +271,8 @@ void CBasePlayer::Jump( void )
 		else
 			pev->velocity.z = 50;
 
-// play swimming sound
-		// TODO
+		// play swimming sound
+				// TODO
 	}
 
 	if (!FBitSet(pev->flags, FL_ONGROUND))
@@ -256,8 +288,8 @@ void CBasePlayer::Jump( void )
 	//SetAnimation( PLAYER_JUMP );
 
 	pev->button &= ~IN_JUMP;
-// player jumping sound
-	if ( UTIL_RandomFloat(0.0, 1.0) < 0.5 )
+	// player jumping sound
+	if (UTIL_RandomFloat(0.0, 1.0) < 0.5)
 		EMIT_SOUND(ENT(pev), CHAN_BODY, "player/pl_jump1.wav", 1, ATTN_NORM);
 	else
 		EMIT_SOUND(ENT(pev), CHAN_BODY, "player/pl_jump2.wav", 1, ATTN_NORM);
@@ -265,8 +297,9 @@ void CBasePlayer::Jump( void )
 }
 
 
-void CBasePlayer::Duck( void )
+void CBasePlayer::Duck(void)
 {
+	//shitty duck code but it'll do for now
 	if (pev->button & IN_DUCK)
 	{
 		if (!FBitSet(pev->flags, FL_DUCKING))
@@ -281,16 +314,16 @@ void CBasePlayer::Duck( void )
 }
 
 
-void DLLEXPORT PlayerPreThink( globalvars_t *pgv )
+void DLLEXPORT PlayerPreThink(globalvars_t* pgv)
 {
-	entvars_t *pev = VARS(pgv->self);
-	CBasePlayer *pPlayer = (CBasePlayer *)GET_PRIVATE(ENT(pev));
-	if ( pPlayer )
+	entvars_t* pev = VARS(pgv->self);
+	CBasePlayer* pPlayer = (CBasePlayer*)GET_PRIVATE(ENT(pev));
+	if (pPlayer)
 		pPlayer->PreThink();
 }
 
 
-void CBasePlayer::PreThink( void )
+void CBasePlayer::PreThink(void)
 {
 	if (pev->view_ofs == g_vecZero)
 		return;	// intermission or finale
@@ -315,7 +348,7 @@ void CBasePlayer::PreThink( void )
 		// If on a latter, jump off the ladder
 		// else Jump
 		Jump();
-		
+
 	}
 	else
 		SetBits(pev->flags, FL_JUMPRELEASED);
@@ -325,6 +358,27 @@ void CBasePlayer::PreThink( void )
 		Duck();
 	else
 		UTIL_SetSize(pev, VEC_HULL_MIN, VEC_HULL_MAX); // broken hack, player's gonna get stuck on the ground
+
+	//if (pev->pSystemGlobals->time < someunknownvariable)   not sure yet
+	//	pev->velocity = g_vecZero;
+	if (pev->pSystemGlobals->time > nextstep && FBitSet(pev->flags, FL_ONGROUND) && pev->velocity != g_vecZero)
+	{
+		if (pev->velocity.Length() > 200)
+		{
+			//unknownfunction( 4 )
+			float step = UTIL_RandomFloat(0, 1);
+			if (step <= 0.25)
+				EMIT_SOUND(ENT(pev), CHAN_BODY, "player/pl_step1.wav", 1, ATTN_NORM);
+			else if (step <= 0.5)
+				EMIT_SOUND(ENT(pev), CHAN_BODY, "player/pl_step2.wav", 1, ATTN_NORM);
+			else if (step <= 0.75)
+				EMIT_SOUND(ENT(pev), CHAN_BODY, "player/pl_step3.wav", 1, ATTN_NORM);
+			else
+				EMIT_SOUND(ENT(pev), CHAN_BODY, "player/pl_step4.wav", 1, ATTN_NORM);
+			nextstep = pev->pSystemGlobals->time + 0.3;
+		}
+	}
+
 }
 
 
@@ -343,7 +397,7 @@ void CBasePlayer::PostThink( void )
 	float v12;
 	if (pev->view_ofs == g_vecZero || pev->deadflag)
 		return;
-	//W_WeaponFrame()
+	W_WeaponFrame();
 	//char str[64];
 	//sprintf(str, "%.2f", pev->velocity[2]);
 	//EMIT_SOUND(ENT(pev), CHAN_BODY, str, 1, ATTN_NORM);
@@ -366,6 +420,6 @@ void CBasePlayer::PostThink( void )
 	}
 	// bunch of punch angle code i think its related to punch angle
 	jumpflag = pev->velocity[2];
-
+	CheckPowerUps(pev);
 
 }

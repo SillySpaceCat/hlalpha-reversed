@@ -53,6 +53,16 @@ void UTIL_TraceLine(const Vector& vecStart, const Vector& vecEnd, edict_t* pentI
 {
 	TRACE_LINE(vecStart, vecEnd, 0, pentIgnore, ptr);
 }
+Vector UTIL_GetAimVector(edict_t* pent, float flSpeed)
+{
+	Vector tmp;
+	GET_AIM_VECTOR(pent, flSpeed, tmp);
+	return tmp;
+}
+int UTIL_FindEntityInSphere(Vector vec1, float radius)
+{
+	return FIND_ENTITY_IN_SPHERE(vec1, radius);
+}
 
 void SetMovedir(entvars_t* pev)
 {
