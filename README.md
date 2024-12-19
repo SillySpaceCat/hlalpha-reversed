@@ -6,7 +6,6 @@
 - doors, water and triggers;
 - func_rotating;
 - level changing (no seamless transitions yet)
-- figure out how util_findentityinsphere works, it always returns chain as 0
 - and other stuff i forgot and im too lazy to put all of it here
 
 #### features that are yet to be added:
@@ -16,5 +15,6 @@
 - monsters/monster ai
 - some func_ entities
 - platform entities and trains (that includes mister john_train too)
+- figure out how util_findentityinsphere works, it always returns chain as 0
 
 to compile the code you'll need to use visual studio 2022, maybe i'll port it to visual c++ 4 in the future
