@@ -6,6 +6,7 @@
 - doors, water and triggers;
 - func_rotating;
 - level changing (no seamless transitions yet)
+- figure out how util_findentityinsphere works, it always returns chain as 0
 - and other stuff i forgot and im too lazy to put all of it here
 
 #### features that are yet to be added:
