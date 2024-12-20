@@ -35,6 +35,118 @@
 extern DLL_GLOBAL BOOL		g_fGameOver;
 
 extern void SetMovedir(entvars_t* pev);
+extern Vector VecBModelOrigin(entvars_t* pevBModel);
+
+#define SF_MULTIMAN_CLONE		0x80000000
+#define SF_MULTIMAN_THREAD		0x00000001
+
+class CMultiManager : public CBaseToggle
+{
+public:
+	void KeyValue(KeyValueData* pkvd);
+	void Spawn(void);
+	void ManagerThink(void);
+	void ManagerUse(entvars_t *pActivator);
+
+	int	m_cTargets;	// the total number of targets in this manager's fire list.
+	int m_index; // Current target
+	int	m_iTargetName[MAX_MULTI_TARGETS];// list if indexes into global string array
+	float m_flTargetDelay[MAX_MULTI_TARGETS];// delay (in seconds) from time of manager fire to target fire
+	float m_startTime;
+};
+LINK_ENTITY_TO_CLASS(multi_manager, CMultiManager);
+
+void CMultiManager::KeyValue(KeyValueData* pkvd)
+{
+	if (FStrEq(pkvd->szKeyName, "wait"))
+	{
+		m_flWait = atof(pkvd->szValue);
+		pkvd->fHandled = TRUE;
+	}
+	else // add this field to the target list
+	{
+		// this assumes that additional fields are targetnames and their values are delay values.
+		if (m_cTargets < MAX_MULTI_TARGETS)
+		{
+			char tmp[128];
+
+			m_iTargetName[m_cTargets] = ALLOC_STRING(pkvd->szKeyName);
+			m_flTargetDelay[m_cTargets] = atof(pkvd->szValue);
+			m_cTargets++;
+			pkvd->fHandled = TRUE;
+		}
+	}
+}
+
+void CMultiManager::Spawn()
+{
+	pev->solid = SOLID_NOT;
+	SetUse(&CMultiManager::ManagerUse);
+	SetThink(&CMultiManager::ManagerThink);
+}
+
+void CMultiManager::ManagerThink()
+{
+	float	time;
+
+	time = pev->pSystemGlobals->time - m_startTime;
+	while (m_index < m_cTargets && m_flTargetDelay[m_index] <= time)
+	{
+		edict_t* entity = FIND_ENTITY_BY_STRING(NULL, "targetname", STRING(m_iTargetName[m_index]));
+		if (!FNullEnt(entity))
+		{
+			const char* str2 = STRING(entity->v.targetname);
+			const char* str3 = STRING(entity->v.classname);
+			CBaseEntity* pTarget = CBaseEntity::Instance(entity);
+			if (pTarget)
+				pTarget->Use(0);
+		}
+		m_index++;
+	}
+	if (m_index >= m_cTargets)// have we fired all targets?
+	{
+		SetThink(NULL);
+		SetUse(&CMultiManager::ManagerUse);// allow manager re-use 
+	}
+	else
+		pev->nextthink = m_startTime + m_flTargetDelay[m_index];
+}
+
+void CMultiManager::ManagerUse(entvars_t *pActivator)
+{
+
+	// Sort targets
+// Quick and dirty bubble sort
+	int swapped = 1;
+
+	while (swapped)
+	{
+		swapped = 0;
+		for (int i = 1; i < m_cTargets; i++)
+		{
+			if (m_flTargetDelay[i] < m_flTargetDelay[i - 1])
+			{
+				// Swap out of order elements
+				int name = m_iTargetName[i];
+				float delay = m_flTargetDelay[i];
+				m_iTargetName[i] = m_iTargetName[i - 1];
+				m_flTargetDelay[i] = m_flTargetDelay[i - 1];
+				m_iTargetName[i - 1] = name;
+				m_flTargetDelay[i - 1] = delay;
+				swapped = 1;
+			}
+		}
+	}
+
+	m_index = 0;
+	m_startTime = pev->pSystemGlobals->time;
+
+	SetUse(NULL);// disable use until all targets have fired
+
+	SetThink(&CMultiManager::ManagerThink);
+	pev->nextthink = pev->pSystemGlobals->time;
+}
+
 
 class CBaseTrigger : public CBaseToggle
 {
@@ -444,24 +556,6 @@ FILE_GLOBAL char st_szNextMap[32];
 FILE_GLOBAL char st_szNextSpot[32];
 
 
-edict_t* CChangeLevel::FindLandmark(const char* pLandmarkName)
-{
-	edict_t* pentLandmark;
-
-	pentLandmark = FIND_ENTITY_BY_STRING(NULL, "classname", "pLandmarkName");
-	while (!FNullEnt(pentLandmark))
-	{
-		// Found the landmark
-		if (FClassnameIs(pentLandmark, "info_landmark"))
-			return pentLandmark;
-		else
-			pentLandmark = FIND_ENTITY_BY_STRING(pentLandmark, "targetname", pLandmarkName);
-	}
-	ALERT(at_error, "Can't find landmark %s\n", pLandmarkName);
-	return NULL;
-}
-
-
 void CChangeLevel::KeyValue(KeyValueData* pkvd)
 {
 	if (FStrEq(pkvd->szKeyName, "map"))
@@ -482,16 +576,50 @@ void CChangeLevel::Spawn(void)
 void CChangeLevel::TouchChangeLevel(entvars_t* pOther)
 {
 	entvars_t* thing = VARS(pev->pSystemGlobals->other);
-	if (!FClassnameIs(thing, "player"))
+	entvars_t* thing2 = VARS(pgv->other);
+	if (!FClassnameIs(thing2, "player"))
 		return;
 	SetTouch(NULL);
 	pev->solid = SOLID_NOT;
 	float* parms = (float*)malloc(120);
-	parms[2] = 0;
 	pgv->spawn_parms = parms;
+	parms[12] = 0;
 	strcpy_s(st_szNextMap, m_szMapName);
 	SUB_UseTargets(pev);
+	/*        gotta figure out how to pass info to the player
+	Vector v2; 
+	v2.z = pev->size.z * 0.5 + pev->absmin.z;
+	v2.y = pev->size.y * 0.5 + pev->absmin.y;
+	v2.x = pev->size.x * 0.5 + pev->absmin.x;
+	edict_t* entity = UTIL_FindEntityInSphere(v2, 256);
+	edict_t* entity2 = NULL;
+	while (1)
+	{
+		if (!OFFSET(entity))
+			break;
+		if (!strcmp(STRING(entity->v.classname), "info_landmark"))
+		{
+			parms[12] = 1;
+			parms[13] = entity->v.target;
+			parms[18] = thing->origin.x;
+			parms[19] = thing->origin.y;
+			parms[20] = thing->origin.z;
+			parms[24] = thing->angles.x;
+			parms[25] = thing->angles.y;
+			parms[26] = thing->angles.z;
+			parms[9] = thing->weapon;
+			parms[21] = thing->velocity.x;
+			parms[22] = thing->velocity.y;
+			parms[23] = thing->velocity.z;
+			break;
+		}
+		entity = ENT(entity->v.chain);
+	}
 	edict_t* landmark = FIND_ENTITY_BY_STRING(NULL, "classname", "info_landmark");
+	const char* str2 = STRING(landmark->v.classname);
+	const char* str3 = STRING(landmark->v.targetname);
+	const char* str4 = STRING(landmark->v.target);
+	strcpy_s(st_szNextSpot, STRING(entity->v.targetname));*/
 
 	CHANGE_LEVEL(st_szNextMap, st_szNextSpot);
 

@@ -28,8 +28,11 @@ void DispatchSpawn( entvars_t *pev )
 {
 	CBaseEntity *pEntity = (CBaseEntity *)GET_PRIVATE(ENT(pev));
 
-	if ( pEntity )
+	if (pEntity)
+	{
+		const char* str2 = STRING(pEntity->pev->classname);
 		pEntity->Spawn();
+	}
 }
 
 

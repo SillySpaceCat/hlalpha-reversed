@@ -104,10 +104,10 @@ void CBasePlayer::W_SetCurrentAmmo( void )
 
 void CBasePlayer::ImpulseCommands()
 {
-	if (pev->button & IN_USE) //&& (pev->pSystemGlobals->time > nextuse? )
+	if ((pev->button & IN_USE) && (pev->pSystemGlobals->time > nextuse))
 	{
-		//LinkEntForLink(pev);
-		//nextuse = pev->pSystemGlobals->time + 0.5
+		Use();
+		nextuse = pev->pSystemGlobals->time + 0.5;
 	}
 	if (pev->impulse >= 1 && pev->impulse <= 8)
 		W_ChangeWeapon(pev->impulse);

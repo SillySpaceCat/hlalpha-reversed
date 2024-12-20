@@ -30,6 +30,7 @@ using namespace std;
 #include "cbase.h"
 #include "player.h"
 #include "weapons.h"
+extern Vector VecBModelOrigin(entvars_t* pevBModel);
 
 extern DLL_GLOBAL ULONG		g_ulModelIndexPlayer;
 
@@ -230,15 +231,44 @@ void CBasePlayer::Spawn( void )
 	SetChangeParms( pgv );
 
 	// TODO: SaveRestore
+	//{
+	//	// default to normal spawn
+	//	edict_t* pentSpawnSpot = EntSelectSpawnPoint( pgv );
+	//	pev->weapon = 2;
+	//	selectedweapon = 2;
+	//	pev->origin = VARS(pentSpawnSpot)->origin;
+	//	pev->angles = VARS(pentSpawnSpot)->angles;
+	//}
+	if (!pgv->spawn_parms || !pgv->spawn_parms[12])
 	{
-		// default to normal spawn
-		edict_t* pentSpawnSpot = EntSelectSpawnPoint( pgv );
+		goto label_8;
+	}
+	//else
+	//{
+		//edict_t* v8 = ENT(FIND_ENTITY_BY_STRING(NULL, "targetname", STRING(pgv->spawn_parms[13])));
+	//}
+	if (!FIND_ENTITY_BY_STRING(NULL, "targetname", STRING(pgv->spawn_parms[13])))
+	{
+		label_8:
+		ALERT(at_console, "No Landmark:%s\n", STRING(pgv->spawn_parms[13]));
+		edict_t* pentSpawnSpot = EntSelectSpawnPoint(pgv);
+		pev->origin = VARS(pentSpawnSpot)->origin;
+		pev->origin.z += 1.0;
 		pev->weapon = 2;
 		selectedweapon = 2;
-		pev->origin = VARS(pentSpawnSpot)->origin;
 		pev->angles = VARS(pentSpawnSpot)->angles;
+		goto label_9;
 	}
-
+	
+	pev->origin.x = pgv->spawn_parms[18];
+	pev->origin.y = pgv->spawn_parms[19];
+	pev->origin.z = pgv->spawn_parms[20];
+	pev->weapon = pgv->spawn_parms[9];
+	pev->angles.x = pgv->spawn_parms[24];
+	pev->angles.y = pgv->spawn_parms[25];
+	pev->angles.z = pgv->spawn_parms[26];
+	pev->v_angle = -pev->v_angle;
+	label_9:
 	pev->origin;
 	pev->angles;
 	pev->fixangle = TRUE;           // turn this way immediately
@@ -254,6 +284,33 @@ void CBasePlayer::Spawn( void )
 	W_SetCurrentAmmo();
 
     pev->view_ofs = VEC_VIEW;
+}
+
+void CBasePlayer::Use()
+{
+	UTIL_MakeVectors(pev->angles);
+	edict_t* entity = UTIL_FindEntityInSphere(pev->origin, 64);
+	edict_t* entity2 = NULL;
+	Vector		vecLOS;
+	float flMaxDot = 0.7;
+	float flDot;
+	if (entity)
+	{
+		vecLOS = (VecBModelOrigin(VARS(entity)) - (pev->origin + pev->view_ofs));
+
+		flDot = DotProduct(vecLOS, pev->pSystemGlobals->v_forward);
+		if (flDot > flMaxDot)
+		{
+			if (FClassnameIs(VARS(entity), "func_button") || (FClassnameIs(VARS(entity), "func_rot_button") || (FClassnameIs(VARS(entity), "momentary_rot_button"))))
+			{
+				if (VARS(entity)->takedamage)
+					return;
+				CBaseEntity* pTarget = CBaseEntity::Instance(entity);
+				if (pTarget)
+					pTarget->Use(0);
+			}
+		}
+	}
 }
 
 

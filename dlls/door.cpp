@@ -115,20 +115,17 @@ void CBaseDoor::DoorGoUp(void)
 
 void CBaseDoor::DoorActivate(void)
 {
-	if (m_toggle_state != TS_GOING_DOWN && m_toggle_state != TS_GOING_UP)
-	{
-		if (!FBitSet(pev->spawnflags, SF_DOOR_NO_AUTO_RETURN) && m_toggle_state == TS_AT_BOTTOM)
-		{// door should close
-			if (m_hActivator != NULL && FClassnameIs(VARS(m_hActivator), "player"))
-			{
-				VARS(m_hActivator)->health += m_bHealthValue;
-			}
-			DoorGoUp();
-		}
-		else
-		{
+	if (FBitSet(pev->spawnflags, SF_DOOR_NO_AUTO_RETURN) && m_toggle_state == TS_AT_TOP)
+	{// door should close
 			DoorGoDown();
+	}
+	else
+	{
+		if (FClassnameIs(VARS(m_hActivator), "player"))
+		{
+			VARS(m_hActivator)->health += m_bHealthValue;
 		}
+		DoorGoUp();
 	}
 }
 
@@ -144,7 +141,7 @@ void CBaseDoor::SmokeThing( void )
 	WRITE_BYTE(0, pev->origin.y);
 	WRITE_BYTE(0, pev->origin.z);
 	WRITE_BYTE(0, 1);
-	//this[3] = 0; dunno
+	SetThink(NULL);
 }
 
 void CBaseDoor::KeyValue(KeyValueData* pkvd)
@@ -345,7 +342,11 @@ void CBaseDoor::Spawn(void)
 void CBaseDoor::Use(entvars_t* pActivator)
 {
 	if (m_toggle_state == TS_AT_BOTTOM || FBitSet(pev->spawnflags, SF_DOOR_NO_AUTO_RETURN) && m_toggle_state == TS_AT_TOP)
+	{
+		const char* str2 = STRING(pev->classname);
+		const char* str3 = STRING(pev->targetname);
 		DoorActivate();
+	}
 }
 
 class CRotDoor : public CBaseDoor

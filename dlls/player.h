@@ -26,8 +26,10 @@ public:
 	int selectedweapon;
 	float nextgrenade;
 	float nextstep;
+	float nextuse;
 	virtual void Spawn( void );
 
+	virtual void Use(void);
 	virtual void Jump( void );
 	virtual void Duck( void );
 	virtual void PreThink( void );

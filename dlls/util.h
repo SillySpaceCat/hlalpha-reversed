@@ -95,7 +95,7 @@ extern void			UTIL_SetOrigin			( entvars_t *pev, Vector vecOrigin );
 extern void         UTIL_MakeVectors        (const Vector& vecangles);
 extern void         UTIL_TraceLine          (const Vector& vecStart, const Vector& vecEnd, edict_t* pentIgnore, TraceResult* ptr);
 extern Vector       UTIL_GetAimVector       (edict_t* pent, float flSpeed);
-extern int          UTIL_FindEntityInSphere(Vector vec1, float radius);
+extern edict_t*     UTIL_FindEntityInSphere (const float *vec1, float radius);
 extern void			UTIL_EmitAmbientSound	( Vector vecOrigin, const char *samp, float vol, float attenuation );
 extern void         SetMovedir              (entvars_t* pev);
 inline float		UTIL_RandomFloat		( float flLow, float flHigh)

@@ -59,7 +59,7 @@ Vector UTIL_GetAimVector(edict_t* pent, float flSpeed)
 	GET_AIM_VECTOR(pent, flSpeed, tmp);
 	return tmp;
 }
-int UTIL_FindEntityInSphere(Vector vec1, float radius)
+edict_t* UTIL_FindEntityInSphere(const float *vec1, float radius)
 {
 	return FIND_ENTITY_IN_SPHERE(vec1, radius);
 }

@@ -32,7 +32,6 @@ typedef enum { USE_OFF = 0, USE_ON = 1, USE_SET = 2, USE_TOGGLE = 3 } USE_TYPE;
 #define EXPORT __attribute__ ((visibility("default")))
 #endif
 
-
 //
 // Base Entity. All entity types derive from this
 //
@@ -79,7 +78,8 @@ public:
 	// common member functions
 	void SUB_Remove(void);
 	void SUB_DoNothing( void );
-	void SUB_CallUseToggle(void) { this->Use(this->pev); }
+	void SUB_WrapperCallUseToggle(entvars_t* unused) { SUB_CallUseToggle(); }; //ugly hack aa
+	void SUB_CallUseToggle(void) { this->Use(this->pev); };
 
 };
 
@@ -120,6 +120,25 @@ class CPointEntity : public CBaseEntity
 public:
 	void	Spawn(void);
 private:
+};
+
+#define MAX_MULTI_TARGETS	16 // maximum number of targets a single multi_manager entity may be assigned.
+#define MS_MAX_TARGETS 32
+
+class CMultiSource : public CPointEntity
+{
+public:
+	void Spawn();
+	void KeyValue(KeyValueData* pkvd);
+	void Use(entvars_t * pActivator);
+	void IsTriggered(entvars_t* pActivator);
+	void Register(void);
+
+	int		m_rgEntities;
+	int			m_rgTriggered[MS_MAX_TARGETS];
+
+	int			m_iTotal;
+	string_t	m_globalstate;
 };
 
 //
@@ -183,6 +202,29 @@ public:
 	// of the switches in the multisource have been triggered, then
 	// the button will be allowed to operate. Otherwise, it will be
 	// deactivated.
+};
+
+char* ButtonSound(int sound);
+
+//
+// Generic Button
+//
+class CBaseButton : public CBaseToggle
+{
+public:
+	void Spawn(void);
+	virtual void KeyValue(KeyValueData* pkvd);
+	void ButtonSpark(void);
+	void ButtonUse(entvars_t* pActivator);
+	void ButtonTouch(entvars_t* pOther);
+	void ButtonActivate();
+	void TriggerAndWait(void);
+	void ButtonReturn(void);
+	void ButtonBackHome(void);
+	virtual void TakeDamage(entvars_t* pevInflictor, entvars_t* pevAttacker, float flDamage);
+	BOOL	m_fStayPushed;	// button stays pushed in until touched again?
+	BOOL	m_fRotating;		// a rotating button?  default is a sliding button.
+	int m_sounds;
 };
 
 //

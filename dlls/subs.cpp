@@ -50,8 +50,8 @@ LINK_ENTITY_TO_CLASS(info_landmark, CPointEntity);
 // Landmark class
 void CPointEntity :: Spawn( void )
 {
-	pev->solid = SOLID_NOT;
-//	UTIL_SetSize(pev, g_vecZero, g_vecZero);
+	pev->solid = SOLID_BBOX;
+	UTIL_SetSize(pev, g_vecZero, g_vecZero);
 }
 
 void CBaseEntity::SUB_Remove( void )
@@ -92,9 +92,11 @@ void CBaseDelay::SUB_UseTargets(entvars_t *pActivator)
 		int v10 = 0;
 		int v11 = v9->self;
 		edict_t* pentTarget = NULL;
+		edict_t* nextTarget = NULL;
 		for (;;)
 		{
-			pentTarget = FIND_ENTITY_BY_STRING(pentTarget, "targetname", STRING(pev->target));
+			pentTarget = FIND_ENTITY_BY_STRING(nextTarget, "targetname", STRING(pev->target));
+			nextTarget = pentTarget;
 			if (FNullEnt(pentTarget))
 				break;
 			CBaseEntity* pTarget = CBaseEntity::Instance(pentTarget);
