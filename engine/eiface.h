@@ -70,7 +70,7 @@ typedef struct enginefuncs_s
 	void		(*pfnChangePitch)			(edict_t *ent);
 	edict_t*	(*pfnFindEntityByString)	(edict_t *pEdictStartSearchAfter, const char *pszField, const char *pszValue);
 	void		(*pfnGetEntityIllum)		(edict_t *pEnt);
-	int	        (*pfnFindEntityInSphere)	(const float *org, int rad);
+	edict_t*    (*pfnFindEntityInSphere)	(const float *org, float rad);
 	void		(*pfnFindClientInPVS)		(void);
 	void		(*pfnMakeVectors)			(const float *rgflVector);
 	edict_t*	(*pfnCreateEntity)			(void);
@@ -115,7 +115,7 @@ typedef struct enginefuncs_s
 	entvars_t*	(*pfnGetVarsOfEnt)			(edict_t *pEdict);
 	edict_t*	(*pfnPEntityOfEntOffset)	(int iEntOffset);
 	int			(*pfnEntOffsetOfPEntity)	(const edict_t *pEdict);
-	int			(**pfnIndexOfEdict)				(const edict_t* pEdict);
+	int			(**pfnIndexOfEdict)			(edict_t* pEdict);
 	edict_t*	(*pfnFindEntityByVars)		(struct entvars_s* pvars);
 	void*		(*pfnGetModelPtr)			(edict_t *pEdict);
 } enginefuncs_t;
