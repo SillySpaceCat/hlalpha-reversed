@@ -4,7 +4,7 @@
 - camera punch when taking fall damage
 - weapons functionality (shoot bullets, grenade, do damage)
 - entity animation (cyclers/cine monsters are present in this repository but do not have any animation code yet)
-- monsters
+- monster ai
 - some func_ entities
 - platform entities and trains (that includes mister john_train too)
 - seamless level transition (only thing left to do is figure out how to pass spawnflags info to client and stuff)
