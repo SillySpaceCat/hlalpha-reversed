@@ -624,3 +624,40 @@ void CChangeLevel::TouchChangeLevel(entvars_t* pOther)
 	CHANGE_LEVEL(st_szNextMap, st_szNextSpot);
 
 }
+
+// ============================== LADDER =======================================
+
+class CLadder : public CBaseTrigger
+{
+public:
+	void KeyValue(KeyValueData* pkvd);
+	void Spawn(void);
+	void Touch(void);
+};
+LINK_ENTITY_TO_CLASS(func_ladder, CLadder);
+
+
+void CLadder::KeyValue(KeyValueData* pkvd)
+{
+	return;
+}
+
+void CLadder::Spawn()
+{
+	pev->solid = SOLID_TRIGGER;
+	pev->solid = SOLID_BSP;
+	SET_MODEL(ENT(pev), STRING(pev->model));
+	pev->movetype = MOVETYPE_PUSH;
+	pev->renderamt = 0;
+	pev->rendermode = 1;
+}
+
+void CLadder::Touch()
+{
+	entvars_t* thing = VARS(pev->pSystemGlobals->other);
+	if (FClassnameIs(thing, "player"))
+	{
+		CBasePlayer* pPlayer = (CBasePlayer*)GET_PRIVATE(ENT(thing));
+		pPlayer->g_onladder = 1;
+	}
+}

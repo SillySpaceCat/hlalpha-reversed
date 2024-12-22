@@ -226,3 +226,65 @@ float CBaseToggle::AxisDelta(int flags, const Vector& angle1, const Vector& angl
 
 	return angle1.y - angle2.y;
 }
+
+void CBaseMonster::MonsterInit()
+{
+	WalkMonsterStart();
+}
+
+void CBaseMonster::WalkMonsterStart()
+{
+	if (pev->pSystemGlobals->deathmatch)
+	{
+		REMOVE_ENTITY(ENT(pev));
+		return;
+	}
+	pev->origin.x = pev->origin.x + 1;
+	DROP_TO_FLOOR(ENT(pev));
+	if (!WALK_MOVE(ENT(pev), 0, 0))
+	{
+		ALERT(at_warning, "Monster %s stuck in wall--level design error", STRING(pev->classname));
+		pev->effects = 1;
+	}
+	pev->takedamage = DAMAGE_AIM;
+	pev->ideal_yaw = pev->angles.y;
+	SetThink(&CBaseMonster::CallMonsterThink);
+	if (pev->target)
+	{
+		pev->goalentity = OFFSET(FIND_ENTITY_BY_STRING(NULL, "targetname", STRING(pev->target)));
+		if (pev->goalentity)
+		{
+			edict_t *goal = ENT(VARS(pev->goalentity));
+			goal->v.origin.x -= pev->origin.x;
+			goal->v.origin.y -= pev->origin.y;
+			goal->v.origin.z -= pev->origin.z;
+			pev->ideal_yaw = UTIL_VecToYaw(goal->v.origin);
+			if (!FClassnameIs(ENT(VARS(pev->goalentity)), "path_corner"))
+				ALERT(at_aiconsole, "WalkMonsterStart--monster's initial goal '%s' is not a path_corner", STRING(pev->target));
+			//*(_DWORD *)(this + 128) = 4;
+		}
+		else
+		{
+			ALERT(at_warning, "WalkMonsterStart--%s couldn't find target %s", STRING(pev->classname), STRING(pev->target));
+		}
+	}
+	pev->nextthink = UTIL_RandomFloat(0, 0.5) + pev->nextthink;
+}
+
+void CBaseMonster::CallMonsterThink()
+{
+	//SetActivity(activity);
+	//StudioFrameAdvance(0.1);
+	if (pev->enemy)
+	{
+		if (pev->health > 0)
+		{
+			if (ENT(VARS(pev->enemy))->v.health <= 0)
+			{
+				pev->enemy = NULL;
+				//activity = 1;
+				return;
+			}
+		}
+	}
+}

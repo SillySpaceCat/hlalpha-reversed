@@ -155,15 +155,68 @@ void CBasePlayer::ImpulseCommands()
 	}
 }
 
-//void CBasePlayer::gunattack(int number, Vector aim, Vector idk, float v_angle0, float v_angle1, int idk2)
-//{
-//	int v46 = 0;
-//	Vector v10 = pev->v_angle;
-//	UTIL_MakeVectors(v10);
-//	float v11 = pgv->parm12;
-//	float v69 = v11 * 10
-//
-//}
+void CBasePlayer::Gun_Attack(int number, Vector aim, Vector idk, Vector v_angles)
+{/*
+	UTIL_MakeVectors(pev->v_angle);
+	Vector v11 = pgv->v_forward;
+	float v69 = v11.x * 10.0;
+	float v70 = v11.y * 10.0;
+	float v12 = v11.z * 10.0;
+	Vector v13 = pev->origin;
+	float v71 = v12;
+	float v42 = v12 + v13.z;
+	float v41 = v13.y + v70;
+	float v40 = v13.z + v69;
+	Vector v43(v40, v41, v42);
+	float v45 = pev->view_ofs.y - 4.0 + pev->origin.z;
+	//variable1 = 0;
+	//variable2 = 0;
+	if (number)
+	{
+		Vector v15 = pgv->v_right;
+		float v16 = UTIL_RandomFloat(-1.0, 1.0) * idk.x;
+		v42 = v15[2] * v16;
+		v41 = v15[1] * v16;
+		v40 = v16 * v15.x;
+		Vector v65(v40, v41, v42);
+		Vector v17 = pgv->v_up;
+		float v18 = UTIL_RandomFloat(-1.0, 1.0) * idk.y;
+		v42 = v17[2] * v18;
+		v41 = v17[1] * v18;
+		v40 = v18 * *v17;
+		Vector v66(v40, v41, v42);
+		float v59 = aim.x + v65[0];
+		float v60 = aim.y + v65[1];
+		float v19 = aim.z + v65[2];
+		float v61 = v19;
+		v42 = v19 + v66[2];
+		v41 = v66[1] + v60;
+		v40 = v66[0] + v59;
+		int v20 = 4;
+		Vector v76(v40, v41, v42);
+		v42 = v69;
+
+		Vector v56;
+		Vector v79;
+
+		v79.x = v76.x * v_angles.x;
+		v79.y = v76.y * v_angles.y;
+		v79.z = v76.z * v_angles.z;
+		Vector v22 = v79;
+
+		v56.x = v22.x + v43.x;
+		v56.y = v22.y + v43.y;
+		v56.z = v22.z + v43.z;
+		Vector vecend(0, 0, 0);
+		TraceResult tr;
+		UTIL_TraceLine(v43, vecend, ENT(pev), &tr);
+		if (!strcmp(STRING(pev->classname), "player"))
+			int v20 = 1;
+
+	}
+	*/
+
+}
 
 void CBasePlayer::Swing_Crowbar()
 {
@@ -185,7 +238,7 @@ void CBasePlayer::Swing_Crowbar()
 void CBasePlayer::Shoot_Pistol()
 {
 	pev->effects == static_cast<int>(pev->effects) | 2;
-
+	UTIL_MakeVectors(pev->v_angle);
 	pev->pSystemGlobals->msg_entity = OFFSET(pev); //i think
 
 	WRITE_BYTE(1, SVC_WEAPONANIM);
@@ -197,6 +250,8 @@ void CBasePlayer::Shoot_Pistol()
 		EMIT_SOUND(ENT(pev), CHAN_WEAPON, "weapons/pl_gun1.wav", 1, ATTN_NORM);
 	else
 		EMIT_SOUND(ENT(pev), CHAN_WEAPON, "weapons/pl_gun2.wav", 1, ATTN_NORM);
+	Vector aimvector = UTIL_GetAimVector(ENT(pev), 2048);
+	//Gun_Attack(1, aimvector, Vector(0.25, 0.25, 0.25), pev->v_angle); unfinished
 
 	nextattack = pgv->time + 0.3;
 

@@ -66,16 +66,16 @@ typedef int BOOL;
 //
 // Conversion among the three types of "entity", including identity-conversions.
 //
-inline edict_t *ENT(const entvars_t *pev)	{ return pev->pContainingEntity; }
-inline edict_t *ENT(edict_t *pent)		{ return pent; }
-inline edict_t *ENT(EOFFSET eoffset)			{ return (*g_engfuncs.pfnPEntityOfEntOffset)(eoffset); }
-inline EOFFSET OFFSET(EOFFSET eoffset)			{ return eoffset; }
-inline EOFFSET OFFSET(const edict_t *pent)		{ return (*g_engfuncs.pfnEntOffsetOfPEntity)(pent); }
-inline EOFFSET OFFSET(entvars_t *pev)			{ return OFFSET(ENT(pev)); }
-inline entvars_t *VARS(entvars_t *pev)					{ return pev; }
-inline entvars_t *VARS(edict_t *pent)			{ return (*g_engfuncs.pfnGetVarsOfEnt)(pent); }
-inline entvars_t* VARS(EOFFSET eoffset)				{ return VARS(ENT(eoffset)); }
-inline int	  ENTINDEX(edict_t* pEdict) { return (*g_engfuncs.pfnIndexOfEdict)(pEdict); }
+inline edict_t		*ENT(const entvars_t *pev)		{ return pev->pContainingEntity; }
+inline edict_t		*ENT(edict_t *pent)				{ return pent; }
+inline edict_t		*ENT(EOFFSET eoffset)			{ return (*g_engfuncs.pfnPEntityOfEntOffset)(eoffset); }
+inline EOFFSET		OFFSET(EOFFSET eoffset)			{ return eoffset; }
+inline EOFFSET		OFFSET(const edict_t *pent)		{ return (*g_engfuncs.pfnEntOffsetOfPEntity)(pent); }
+inline EOFFSET		OFFSET(entvars_t *pev)			{ return OFFSET(ENT(pev)); }
+inline entvars_t	*VARS(entvars_t *pev)			{ return pev; }
+inline entvars_t	*VARS(edict_t *pent)			{ return (*g_engfuncs.pfnGetVarsOfEnt)(pent); }
+inline entvars_t*	VARS(EOFFSET eoffset)			{ return VARS(ENT(eoffset)); }
+inline int			ENTINDEX(edict_t* pEdict)		{ return (*g_engfuncs.pfnIndexOfEdict)(pEdict); }
 
 // Testing the three types of "entity" for nullity
 #define eoNullEntity 0
@@ -89,14 +89,18 @@ inline BOOL FNullEnt(entvars_t* pev)				{ return pev == NULL || FNullEnt(OFFSET(
 inline BOOL FStringNull(int iString)			{ return iString == iStringNull; }
 
 // Misc. Prototypes
-extern void			UTIL_SetSize			(entvars_t *pev, Vector vecMin, Vector vecMax);
-
-extern void			UTIL_SetOrigin			( entvars_t *pev, Vector vecOrigin );
-extern void         UTIL_MakeVectors        (const Vector& vecangles);
-extern void         UTIL_TraceLine          (const Vector& vecStart, const Vector& vecEnd, edict_t* pentIgnore, TraceResult* ptr);
-extern Vector       UTIL_GetAimVector       (edict_t* pent, float flSpeed);
-extern edict_t*     UTIL_FindEntityInSphere (const float *vec1, float radius);
-extern void			UTIL_EmitAmbientSound	( Vector vecOrigin, const char *samp, float vol, float attenuation );
+extern void			UTIL_SetSize			(entvars_t* pev, Vector vecMin, Vector vecMax);
+extern float		UTIL_VecToYaw			(const float* vector);
+extern Vector		UTIL_VecToAngles		(const float* vector);
+extern void			UTIL_MoveToOrigin		(edict_t* pent, const Vector vecGoal, float flDist, int iMoveType);
+extern edict_t*		UTIL_FindEntityInSphere	(const float* vec1, float radius);
+extern void			UTIL_MakeVectors		(const Vector& vecAngles);
+extern void			UTIL_SetOrigin			(entvars_t* pev, Vector vecOrigin);
+extern void			UTIL_EmitAmbientSound	(Vector vecOrigin, const char* samp, float vol, float attenuation);
+extern void			UTIL_TraceLine			(const Vector& vecStart, const Vector& vecEnd, edict_t* pentIgnore, TraceResult* ptr);
+extern Vector		UTIL_GetAimVector		(edict_t* pent, float flSpeed);
+extern void			UTIL_ParticleEffect		(const Vector& vecOrigin, const Vector& vecDirection, ULONG ulColor, ULONG ulCount);
+extern int			UTIL_PointContents		(const Vector& vec);
 extern void         SetMovedir              (entvars_t* pev);
 inline float		UTIL_RandomFloat		( float flLow, float flHigh)
 {
@@ -123,8 +127,10 @@ extern DLL_GLOBAL const Vector g_vecZero;
 
 #define VEC_HULL_MIN		Vector(-16, -16, -36)
 #define VEC_HULL_MAX		Vector( 16,  16,  36)
-#define VEC_HUMAN_HULL_MIN	Vector( -16, -16, 0 )
-#define VEC_HUMAN_HULL_MAX	Vector( 16, 16, 72 )
+#define VEC_BARNEY_HULL_MIN	Vector( -18, -18, 0 )
+#define VEC_BARNEY_HULL_MAX	Vector( 18, 18, 72 )
+#define VEC_SCIENTIST_HULL_MIN	Vector( -16, -16, 0 )
+#define VEC_SCIENTIST_HULL_MAX	Vector( 16, 16, 72 )
 #define VEC_HUMAN_HULL_DUCK	Vector( 16, 16, 36 )
 
 #define VEC_VIEW			Vector( 0, 0, 28 )

@@ -27,6 +27,7 @@ public:
 	float nextgrenade;
 	float nextstep;
 	float nextuse;
+	int g_onladder;
 	virtual void Spawn( void );
 
 	virtual void Use(void);
@@ -36,7 +37,7 @@ public:
 	virtual void PostThink( void );
 	virtual void Killed(void);
 	void ImpulseCommands();
-	//void gunattack(int number, Vector aim, Vector idk, float v_angle0, float v_angle1, int idk2);
+	void Gun_Attack(int number, Vector aim, Vector idk, Vector v_angles);
 	void Swing_Crowbar();
 	void Shoot_Pistol();
 	void Shoot_Mp5();

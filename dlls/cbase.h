@@ -32,6 +32,7 @@ typedef enum { USE_OFF = 0, USE_ON = 1, USE_SET = 2, USE_TOGGLE = 3 } USE_TYPE;
 #define EXPORT __attribute__ ((visibility("default")))
 #endif
 
+
 //
 // Base Entity. All entity types derive from this
 //
@@ -203,6 +204,9 @@ public:
 	// the button will be allowed to operate. Otherwise, it will be
 	// deactivated.
 };
+
+class CBaseMonster;
+#include "basemonster.h"
 
 char* ButtonSound(int sound);
 
