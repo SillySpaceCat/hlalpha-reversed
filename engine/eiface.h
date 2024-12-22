@@ -90,7 +90,7 @@ typedef struct enginefuncs_s
 	void		(*pfnParticleEffect)		(const float *org, const float *dir, float color, float count);
 	void		(*pfnLightStyle)			(int style, char* val);
 	void		(*pfnDecalIndex)			(int index, const char* name);
-	void		(*pfnPointContents)			(const float *rgflVector);
+	int		    (*pfnPointContents)			(const float *rgflVector);
 	void		(*pfnWriteByte)				(int msg_dest, int iValue);
 	void		(*pfnWriteChar)				(int msg_dest, int iValue);
 	void		(*pfnWriteShort)			(int msg_dest, int iValue);
