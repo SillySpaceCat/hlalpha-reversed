@@ -155,66 +155,38 @@ void CBasePlayer::ImpulseCommands()
 	}
 }
 
-void CBasePlayer::Gun_Attack(int number, Vector aim, Vector idk, Vector v_angles)
-{/*
+//   GUN ATTACK
+//   other monsters use this but for now only the player has this function
+
+
+void CBasePlayer::FireBullets(int number, Vector dir, Vector spread, float distance)
+{
 	UTIL_MakeVectors(pev->v_angle);
-	Vector v11 = pgv->v_forward;
-	float v69 = v11.x * 10.0;
-	float v70 = v11.y * 10.0;
-	float v12 = v11.z * 10.0;
-	Vector v13 = pev->origin;
-	float v71 = v12;
-	float v42 = v12 + v13.z;
-	float v41 = v13.y + v70;
-	float v40 = v13.z + v69;
-	Vector v43(v40, v41, v42);
-	float v45 = pev->view_ofs.y - 4.0 + pev->origin.z;
-	//variable1 = 0;
-	//variable2 = 0;
-	if (number)
+
+	Vector src = pev->origin + pgv->v_forward * 10;
+	Vector direction;
+	src.z = pev->absmin.z + pev->size.z * 0.7;
+
+	//ClearMultiDamage();
+	TraceResult tr;
+
+	UTIL_TraceLine(src, src + dir * 2048, FALSE, &tr);
+	//puff_org = trace_endpos - dir * 4;
+
+	while (number > 0)
 	{
-		Vector v15 = pgv->v_right;
-		float v16 = UTIL_RandomFloat(-1.0, 1.0) * idk.x;
-		v42 = v15[2] * v16;
-		v41 = v15[1] * v16;
-		v40 = v16 * v15.x;
-		Vector v65(v40, v41, v42);
-		Vector v17 = pgv->v_up;
-		float v18 = UTIL_RandomFloat(-1.0, 1.0) * idk.y;
-		v42 = v17[2] * v18;
-		v41 = v17[1] * v18;
-		v40 = v18 * *v17;
-		Vector v66(v40, v41, v42);
-		float v59 = aim.x + v65[0];
-		float v60 = aim.y + v65[1];
-		float v19 = aim.z + v65[2];
-		float v61 = v19;
-		v42 = v19 + v66[2];
-		v41 = v66[1] + v60;
-		v40 = v66[0] + v59;
-		int v20 = 4;
-		Vector v76(v40, v41, v42);
-		v42 = v69;
+		direction = dir + UTIL_RandomFloat(-1, 1) * spread.x * pgv->v_right + UTIL_RandomFloat(-1, 1) * spread.y * pgv->v_up;
+		UTIL_TraceLine(src, src + direction * 2048, ENT(pev), &tr);
+		//if (tr.flFraction != 1.0)
+			//TraceAttack(4, direction);
+		WRITE_BYTE(MSG_BROADCAST, SVC_TEMPENTITY);
+		WRITE_BYTE(MSG_BROADCAST, TE_GUNSHOT);
+		WRITE_COORD(MSG_BROADCAST, tr.vecEndPos.x);
+		WRITE_COORD(MSG_BROADCAST, tr.vecEndPos.y);
+		WRITE_COORD(MSG_BROADCAST, tr.vecEndPos.z);
 
-		Vector v56;
-		Vector v79;
-
-		v79.x = v76.x * v_angles.x;
-		v79.y = v76.y * v_angles.y;
-		v79.z = v76.z * v_angles.z;
-		Vector v22 = v79;
-
-		v56.x = v22.x + v43.x;
-		v56.y = v22.y + v43.y;
-		v56.z = v22.z + v43.z;
-		Vector vecend(0, 0, 0);
-		TraceResult tr;
-		UTIL_TraceLine(v43, vecend, ENT(pev), &tr);
-		if (!strcmp(STRING(pev->classname), "player"))
-			int v20 = 1;
-
+		number -= 1;
 	}
-	*/
 
 }
 
@@ -231,7 +203,7 @@ void CBasePlayer::Swing_Crowbar()
 	pev->pSystemGlobals->msg_entity = 0;
 	UTIL_MakeVectors(pev->v_angle);
 	Vector aim = UTIL_GetAimVector(ENT(pev), 1000);
-	//gunattack(1, aim, Vector(0.025, 0.025, 0.025), pev->v_angle[0], pev->v_angle[1], 64);
+	FireBullets(1, aim, Vector(0.025, 0.025, 0.025), 64);
 	nextattack = pgv->time + 1.0;
 }
 
@@ -251,7 +223,7 @@ void CBasePlayer::Shoot_Pistol()
 	else
 		EMIT_SOUND(ENT(pev), CHAN_WEAPON, "weapons/pl_gun2.wav", 1, ATTN_NORM);
 	Vector aimvector = UTIL_GetAimVector(ENT(pev), 2048);
-	//Gun_Attack(1, aimvector, Vector(0.25, 0.25, 0.25), pev->v_angle); unfinished
+	FireBullets(1, aimvector, Vector(0.025, 0.025, 0.025), 2048);
 
 	nextattack = pgv->time + 0.3;
 
@@ -274,6 +246,8 @@ void CBasePlayer::Shoot_Mp5()
 	else
 		EMIT_SOUND(ENT(pev), CHAN_WEAPON, "weapons/hks3.wav", 1, ATTN_NORM);
 
+	Vector aim = UTIL_GetAimVector(ENT(pev), 1000);
+	FireBullets(1, aim, Vector(0.01, 0.01, 0.01), 2048);
 	nextattack = pgv->time + 0.1;
 	//variable = pgv->time + 1.0; not sure what this is
 
@@ -288,15 +262,15 @@ void CBasePlayer::W_Attack(void)
 		{
 		case 1:
 			Swing_Crowbar();
-			//player_shot1();
+			//PlayerSetAnimation(30);
 			break;
 		case 2:
 			Shoot_Pistol();
-			//player_shot1();
+			//PlayerSetAnimation(30);
 			break;
 		case 4:
 			Shoot_Mp5();
-			//player_shot1();
+			//PlayerSetAnimation(30);
 			break;
 		}
 	}

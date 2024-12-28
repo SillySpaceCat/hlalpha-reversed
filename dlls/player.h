@@ -37,7 +37,7 @@ public:
 	virtual void PostThink( void );
 	virtual void Killed(void);
 	void ImpulseCommands();
-	void Gun_Attack(int number, Vector aim, Vector idk, Vector v_angles);
+	void FireBullets(int number, Vector dir, Vector spread, float distance);
 	void Swing_Crowbar();
 	void Shoot_Pistol();
 	void Shoot_Mp5();
