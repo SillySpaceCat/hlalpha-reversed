@@ -176,14 +176,16 @@ void CBasePlayer::FireBullets(int number, Vector dir, Vector spread, float dista
 	while (number > 0)
 	{
 		direction = dir + UTIL_RandomFloat(-1, 1) * spread.x * pgv->v_right + UTIL_RandomFloat(-1, 1) * spread.y * pgv->v_up;
-		UTIL_TraceLine(src, src + direction * 2048, ENT(pev), &tr);
-		//if (tr.flFraction != 1.0)
+		UTIL_TraceLine(src, src + direction * distance, ENT(pev), &tr);
+		if (tr.flFraction != 1.0)
+		{
 			//TraceAttack(4, direction);
-		WRITE_BYTE(MSG_BROADCAST, SVC_TEMPENTITY);
-		WRITE_BYTE(MSG_BROADCAST, TE_GUNSHOT);
-		WRITE_COORD(MSG_BROADCAST, tr.vecEndPos.x);
-		WRITE_COORD(MSG_BROADCAST, tr.vecEndPos.y);
-		WRITE_COORD(MSG_BROADCAST, tr.vecEndPos.z);
+			WRITE_BYTE(MSG_BROADCAST, SVC_TEMPENTITY);
+			WRITE_BYTE(MSG_BROADCAST, TE_GUNSHOT);
+			WRITE_COORD(MSG_BROADCAST, tr.vecEndPos.x);
+			WRITE_COORD(MSG_BROADCAST, tr.vecEndPos.y);
+			WRITE_COORD(MSG_BROADCAST, tr.vecEndPos.z);
+		}
 
 		number -= 1;
 	}
