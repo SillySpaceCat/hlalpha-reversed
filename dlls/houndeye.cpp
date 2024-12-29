@@ -65,7 +65,7 @@ void CHoundEye::Spawn()
 	pev->health = 15;
 	pev->yaw_speed = 10;
 	pev->sequence = 6;
-	//*(_BYTE*)(this + 296) = -61;
+	m_bloodColor = -61;
 	//*(_DWORD*)(this + 304) = 1;
 	pev->nextthink += 1;
 	SetThink(&CHoundEye::MonsterInit);
@@ -85,7 +85,7 @@ int CHoundEye::CheckEnemy(int a2, float a3)
 
 void CHoundEye::Die()
 {
-	if (pev->health <= -30)
+	if (pev->health > -30)
 	{
 		float sound = UTIL_RandomFloat(0.0, 1.0);
 		if (sound <= 0.33)

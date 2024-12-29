@@ -381,7 +381,7 @@ void CBaseTrigger::HurtTouch(entvars_t* pOther)
 	if (pev->pSystemGlobals->time < m_flDelay)
 		return;
 
-	CBaseEntity* otherthing = GetClassPtr((CBaseEntity*)thing);
+	CBaseMonster* otherthing = GetClassPtr((CBaseMonster*)thing);
 	otherthing->TakeDamage(pev, pev, pev->dmg);
 
 	m_flDelay += 0.5;

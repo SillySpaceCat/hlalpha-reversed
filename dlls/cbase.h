@@ -47,8 +47,6 @@ public:
 	virtual void	Unknown() { return; }
 	virtual int		Save( void *pSaveData );
 	virtual void	Restore( void *pSaveData );
-	virtual void    TakeDamage(entvars_t* pevInflictor, entvars_t* pevAttacker, float flDamage);
-	virtual void    Killed(int pevAttacker);
 
 	// fundamental callbacks
 	void (CBaseEntity ::*m_pfnThink)( void );

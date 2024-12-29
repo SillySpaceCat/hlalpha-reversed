@@ -117,7 +117,7 @@ void CBaseEntity::Restore( void *pSaveData )
 {
 }
 
-void CBaseEntity::TakeDamage(entvars_t* pevInflictor, entvars_t* pevAttacker, float flDamage)
+void CBaseMonster::TakeDamage(entvars_t* pevInflictor, entvars_t* pevAttacker, float flDamage)
 {
 	Vector			vecTemp;
 
@@ -193,16 +193,19 @@ void CBaseEntity::TakeDamage(entvars_t* pevInflictor, entvars_t* pevAttacker, fl
 		//{
 			//if ()
 		//}
+		else if (pev->pSystemGlobals->time > pev->pain_finished)
+			Pain(flDamage);
 	}
 }
 
-void CBaseEntity::Killed(int pevAttacker)
+void CBaseMonster::Killed(int pevAttacker)
 {
 	EMIT_SOUND(ENT(pev), CHAN_WEAPON, "common/null.wav", 1, ATTN_NORM);
 	pev->solid = SOLID_NOT;
 	entvars_t* no = NULL;
 	SetThink(NULL);
-	SetTouch(NULL)
+	SetTouch(NULL);
+	Die();
 }
 
 

@@ -115,7 +115,7 @@ void CFuncIllusionary::Spawn(void)
 
 // =================== FUNC_GLASS ==============================================
 
-class CFuncGlass : public CBaseEntity //CBaseToggle i think
+class CFuncGlass : public CBaseMonster
 {
 public:
 	void Spawn(void);
@@ -305,7 +305,7 @@ void CFuncRotating::Touch(entvars_t* pActivator)
 	if (pev->takedamage)
 	{
 		pev->dmg = pev->avelocity.Length() / 10;
-		CBaseEntity* otherthing = GetClassPtr((CBaseEntity*)thing);
+		CBaseMonster* otherthing = GetClassPtr((CBaseMonster*)thing);
 		otherthing->TakeDamage(pev, pev, pev->dmg);
 
 		thing->velocity = (thing->origin - VecBModelOrigin(pev)).Normalize() * pev->dmg;
@@ -386,7 +386,7 @@ void CFuncRotating::Use(entvars_t* pActivator)
 void CFuncRotating::Blocked(entvars_t* pOther)
 {
 	entvars_t* thing = VARS(pev->pSystemGlobals->other);
-	CBaseEntity* otherthing = GetClassPtr((CBaseEntity*)thing);
+	CBaseMonster* otherthing = GetClassPtr((CBaseMonster*)thing);
 	otherthing->TakeDamage(pev, pev, pev->dmg);
 }
 

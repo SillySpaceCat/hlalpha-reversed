@@ -57,7 +57,7 @@ void CBarney::Spawn()
 	pev->yaw_speed = 8;
 	pev->sequence = 17;
 	//unknownvariable = 1;
-	//unknownvariable2 = 70;
+	m_bloodColor = 70;
 	//unknownvariable3 = 384;
 	//unknownvariable4 = 128;
 	pev->nextthink += UTIL_RandomFloat(0, 0.5) + 0.5;
@@ -180,7 +180,7 @@ void CBarney::Pain(int a2)
 
 void CBarney::Die()
 {
-    if (pev->health <= -30)
+    if (pev->health > -30)
     {
         switch (rand() % 4)
         {

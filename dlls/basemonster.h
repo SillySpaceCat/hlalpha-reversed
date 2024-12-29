@@ -22,12 +22,15 @@
 class CBaseMonster : public CBaseToggle
 {
 public:
+	int m_bloodColor;
 	virtual int Classify() { return 0; };
 	virtual void Pain(int a2) { return; };
 	virtual void Die() { return; };
 	virtual void Idle() { return; };
 	virtual void SetActivity(int activity) { return; };
 	virtual int CheckEnemy(int a2, float a3) { return 0; };
+	virtual void TakeDamage(entvars_t* pevInflictor, entvars_t* pevAttacker, float flDamage);
+	void Killed(int pevAttacker);
 	void MonsterInit();
 	void WalkMonsterStart();
 	void CallMonsterThink();

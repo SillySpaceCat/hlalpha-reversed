@@ -80,7 +80,7 @@ void CFuncPlat::GoDown()
 void CFuncPlat::Blocked(entvars_t* pActivator)
 {
 	entvars_t* thing = VARS(pev->pSystemGlobals->other);
-	CBaseEntity* otherthing = GetClassPtr((CBaseEntity*)thing);
+	CBaseMonster* otherthing = GetClassPtr((CBaseMonster*)thing);
 	otherthing->TakeDamage(pev, pev, 1);
 	if (m_toggle_state == TS_GOING_UP)
 		GoDown();

@@ -155,6 +155,102 @@ void CBasePlayer::ImpulseCommands()
 	}
 }
 
+void CBasePlayer::ClearMultiDamage()
+{
+	multi_damage = 0;
+	multi_ent = 0;
+}
+
+void CBasePlayer::AddMultiDamage(float a3)
+{
+	if (pgv->trace_ent)
+	{
+		if (pgv->trace_ent == multi_ent)
+		{
+			multi_damage += a3;
+		}
+		else
+		{
+			ApplyMultiDamage();
+			multi_ent = pgv->trace_ent;
+			multi_damage = a3;
+		}
+	}
+}
+
+void CBasePlayer::ApplyMultiDamage()
+{
+	if (!multi_ent)
+		return;
+	CBaseMonster* pMonster = (CBaseMonster*)GET_PRIVATE(ENT(multi_ent));
+	pMonster->TakeDamage(VARS(multi_ent), pev, multi_damage);
+}
+
+void CBasePlayer::TraceAttack(float damage, int integer1, Vector dir)
+{
+	Vector  vel, org;
+
+	org = pgv->trace_endpos - dir * 4;
+
+	if (VARS(pgv->trace_ent)->takedamage)
+	{
+		AddMultiDamage(damage);
+		if (FClassnameIs(VARS(pgv->trace_ent), "func_glass"))
+			return;
+		if (FClassnameIs(VARS(pgv->trace_ent), "func_breakable"))
+			return;
+		if (VARS(pgv->trace_ent)->health > 1000) //probably a cycler or sumthing
+			return;
+
+		//BloodSpray(org, bloodcolor, damage);
+		WRITE_BYTE(MSG_BROADCAST, SVC_TEMPENTITY);
+		WRITE_BYTE(MSG_BROADCAST, TE_BLOOD);
+		WRITE_COORD(MSG_BROADCAST, pgv->trace_endpos.x);
+		WRITE_COORD(MSG_BROADCAST, pgv->trace_endpos.y);
+		WRITE_COORD(MSG_BROADCAST, pgv->trace_endpos.z);
+		WRITE_COORD(MSG_BROADCAST, 0);
+		WRITE_COORD(MSG_BROADCAST, 0);
+		WRITE_COORD(MSG_BROADCAST, 0);
+		CBaseMonster* pMonster = (CBaseMonster*)GET_PRIVATE(ENT(pgv->trace_ent));
+		WRITE_BYTE(MSG_BROADCAST, pMonster->m_bloodColor);
+		WRITE_BYTE(MSG_BROADCAST, damage);
+
+
+		if (VARS(pgv->trace_ent)->health <= 0)
+		{
+			WRITE_BYTE(MSG_BROADCAST, SVC_TEMPENTITY);
+			WRITE_BYTE(MSG_BROADCAST, TE_BLOODSTREAM);
+			WRITE_COORD(MSG_BROADCAST, pgv->trace_endpos.x);
+			WRITE_COORD(MSG_BROADCAST, pgv->trace_endpos.y);
+			WRITE_COORD(MSG_BROADCAST, pgv->trace_endpos.z);
+			WRITE_COORD(MSG_BROADCAST, UTIL_RandomFloat(-1, 1));
+			WRITE_COORD(MSG_BROADCAST, UTIL_RandomFloat(-1, 1));
+			WRITE_COORD(MSG_BROADCAST, UTIL_RandomFloat(0, 1));
+			CBaseMonster* pMonster = (CBaseMonster*)GET_PRIVATE(ENT(pgv->trace_ent));
+			WRITE_BYTE(MSG_BROADCAST, pMonster->m_bloodColor);
+			WRITE_BYTE(MSG_BROADCAST, UTIL_RandomLong(80, 150));
+		}
+	}
+	if (!integer1)
+	{
+		if (VARS(pgv->trace_ent)->solid == SOLID_BSP)
+		{
+			WRITE_BYTE(MSG_BROADCAST, SVC_TEMPENTITY);
+			WRITE_BYTE(MSG_BROADCAST, TE_GUNSHOT);
+			WRITE_COORD(MSG_BROADCAST, pgv->trace_endpos.x);
+			WRITE_COORD(MSG_BROADCAST, pgv->trace_endpos.y);
+			WRITE_COORD(MSG_BROADCAST, pgv->trace_endpos.z);
+			WRITE_BYTE(MSG_BROADCAST, SVC_TEMPENTITY);
+			WRITE_BYTE(MSG_BROADCAST, TE_DECAL);
+			WRITE_COORD(MSG_BROADCAST, pgv->trace_endpos.x);
+			WRITE_COORD(MSG_BROADCAST, pgv->trace_endpos.y);
+			WRITE_COORD(MSG_BROADCAST, pgv->trace_endpos.z);
+			WRITE_SHORT(MSG_BROADCAST, 0);
+			WRITE_BYTE(MSG_BROADCAST, rand() % 5);
+		}
+	}
+}
+
 //   GUN ATTACK
 //   other monsters use this but for now only the player has this function
 
@@ -163,11 +259,12 @@ void CBasePlayer::FireBullets(int number, Vector dir, Vector spread, float dista
 {
 	UTIL_MakeVectors(pev->v_angle);
 
-	Vector src = pev->origin + pgv->v_forward * 10;
+	Vector src = pev->origin + (pgv->v_forward * 10);
 	Vector direction;
-	src.z = pev->absmin.z + pev->size.z * 0.7;
+	//src.z -= pev->absmin.z + pev->size.z * 0.7;
+	src.z = pev->view_ofs.z - 4 + pev->origin.z;
 
-	//ClearMultiDamage();
+	ClearMultiDamage();
 	TraceResult tr;
 
 	UTIL_TraceLine(src, src + dir * 2048, FALSE, &tr);
@@ -179,17 +276,15 @@ void CBasePlayer::FireBullets(int number, Vector dir, Vector spread, float dista
 		UTIL_TraceLine(src, src + direction * distance, ENT(pev), &tr);
 		if (tr.flFraction != 1.0)
 		{
-			//TraceAttack(4, direction);
-			WRITE_BYTE(MSG_BROADCAST, SVC_TEMPENTITY);
-			WRITE_BYTE(MSG_BROADCAST, TE_GUNSHOT);
-			WRITE_COORD(MSG_BROADCAST, tr.vecEndPos.x);
-			WRITE_COORD(MSG_BROADCAST, tr.vecEndPos.y);
-			WRITE_COORD(MSG_BROADCAST, tr.vecEndPos.z);
+			//TraceAttack(2, integer1, direction);
+			if (pgv->trace_ent)
+				edict_t *phitentity = ENT(pgv->trace_ent);
+			TraceAttack(2, 0, direction);
 		}
 
 		number -= 1;
 	}
-
+	ApplyMultiDamage();
 }
 
 void CBasePlayer::Swing_Crowbar()

@@ -44,6 +44,7 @@ void CPanther::Spawn()
 	pev->health = 50;
 	pev->yaw_speed = 10;
 	pev->sequence = 2;
+	m_bloodColor = -110;
 	pev->nextthink += UTIL_RandomFloat(0, 0.5) + 0.5;
 	SetThink(&CPanther::MonsterInit);
 }

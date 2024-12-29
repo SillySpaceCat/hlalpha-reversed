@@ -61,6 +61,7 @@ void CHeadCrab::Spawn()
 	pev->health = 12;
 	pev->yaw_speed = 10;
 	pev->sequence = 8;
+	m_bloodColor = 54;
 	pev->nextthink += UTIL_RandomFloat(0, 0.5) + 0.5;
 	SetThink(&CHeadCrab::MonsterInit);
 }
@@ -149,7 +150,7 @@ void CHeadCrab::Pain(int a2)
 
 void CHeadCrab::Die()
 {
-	if (pev->health <= -30)
+	if (pev->health > -30)
 	{
 		switch (rand() % 2)
 		{

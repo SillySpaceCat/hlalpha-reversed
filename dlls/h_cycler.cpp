@@ -28,7 +28,7 @@
 #define TEMP_FOR_SCREEN_SHOTS
 #ifdef TEMP_FOR_SCREEN_SHOTS //===================================================
 
-class CCycler : public CBaseEntity //CBaseMonster
+class CCycler : public CBaseMonster
 {
 public:
 	void CyclerSpawn(char* szModel, Vector vecMin, Vector vecMax);

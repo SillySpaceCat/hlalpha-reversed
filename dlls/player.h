@@ -15,7 +15,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-class CBasePlayer : public CBaseEntity
+class CBasePlayer : public CBaseMonster
 {
 public:
 	float jumpflag;
@@ -28,8 +28,9 @@ public:
 	float nextstep;
 	float nextuse;
 	int g_onladder;
+	float multi_damage;
+	int multi_ent;
 	virtual void Spawn( void );
-
 	virtual void Use(void);
 	virtual void Jump( void );
 	virtual void Duck( void );
@@ -38,6 +39,10 @@ public:
 	virtual void Killed(void);
 	void ImpulseCommands();
 	void FireBullets(int number, Vector dir, Vector spread, float distance);
+	void TraceAttack(float damage, int integer1, Vector dir);
+	void ClearMultiDamage();
+	void ApplyMultiDamage();
+	void AddMultiDamage(float a3);
 	void Swing_Crowbar();
 	void Shoot_Pistol();
 	void Shoot_Mp5();
