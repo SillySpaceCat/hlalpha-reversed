@@ -3,7 +3,6 @@
 #### features that are yet to be added:
 - camera punch when taking fall damage
 - mp5 grenade
-- entity animation (cyclers/cine monsters are present in this repository but do not have any animation code yet)
 - monster ai
 - some func_ entities
 - platform entities and trains (that includes mister john_train too)
