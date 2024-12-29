@@ -1,17 +1,19 @@
-/***
-*
-*	Copyright (c) 1996-2002, Valve LLC. All rights reserved.
-*	
-*	This product contains software technology licensed from Id 
-*	Software, Inc. ("Id Technology").  Id Technology (c) 1996 Id Software, Inc. 
-*	All Rights Reserved.
-*
-*   Use, distribution, and modification of this source code and/or resulting
-*   object code is restricted to non-commercial enhancements to products from
-*   Valve LLC.  All other use, distribution, or modification is prohibited
-*   without written permission from Valve LLC.
-*
-****/
+//=============================================================================
+//
+// Copyright (c) 1998, Valve LLC. All rights reserved.
+//
+// Copyright (c) 1999-2013 Tomas Slavotinek (aka baso88, GeckoN[CZ])
+// E-mail: slavotinek@gmail.com
+//
+// This product contains software technology licensed from Id
+// Software, Inc. ("Id Technology").  Id Technology (c) 1996 Id Software, Inc.
+// All Rights Reserved.
+//
+// contains code from GoldSrc Model Viewer (MDL v6) made by Tomas Slavotinek (aka baso88, GeckoN[CZ]) 
+//
+// Purpose: STUDIO MODELS
+//
+//=============================================================================
 
 
 
@@ -44,57 +46,83 @@ Studio models are position independent, so the cache manager can move them.
 #define MAXSTUDIOPIVOTS		256
 #define MAXSTUDIOCONTROLLERS 8
 
-typedef struct 
+typedef struct
 {
 	int					id;
 	int					version;
 
 	char				name[64];
+	// 48h
 	int					length;
 
-	vec3_t				eyeposition;	// ideal eye position
-	vec3_t				min;			// ideal movement hull size
-	vec3_t				max;			
+	// 4Ch
+	int					numbones;				// bones
+	int					boneindex;				// (->BCh)
 
-	vec3_t				bbmin;			// clipping bounding box
-	vec3_t				bbmax;		
-
-	int					flags;
-
-	int					numbones;			// bones
-	int					boneindex;
-
+	// 54h
 	int					numbonecontrollers;		// bone controllers
-	int					bonecontrollerindex;
+	// TOMAS: turret.mdl has 2
+	int					bonecontrollerindex;	// if num == 0 then this points to bones! not controlers!
 
-	int					numhitboxes;			// complex bounding boxes
-	int					hitboxindex;			
-	
-	int					numseq;				// animation sequences
+	// 5Ch
+	int					numseq;					// animation sequences
 	int					seqindex;
 
-	int					numseqgroups;		// demand loaded sequences
-	int					seqgroupindex;
-
-	int					numtextures;		// raw textures
+	// 64h
+	int					numtextures;			// raw textures
 	int					textureindex;
 	int					texturedataindex;
 
-	int					numskinref;			// replaceable textures
+	// 70h
+	int					numskinref;				// replaceable textures
 	int					numskinfamilies;
 	int					skinindex;
 
-	int					numbodyparts;		
-	int					bodypartindex;
+	// 7Ch
+	int					numbodyparts;
+	int					bodypartindex;			// (->mstudiobodyparts_t)
 
-	int					numattachments;		// queryable attachable points
-	int					attachmentindex;
+	int					unused[14];				// TOMAS: UNUSED (checked)
 
-	int					soundtable;
-	int					soundindex;
-	int					soundgroups;
-	int					soundgroupindex;
-
-	int					numtransitions;		// animation node to animation node transition graph
-	int					transitionindex;
 } studiohdr_t;
+
+typedef struct
+{
+	char				label[32];	// textual name
+	char				name[64];	// file name
+    //int32				unused1;    // was "cache"  - index pointer
+	//int					unused2;    // was "data" -  hack for group 0
+} mstudioseqgroup_t;
+
+typedef struct
+{
+	char				label[32];		// sequence label
+
+	float				fps;			// frames per second
+	int					flags;			// looping/non-looping flags
+
+	int					numevents;		// TOMAS: USED (not always 0)
+	int					eventindex;
+
+	int					numframes;		// number of frames per sequence
+
+	int					unused01;		// TOMAS: UNUSED (checked)
+
+	int					numpivots;		// number of foot pivots
+	// TOMAS: polyrobo.mdl use this (4)
+	int					pivotindex;
+
+	int					motiontype;		// TOMAS: USED (not always 0)
+	int					motionbone;		// motion bone id (0)
+
+	int					unused02;		// TOMAS: UNUSED (checked)
+	vec3_t				linearmovement;	// TOMAS: USED (not always 0)
+
+	int					numblends;		// TOMAS: UNUSED (checked)
+	int					animindex;		// (->mstudioanim_t)
+
+	int					unused03[2];	// TOMAS: UNUSED (checked)
+
+} mstudioseqdesc_t;
+
+#endif
