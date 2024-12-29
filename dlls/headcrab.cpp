@@ -121,7 +121,7 @@ void CHeadCrab::SetActivity(int activity)
 	{
 		pev->sequence = activitynum;
 		pev->frame = 0;
-		//ResetSequenceInfo(0.1);
+		ResetSequenceInfo(0.1);
 	}
 }
 

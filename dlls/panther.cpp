@@ -64,7 +64,7 @@ void CPanther::SetActivity(int activity)
 		{
 			pev->sequence = 0;
 			pev->frame = 0;
-			//ResetSequenceInfo(0.1);
+			ResetSequenceInfo(0.1);
 		}
 	default:
 		ALERT(at_console, "Houndeye's monster state is bogus: %d", activity);

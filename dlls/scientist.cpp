@@ -128,7 +128,7 @@ void CScientist::SetActivity(int activity)
         pev->sequence = activitynum;
         if ((activitynum != 4 && activitynum != 3) || (pev->sequence != 4 && pev->sequence != 4))
             pev->frame = 0;
-        //ResetSequenceInfo(0.1);
+        ResetSequenceInfo(0.1);
         switch (activitynum)
         {
         case 0:

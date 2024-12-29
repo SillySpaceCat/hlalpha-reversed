@@ -28,7 +28,7 @@
 #include	"cbase.h"
 
 
-class CCineMonster : public CBaseEntity //CBaseMonster
+class CCineMonster : public CBaseMonster //CBaseMonster
 {
 public:
 	void CineSpawn(char* szModel);

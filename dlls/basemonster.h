@@ -19,10 +19,11 @@
 //
 // generic Monster
 //
-class CBaseMonster : public CBaseToggle
+class CBaseMonster : public CBaseAnimating
 {
 public:
 	int m_bloodColor;
+	int m_iActivity;
 	virtual int Classify() { return 0; };
 	virtual void Pain(int a2) { return; };
 	virtual void Die() { return; };

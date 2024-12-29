@@ -59,7 +59,7 @@ void CBarney::Spawn()
 	//unknownvariable = 1;
 	m_bloodColor = 70;
 	//unknownvariable3 = 384;
-	//unknownvariable4 = 128;
+	m_flFrameRate = 128;
 	pev->nextthink += UTIL_RandomFloat(0, 0.5) + 0.5;
 	SetThink(&CBarney::MonsterInit);
 }
@@ -136,7 +136,7 @@ void CBarney::SetActivity(int activity)
         pev->sequence = activitynum;
         if ((activitynum != 4 && activitynum != 3) || (pev->sequence != 4 && pev->sequence != 4))
             pev->frame = 0;
-        //ResetSequenceInfo(0.1);
+        ResetSequenceInfo(0.1);
         switch (activitynum)
         {
         case 0:
@@ -158,8 +158,8 @@ void CBarney::SetActivity(int activity)
             return;
         default:
             ALERT(at_console, "Bogus Barney anim: %d", activitynum);
-            //this[66] = 0.0;
-            //this[67] = 0.0;
+            m_flFrameRate = 0.0;
+            m_flGroundSpeed = 0.0;
             break;
         }
     }

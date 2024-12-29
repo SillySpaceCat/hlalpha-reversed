@@ -47,7 +47,7 @@ public:
 	virtual void	Unknown() { return; }
 	virtual int		Save( void *pSaveData );
 	virtual void	Restore( void *pSaveData );
-
+	virtual void	TakeDamage(entvars_t* pevInflictor, entvars_t* pevAttacker, float flDamage) {return;}; // just so the game doesn't crash
 	// fundamental callbacks
 	void (CBaseEntity ::*m_pfnThink)( void );
 	void (CBaseEntity ::*m_pfnTouch)( entvars_t *pevOther );
@@ -155,7 +155,20 @@ public:
 	void EXPORT DelayThink(void);
 };
 
-class CBaseToggle : public CBaseDelay //CBaseAnimating
+
+class CBaseAnimating : public CBaseDelay
+{
+public:
+	float				m_flFrameRate;		// computed FPS for current sequence
+	float				m_flGroundSpeed;	// computed linear movement rate for current sequence
+	BOOL				m_fSequenceFinished;
+	void StudioFrameAdvance(float flInterval);
+	void ResetSequenceInfo(float flInterval);
+	void DispatchAnimEvents(float flInterval);
+};
+
+
+class CBaseToggle : public CBaseAnimating
 {
 public:
 	//void				KeyValue(KeyValueData* pkvd); also dunno if it exists in the original dll

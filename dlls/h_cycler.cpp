@@ -33,9 +33,10 @@ class CCycler : public CBaseMonster
 public:
 	void CyclerSpawn(char* szModel, Vector vecMin, Vector vecMax);
 	//virtual int	ObjectCaps(void) { return (CBaseEntity::ObjectCaps() | FCAP_IMPULSE_USE); }
-	void Pain(float flDamage);
-	//void Pain( float flDamage );
+	//void Pain(float flDamage);
+	void Pain(int a2);
 	void Use(entvars_t* pActivator);
+	virtual void Think(void);
 
 	int			m_animate;
 };
@@ -244,42 +245,44 @@ void CCycler::CyclerSpawn(char* szModel, Vector vecMin, Vector vecMax)
 	pev->health = 80000;// no cycler should die
 	pev->yaw_speed = 5;
 	UTIL_SetSize(pev, vecMin, vecMax);
-	//m_flFrameRate = 75;
-	//m_flGroundSpeed = 0;
+	m_flFrameRate = 75;
+	m_flGroundSpeed = 0;
 	pev->classname = ALLOC_STRING("cycler");
 	pev->sequence = 0;
 	pev->frame = 0;
-	//ResetSequenceInfo(0.1);
+	ResetSequenceInfo(0.1);
 	//SetUse(SUB_CallUseToggle);
 
 	pev->nextthink += 1.0;
 
 }
-//
-// CyclerUse - starts a rotation trend
-//
 void CCycler::Use(entvars_t* pActivator)
 {
-	pev->nextthink = pev->pSystemGlobals->time + 0.1;
-	//if (pev->pSystemGlobals->time < somevalue)
-	//	pev->angles.x += 4;
-	//StudioFrameAdvance(0.1);
+	//somevariable = pev->pSystemGlobals->time + 4.5;
 }
 
 //
 // CyclerPain , changes sequences when shot
 //
-void CCycler::Pain(float flDamage)
+void CCycler::Pain(int a2)
 {
-	pev->health += flDamage;
+	pev->health += a2;
 	++pev->sequence;
-	//ResetSequenceInfo(0.1);
-	//if (((_DWORD)this[66] & 0x7FFFFFFF) == 0)
-	//{
-	//	pev->sequence = 0;
-	//	ResetSequenceInfo(0.1);
-	//}
+	ResetSequenceInfo(0.1);
+	if (!m_flFrameRate)
+	{
+		pev->sequence = 0;
+		ResetSequenceInfo(0.1);
+	}
 	pev->frame = 0;
+}
+
+void CCycler::Think(void)
+{
+	pev->nextthink = pev->pSystemGlobals->time + 0.1;
+	//if (pev->pSystemGlobals->time < somevariable)
+		//pev->angles.y += 4; // SPEEN
+	StudioFrameAdvance(0.1);
 }
 
 #endif

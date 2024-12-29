@@ -183,7 +183,8 @@ void CBasePlayer::ApplyMultiDamage()
 	if (!multi_ent)
 		return;
 	CBaseMonster* pMonster = (CBaseMonster*)GET_PRIVATE(ENT(multi_ent));
-	pMonster->TakeDamage(VARS(multi_ent), pev, multi_damage);
+	if (pMonster)
+		pMonster->TakeDamage(VARS(multi_ent), pev, multi_damage);
 }
 
 void CBasePlayer::TraceAttack(float damage, int integer1, Vector dir)

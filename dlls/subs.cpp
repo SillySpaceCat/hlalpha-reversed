@@ -24,6 +24,7 @@
 #include "util.h"
 #include "cbase.h"
 #include "doors.h"
+#include "studio.h"
 
 // These are the new entry points to entities.
 
@@ -273,18 +274,115 @@ void CBaseMonster::WalkMonsterStart()
 
 void CBaseMonster::CallMonsterThink()
 {
-	//SetActivity(activity);
-	//StudioFrameAdvance(0.1);
+	pev->nextthink = pgv->time + 0.1;
+	SetActivity(m_iActivity);
+	StudioFrameAdvance(0.1);
+	//ResetSequenceInfo(0.1); // test
 	if (pev->enemy)
 	{
 		if (pev->health > 0)
 		{
-			if (ENT(VARS(pev->enemy))->v.health <= 0)
+			if (VARS(pev->enemy)->health <= 0)
 			{
 				pev->enemy = NULL;
-				//activity = 1;
+				m_iActivity = 1;
 				return;
 			}
 		}
 	}
+
+	switch (m_iActivity)
+	{
+	case 1:
+	case 2:
+	case 3:
+		//if (pgv->time > nextidle)
+		//	Idle();
+		//if (variable)
+		//int random = rand() % 10;
+		//if (random)
+		//{
+		//	if (random == 1)
+		//		m_iActivity = 3;
+		//	else
+		//		m_iActivity = 1;
+		// }
+		//else
+		//	m_iActivity = 2;
+		break;
+	case 4:
+		VARS(pev->goalentity);
+		UTIL_MoveToOrigin(ENT(pev), VARS(pev->goalentity)->origin, m_flGroundSpeed, 1);
+		break;
+	case 5:
+		CHANGE_YAW(ENT(pev));
+		CheckEnemy(pev->enemy, NULL);
+		break;
+	}
+
+}
+
+void GetSequenceInfo(void* pmodel, entvars_t* pev, float* pflFrameRate, float* pflGroundSpeed)
+{
+	studiohdr_t* pstudiohdr;
+
+	pstudiohdr = (studiohdr_t*)pmodel;
+	if (!pstudiohdr)
+		return;
+
+	mstudioseqdesc_t* pseqdesc;
+
+	if (pev->sequence >= pstudiohdr->numseq)
+	{
+		*pflFrameRate = 0.0;
+		*pflGroundSpeed = 0.0;
+		return;
+	}
+
+	pseqdesc = (mstudioseqdesc_t*)((byte*)pstudiohdr + pstudiohdr->seqindex) + (int)pev->sequence;
+
+	if (pseqdesc->numframes > 1)
+	{
+		*pflFrameRate = 256 * pseqdesc->fps / (pseqdesc->numframes - 1);
+		*pflGroundSpeed = sqrt(pseqdesc->linearmovement[0] * pseqdesc->linearmovement[0] + pseqdesc->linearmovement[1] * pseqdesc->linearmovement[1] + pseqdesc->linearmovement[2] * pseqdesc->linearmovement[2]);
+		*pflGroundSpeed = *pflGroundSpeed * pseqdesc->fps / (pseqdesc->numframes - 1);
+	}
+	else
+	{
+		*pflFrameRate = 256.0;
+		*pflGroundSpeed = 0.0;
+	}
+}
+
+void CBaseAnimating::StudioFrameAdvance(float flInterval)
+{
+	if (pev->animtime)
+		pev->frame = (pgv->time - pev->animtime) * pev->framerate * m_flFrameRate + pev->frame;
+	pev->animtime = pgv->time;
+	if (pev->frame < 0.0 || pev->frame >= 256.0)
+		pev->frame += (int)(pev->frame / 256.0) * -256.0;
+	m_fSequenceFinished = FALSE;
+	if ((m_flFrameRate <= 0) || (pev->framerate * m_flFrameRate * flInterval + pev->frame <= 256))
+	{
+		if (pev->framerate * m_flFrameRate * flInterval + pev->frame <= 0)
+			m_fSequenceFinished = TRUE;
+	}
+	else
+		m_fSequenceFinished = TRUE;
+}
+
+void CBaseAnimating::ResetSequenceInfo(float flInterval)
+{
+	void* pmodel = GET_MODEL_PTR(ENT(pev));
+
+	GetSequenceInfo(pmodel, pev, &m_flFrameRate, &m_flGroundSpeed);
+	pev->animtime = pgv->time;
+	pev->framerate = 1;
+	m_fSequenceFinished = FALSE;
+	m_flGroundSpeed *= flInterval;
+}
+
+void CBaseAnimating::DispatchAnimEvents(float flInterval)
+{
+	//HandleAnimEvent(GET_MODEL_PTR(ENT(pev)), pev, flInterval);
 }
