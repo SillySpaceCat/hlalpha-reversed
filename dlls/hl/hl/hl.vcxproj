@@ -165,6 +165,7 @@
     <ClCompile Include="..\..\lights.cpp" />
     <ClCompile Include="..\..\m44.cpp" />
     <ClCompile Include="..\..\panther.cpp" />
+    <ClCompile Include="..\..\pathcorner.cpp" />
     <ClCompile Include="..\..\plats.cpp" />
     <ClCompile Include="..\..\player.cpp" />
     <ClCompile Include="..\..\scientist.cpp" />
