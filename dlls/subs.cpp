@@ -240,40 +240,49 @@ void CBaseMonster::WalkMonsterStart()
 		REMOVE_ENTITY(ENT(pev));
 		return;
 	}
-	pev->origin.x = pev->origin.x + 1;
-	DROP_TO_FLOOR(ENT(pev));
-	if (!WALK_MOVE(ENT(pev), 0, 0))
-	{
-		ALERT(at_warning, "Monster %s stuck in wall--level design error", STRING(pev->classname));
-		pev->effects = 1;
-	}
+	pev->origin.z += 1;
+	//DROP_TO_FLOOR(ENT(pev)); //for some reason some monsters dissappear when this
+	                         //line executes ?????????
+	//if (!WALK_MOVE(ENT(pev), 0, 0))
+	//{
+	//	ALERT(at_warning, "Monster %s stuck in wall--level design error", STRING(pev->classname));
+	//	pev->effects = 1;
+	//}
+	pev->view_ofs.x = 0;
+	pev->view_ofs.y = 0;
+	pev->view_ofs.z = 64;
 	pev->takedamage = DAMAGE_AIM;
 	pev->ideal_yaw = pev->angles.y;
+	SetBits(pev->flags, FL_MONSTER);
 	SetThink(&CBaseMonster::CallMonsterThink);
+	m_iActivity = ACT_IDLE1;
 	if (pev->target)
 	{
 		pev->goalentity = OFFSET(FIND_ENTITY_BY_STRING(NULL, "targetname", STRING(pev->target)));
 		if (pev->goalentity)
 		{
-			edict_t *goal = ENT(VARS(pev->goalentity));
-			goal->v.origin.x -= pev->origin.x;
-			goal->v.origin.y -= pev->origin.y;
-			goal->v.origin.z -= pev->origin.z;
-			pev->ideal_yaw = UTIL_VecToYaw(goal->v.origin);
-			if (!FClassnameIs(ENT(VARS(pev->goalentity)), "path_corner"))
+			entvars_t *goal = VARS(pev->goalentity);
+			Vector goaltest;
+			goaltest.x = goal->origin.x - pev->origin.x;
+			goaltest.y = goal->origin.y - pev->origin.y;
+			goaltest.z = goal->origin.z - pev->origin.z;
+			pev->ideal_yaw = UTIL_VecToYaw(goaltest);
+			if (!FClassnameIs(VARS(pev->goalentity), "path_corner"))
 				ALERT(at_aiconsole, "WalkMonsterStart--monster's initial goal '%s' is not a path_corner", STRING(pev->target));
-			//*(_DWORD *)(this + 128) = 4;
+			m_iActivity = ACT_WALK;
 		}
 		else
 		{
 			ALERT(at_warning, "WalkMonsterStart--%s couldn't find target %s", STRING(pev->classname), STRING(pev->target));
 		}
 	}
-	pev->nextthink = UTIL_RandomFloat(0, 0.5) + pev->nextthink;
+		pev->nextthink += UTIL_RandomFloat(0.0, 0.5) + 0.5;
 }
 
 void CBaseMonster::CallMonsterThink()
 {
+	entvars_t *enemy = NULL;
+	float distance = NULL;
 	pev->nextthink = pgv->time + 0.1;
 	SetActivity(m_iActivity);
 	StudioFrameAdvance(0.1);
@@ -282,15 +291,16 @@ void CBaseMonster::CallMonsterThink()
 	{
 		if (pev->health > 0)
 		{
+			enemy = VARS(enemy);
 			if (VARS(pev->enemy)->health <= 0)
 			{
 				pev->enemy = NULL;
 				m_iActivity = 1;
 				return;
 			}
+			//distance = somethingsomething
 		}
 	}
-
 	switch (m_iActivity)
 	{
 	case 1:
@@ -311,15 +321,67 @@ void CBaseMonster::CallMonsterThink()
 		//	m_iActivity = 2;
 		break;
 	case 4:
-		VARS(pev->goalentity);
-		UTIL_MoveToOrigin(ENT(pev), VARS(pev->goalentity)->origin, m_flGroundSpeed, 1);
+		//UTIL_MoveToOrigin(ENT(pev), VARS(pev->goalentity)->origin, m_flGroundSpeed, 1);
+		//  the line above causes the screen to blink and monsters dissappear
+		//  and a bunch of other funky stuff i literally
+		//  do not know why
+		//ALERT(at_console, "%f, %f,%f\n", VARS(pev->goalentity)->origin.x, VARS(pev->goalentity)->origin.y, VARS(pev->goalentity)->origin.z);
 		break;
 	case 5:
 		CHANGE_YAW(ENT(pev));
-		CheckEnemy(pev->enemy, NULL);
+		CheckEnemy(enemy, distance);
+		break;
+	case 6:
+		CHANGE_YAW(ENT(pev));
+		if (!CheckEnemy(enemy, distance))
+		{
+			//v25 = this[248];
+			//if ((v25 & 2) != 0 && (v25 & 1) != 0)
+			//	*((_DWORD*)this + 32) = ACT_AIM2;
+		}
+	case 7:
+		CHANGE_YAW(ENT(pev));
+		if (!CheckEnemy(enemy, distance) && WALK_MOVE(ENT(pev), pev->ideal_yaw, 15))
+		{
+			m_iActivity = ACT_RUN;
+		}
+	case 27:
+		break;
+	case 29:
+	case 30:
+		CHANGE_YAW(ENT(pev));
+		break;
+	case 31:
+		if (!CheckEnemy(enemy, distance))
+			m_iActivity = 6;
+		break;
+	case 35:
+	case 36:
+	case 37:
+	case 38:
+		CHANGE_YAW(ENT(pev));
+		if (m_fSequenceFinished)
+		{
+			pev->framerate = 0;
+			pev->solid = SOLID_NOT;
+			m_iActivity = 42;
+			SetThink(NULL);
+		}
+		break;
+	case 42:
+		SetThink(NULL);
 		break;
 	}
-
+	if (Classify() != 5)
+	{
+		if (!FBitSet(pev->spawnflags, 1))
+		{
+			//pev->enemy = OFFSET(FIND_CLIENT_IN_PVS());
+			//pev->goalentity = pev->enemy;
+			//goal_origin = VARS(pev->enemy)->origin;
+			//Alert();
+		}
+	}
 }
 
 void GetSequenceInfo(void* pmodel, entvars_t* pev, float* pflFrameRate, float* pflGroundSpeed)
@@ -361,13 +423,10 @@ void CBaseAnimating::StudioFrameAdvance(float flInterval)
 	pev->animtime = pgv->time;
 	if (pev->frame < 0.0 || pev->frame >= 256.0)
 		pev->frame += (int)(pev->frame / 256.0) * -256.0;
+	float flEnd = pev->frame + flInterval * m_flFrameRate * pev->framerate;
+
 	m_fSequenceFinished = FALSE;
-	if ((m_flFrameRate <= 0) || (pev->framerate * m_flFrameRate * flInterval + pev->frame <= 256))
-	{
-		if (pev->framerate * m_flFrameRate * flInterval + pev->frame <= 0)
-			m_fSequenceFinished = TRUE;
-	}
-	else
+	if (flEnd >= 256 || flEnd <= 0.0)
 		m_fSequenceFinished = TRUE;
 }
 

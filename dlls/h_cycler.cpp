@@ -34,7 +34,7 @@ public:
 	void CyclerSpawn(char* szModel, Vector vecMin, Vector vecMax);
 	//virtual int	ObjectCaps(void) { return (CBaseEntity::ObjectCaps() | FCAP_IMPULSE_USE); }
 	//void Pain(float flDamage);
-	void Pain(int a2);
+	void Pain(float flDamage);
 	void Use(entvars_t* pActivator);
 	virtual void Think(void);
 
@@ -264,9 +264,9 @@ void CCycler::Use(entvars_t* pActivator)
 //
 // CyclerPain , changes sequences when shot
 //
-void CCycler::Pain(int a2)
+void CCycler::Pain(float flDamage)
 {
-	pev->health += a2;
+	pev->health += flDamage;
 	++pev->sequence;
 	ResetSequenceInfo(0.1);
 	if (!m_flFrameRate)

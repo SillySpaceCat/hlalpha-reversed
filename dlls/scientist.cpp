@@ -22,6 +22,21 @@
 #include "util.h"
 #include "cbase.h"
 
+enum scientist_anims
+{
+    idle1 = 0,
+    idle2,
+    idle3,
+    walk,
+    walktostand,
+    run,
+    stairsup,
+    flinch,
+    dieviolent,
+    diebackward,
+    dieforward
+};
+
 class CScientist : public CBaseMonster
 {
 public:
@@ -43,7 +58,7 @@ void CScientist::Spawn()
 	PRECACHE_SOUND("barney/ba_pain1.wav");
 	PRECACHE_MODEL("models/scientist.mdl");
 	SET_MODEL(ENT(pev), "models/scientist.mdl");
-	UTIL_SetSize(pev, VEC_SCIENTIST_HULL_MIN, VEC_SCIENTIST_HULL_MAX);
+	UTIL_SetSize(pev, Vector(-16, -16, 0), Vector(16, 16, 64));
 	pev->solid = SOLID_SLIDEBOX;
 	pev->movetype = MOVETYPE_STEP;
 	pev->effects = 0;
@@ -54,7 +69,7 @@ void CScientist::Spawn()
 	m_bloodColor = 70;
 	//unknownvariable3 = 384;
 	//unknownvariable4 = 128;
-	pev->nextthink += UTIL_RandomFloat(0, 0.5) + 0.5;
+    pev->nextthink = pev->pSystemGlobals->time + 0.5;
     if (pev->body == -1)
     {
         pev->body = rand() % 3;
@@ -67,28 +82,28 @@ void CScientist::SetActivity(int activity)
     int activitynum = NULL;
     switch (activity)
     {
-    case 1:
-        activitynum = 0;
+    case ACT_IDLE1:
+        activitynum = idle1;
         break;
-    case 2:
-        activitynum = 1;
+    case ACT_IDLE2:
+        activitynum = idle2;
         break;
-    case 3:
-        activitynum = 2;
+    case ACT_IDLE3:
+        activitynum = idle3;
         break;
-    case 4:
-        activitynum = 3;
+    case ACT_WALK:
+        activitynum = walk;
         break;
     case 6:
-        activitynum = 0;
+        activitynum = ACT_AIM;
         break;
-    case 8:
-        activitynum = 5;
+    case ACT_RUN:
+        activitynum = run;
         break;
-    case 9:
-        activitynum = 5;
+    case ACT_RUN2:
+        activitynum = run;
         break;
-    case 10:                                    // player interacts with barney
+    case ACT_FOLLOWPLAYER:
         //v4 = pev->origin - player->origin);
         //v5 = v4 * v4;
         //v6 = *(float*)(*((_DWORD*)this + 1) + 48) - *(float*)(*((_DWORD*)this + 79) + 48);
@@ -97,27 +112,27 @@ void CScientist::SetActivity(int activity)
         //if (this[65] * 2.0 >= v10)
         //{
         //    if (this[65] < (double)v10)
-        //        v3 = 3;
+        //        v3 = walk;
         //    else
-        //        v3 = 0;
+        //        v3 = idle1;
         //}
         //else
         //{
-        activitynum = 5;
+        activitynum = run;
         //}
         break;
     case 29:
-        activitynum = 7;
+        activitynum = flinch;
         break;
     case 35:
     case 38:
-        activitynum = 10;
+        activitynum = dieforward;
         break;
     case 36:
-        activitynum = 8;
+        activitynum = dieviolent;
         break;
     case 37:
-        activitynum = 9;
+        activitynum = diebackward;
         break;
     default:
         ALERT(at_console, "Scientist's monster state is bogus: %d", activity);
@@ -178,7 +193,11 @@ void CScientist::Die()
         default:
             break;
         }
-        //get_death_type( 0);
+        m_iActivity = 35;
+        pev->ideal_yaw = pev->angles.y;
+        pev->nextthink = pev->pSystemGlobals->time + 0.1;
+        SetThink(&CBaseMonster::CallMonsterThink);
+        SetActivity(m_iActivity);
     }
     else 
     {
@@ -190,6 +209,10 @@ void CScientist::Die()
             pev->velocity.y = 0;
             pev->velocity.z = 200;
         }
-        //get_death_type(1);
+        m_iActivity = 36;
+        pev->ideal_yaw = pev->angles.y;
+        pev->nextthink = pev->pSystemGlobals->time + 0.1;
+        SetThink(&CBaseMonster::CallMonsterThink);
+        SetActivity(m_iActivity);
     }
 }

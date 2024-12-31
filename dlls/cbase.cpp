@@ -30,7 +30,6 @@ void DispatchSpawn( entvars_t *pev )
 
 	if (pEntity)
 	{
-		const char* str2 = STRING(pEntity->pev->classname);
 		pEntity->Spawn();
 	}
 }
@@ -189,12 +188,24 @@ void CBaseMonster::TakeDamage(entvars_t* pevInflictor, entvars_t* pevAttacker, f
 		{
 			Killed(OFFSET(ENT(pevAttacker)));
 		}
-		//else if (FBitSet(pev->flags, FL_MONSTER) && OFFSET(ENT(pevAttacker)) && FBitSet(pevAttacker->flags, 40))
-		//{
-			//if ()
-		//}
+		else if (FBitSet(pev->flags, FL_MONSTER) && OFFSET(ENT(pevAttacker)) && FBitSet(pevAttacker->flags, 40))
+		{
+			CBaseMonster* pMonster = (CBaseMonster*)GET_PRIVATE(ENT(pevAttacker));
+			if (pMonster->Classify() != Classify())
+			{
+				pev->goalentity = OFFSET(pevAttacker);
+				pev->enemy = pev->goalentity;
+				//*((_DWORD*)this + 61) = pevAttacker;
+				goal_origin = g_vecAttackDir * 64 + pev->origin;
+				goal_origin.x -= pev->origin.x;
+				goal_origin.y -= pev->origin.y;
+				goal_origin.z -= pev->origin.z;
+				pev->ideal_yaw = UTIL_VecToYaw(goal_origin);
+			}
+		}
 		else if (pev->pSystemGlobals->time > pev->pain_finished)
 			Pain(flDamage);
+
 	}
 }
 

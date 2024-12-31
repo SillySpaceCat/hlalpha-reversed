@@ -32,7 +32,7 @@ class CCineMonster : public CBaseMonster //CBaseMonster
 {
 public:
 	void CineSpawn(char* szModel);
-	void Use(CBaseEntity* pActivator);
+	void Use(entvars_t* pevOther);
 	void EXPORT CineThink(void);
 	void Die(void);
 
@@ -117,7 +117,7 @@ void CCineMonster::CineSpawn(char* szModel)
 
 	// ugly alpha hack, can't set ints from the bsp.	
 	pev->sequence = (int)pev->impulse;
-	//ResetSequenceInfo();
+	ResetSequenceInfo(0.1);
 	pev->framerate = 0.0;
 
 	unknownvalue = 999999;
@@ -136,7 +136,7 @@ void CCineMonster::CineSpawn(char* szModel)
 //
 // CineStart
 //
-void CCineMonster::Use(CBaseEntity* pActivator)
+void CCineMonster::Use(entvars_t* pevOther)
 {
 	pev->animtime = 0;	// reset the sequence
 	SetThink(&CCineMonster::CineThink);
@@ -160,17 +160,17 @@ void CCineMonster::CineThink(void)
 	//UTIL_ParticleEffect(pev->origin, g_vecZero, 255, 20);
 
 	if (!pev->animtime)
-		//ResetSequenceInfo();
+		ResetSequenceInfo(0.1);
 
 	pev->nextthink = pev->pSystemGlobals->time + 1.0;
 
-	if (pev->spawnflags != 0) //&& m_fSequenceFinished)
+	if ((pev->spawnflags != 0) && (m_fSequenceFinished))
 	{
 		Die();
 		return;
 	}
 
-	//StudioFrameAdvance();
+	StudioFrameAdvance(1.0);
 }
 
 //
@@ -209,8 +209,8 @@ void CCineBlood::BloodGush(void)
 		WRITE_COORD(MSG_BROADCAST, UTIL_RandomFloat(-1, 1));
 		WRITE_COORD(MSG_BROADCAST, UTIL_RandomFloat(-1, 1));
 		WRITE_COORD(MSG_BROADCAST, UTIL_RandomFloat(0, 1));
-		WRITE_COORD(MSG_BROADCAST, 70);
-		WRITE_COORD(MSG_BROADCAST, 10);
+		WRITE_BYTE(MSG_BROADCAST, 70);
+		WRITE_BYTE(MSG_BROADCAST, 10);
 	}
 	else// slim chance of geyser
 	{
@@ -222,8 +222,8 @@ void CCineBlood::BloodGush(void)
 		WRITE_COORD(MSG_BROADCAST, UTIL_RandomFloat(-1, 1));
 		WRITE_COORD(MSG_BROADCAST, UTIL_RandomFloat(-1, 1));
 		WRITE_COORD(MSG_BROADCAST, UTIL_RandomFloat(0, 1));
-		WRITE_COORD(MSG_BROADCAST, 70);
-		WRITE_COORD(MSG_BROADCAST, UTIL_RandomLong(50, 150));
+		WRITE_BYTE(MSG_BROADCAST, 70);
+		WRITE_BYTE(MSG_BROADCAST, UTIL_RandomLong(50, 150));
 	}
 
 	if (UTIL_RandomFloat(0, 1) < 0.75)
@@ -240,7 +240,7 @@ void CCineBlood::BloodGush(void)
 			WRITE_COORD(MSG_BROADCAST, tr.vecEndPos.x);
 			WRITE_COORD(MSG_BROADCAST, tr.vecEndPos.y);
 			WRITE_COORD(MSG_BROADCAST, tr.vecEndPos.z);
-			WRITE_SHORT(MSG_BROADCAST, ENTINDEX(tr.pHit));
+			WRITE_SHORT(MSG_BROADCAST, pgv->trace_ent);
 			WRITE_BYTE(MSG_BROADCAST, rand() % 6 + 14);
 		}
 	}

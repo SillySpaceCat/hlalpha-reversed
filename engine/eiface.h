@@ -71,7 +71,7 @@ typedef struct enginefuncs_s
 	edict_t*	(*pfnFindEntityByString)	(edict_t *pEdictStartSearchAfter, const char *pszField, const char *pszValue);
 	void		(*pfnGetEntityIllum)		(edict_t *pEnt);
 	edict_t*    (*pfnFindEntityInSphere)	(const float *org, float rad);
-	void		(*pfnFindClientInPVS)		(void);
+	edict_t*	(*pfnFindClientInPVS)		(void);
 	void		(*pfnMakeVectors)			(const float *rgflVector);
 	edict_t*	(*pfnCreateEntity)			(void);
 	void		(*pfnRemoveEntity)			(edict_t* e);

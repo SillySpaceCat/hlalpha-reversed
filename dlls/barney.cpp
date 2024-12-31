@@ -20,6 +20,27 @@
 
 */
 
+enum barney_anims
+{
+    idle1 = 0,
+    idle2,
+    idle3,
+    walk,
+    run,
+    walkdraw,
+    draw,
+    drawslow,
+    walkshoot,
+    aim,
+    shootgun,
+    replacegun,
+    diesimple,
+    dieforward,
+    diebackward,
+    dieviolent,
+    diecrump
+};
+
 #include "extdll.h"
 #include "util.h"
 #include "cbase.h"
@@ -60,7 +81,7 @@ void CBarney::Spawn()
 	m_bloodColor = 70;
 	//unknownvariable3 = 384;
 	m_flFrameRate = 128;
-	pev->nextthink += UTIL_RandomFloat(0, 0.5) + 0.5;
+    pev->nextthink += UTIL_RandomFloat(0.0, 0.5) + 0.5;
 	SetThink(&CBarney::MonsterInit);
 }
 
@@ -69,31 +90,31 @@ void CBarney::SetActivity(int activity)
     int activitynum = NULL;
     switch (activity)
     {
-    case 1:
-        activitynum = 0;
+    case ACT_IDLE1:
+        activitynum = idle1;
         break;
-    case 2:
-        activitynum = 1;
+    case ACT_IDLE2:
+        activitynum = idle2;
         break;
-    case 3:
-        activitynum = 2;
+    case ACT_IDLE3:
+        activitynum = idle3;
         break;
-    case 4:
-        activitynum = 3;
+    case ACT_WALK:
+        activitynum = walk;
         break;
-    case 6:
-        activitynum = 9;
+    case ACT_AIM:
+        activitynum = aim;
         break;
-    case 7:
-        activitynum = 9;
+    case ACT_AIM2:
+        activitynum = aim;
         break;
-    case 8:
-        activitynum = 4;
+    case ACT_RUN:
+        activitynum = run;
         break;
-    case 9:
-        activitynum = 4;
+    case ACT_RUN2:
+        activitynum = run;
         break;
-    case 10:                                    // player interacts with barney
+    case ACT_FOLLOWPLAYER:                                    // player interacts with barney
         //v4 = pev->origin - player->origin);
         //v5 = v4 * v4;
         //v6 = *(float*)(*((_DWORD*)this + 1) + 48) - *(float*)(*((_DWORD*)this + 79) + 48);
@@ -102,30 +123,30 @@ void CBarney::SetActivity(int activity)
         //if (this[65] * 2.0 >= v10)
         //{
         //    if (this[65] < (double)v10)
-        //        v3 = 3;
+        //        v3 = walk;
         //    else
-        //        v3 = 0;
+        //        v3 = idle1;
         //}
         //else
         //{
-        activitynum = 4;
+        activitynum = run;
         //}
         break;
     case 29:
-        activitynum = 4;
+        activitynum = run;
         break;
     case 30:
-        activitynum = 10;
+        activitynum = shootgun;
         break;
     case 35:
     case 38:
-        activitynum = 14;
+        activitynum = diebackward;
         break;
     case 36:
-        activitynum = 15;
+        activitynum = dieviolent;
         break;
     case 37:
-        activitynum = 13;
+        activitynum = dieforward;
         break;
     default:
         ALERT(at_console, "Barney's monster state is bogus: %d", activity);
@@ -134,7 +155,7 @@ void CBarney::SetActivity(int activity)
     if (pev->sequence != activitynum)
     {
         pev->sequence = activitynum;
-        if ((activitynum != 4 && activitynum != 3) || (pev->sequence != 4 && pev->sequence != 4))
+        if ((activitynum != 4 && activitynum != 3) || (pev->sequence != 4 && pev->sequence != 3))
             pev->frame = 0;
         ResetSequenceInfo(0.1);
         switch (activitynum)
@@ -158,8 +179,8 @@ void CBarney::SetActivity(int activity)
             return;
         default:
             ALERT(at_console, "Bogus Barney anim: %d", activitynum);
-            m_flFrameRate = 0.0;
-            m_flGroundSpeed = 0.0;
+            //m_flFrameRate = 0.0;
+            //m_flGroundSpeed = 0.0;
             break;
         }
     }
@@ -199,11 +220,19 @@ void CBarney::Die()
         default:
             break;
         }
-        //get_death_type( 0);
+        m_iActivity = 35;
+        pev->ideal_yaw = pev->angles.y;
+        pev->nextthink = pev->pSystemGlobals->time + 0.1;
+        SetThink(&CBaseMonster::CallMonsterThink);
+        SetActivity(m_iActivity);
     }
     else
     {
-        //get_death_type( 1);
+        m_iActivity = 36;
+        pev->ideal_yaw = pev->angles.y;
+        pev->nextthink = pev->pSystemGlobals->time + 0.1;
+        SetThink(&CBaseMonster::CallMonsterThink);
+        SetActivity(m_iActivity);
     }
 }
 

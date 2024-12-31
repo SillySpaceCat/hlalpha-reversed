@@ -43,7 +43,7 @@ void CAlienSlave::Spawn()
 	pev->health = 30;
 	pev->yaw_speed = 8;
 	pev->sequence = 13;
-	//this[32] = 1;
+	m_iActivity = 1;
 	pev->nextthink += 1;
 	WalkMonsterStart();
 }

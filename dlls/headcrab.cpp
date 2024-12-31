@@ -22,6 +22,17 @@
 #include "util.h"
 #include "cbase.h"
 
+enum headcrab_anims
+{
+	idle = 0,
+	walk,
+	run,
+	angry,
+	jump,
+	flinch,
+	dieback
+};
+
 class CHeadCrab : public CBaseMonster
 {
 public:
@@ -62,7 +73,7 @@ void CHeadCrab::Spawn()
 	pev->yaw_speed = 10;
 	pev->sequence = 8;
 	m_bloodColor = 54;
-	pev->nextthink += UTIL_RandomFloat(0, 0.5) + 0.5;
+	pev->nextthink += UTIL_RandomFloat(0.0, 0.5) + 0.5;
 	SetThink(&CHeadCrab::MonsterInit);
 }
 
@@ -72,46 +83,46 @@ void CHeadCrab::SetActivity(int activity)
 	switch (activity)
 	{
 	case 1:
-		activitynum = 0;
+		activitynum = idle;
 		break;
 	case 2:
-		activitynum = 0;
+		activitynum = idle;
 		break;
 	case 3:
-		activitynum = 0;
+		activitynum = idle;
 		break;
 	case 4:
-		activitynum = 1;
+		activitynum = walk;
 		break;
 	case 6:
-		activitynum = 0;
+		activitynum = idle;
 		break;
 	case 7:
-		activitynum = 0;
+		activitynum = idle;
 		break;
 	case 8:
-		activitynum = 2;
+		activitynum = run;
 		break;
 	case 9:
-		activitynum = 2;
+		activitynum = run;
 		break;
 	case 18:
-		activitynum = 5;
+		activitynum = flinch;
 		break;
 	case 30:
-		activitynum = 4;
+		activitynum = jump;
 		break;
 	case 31:
 		return;
 		break;
 	case 33:
-		activitynum = 5;
+		activitynum = flinch;
 		break;
 	case 35:
-		activitynum = 6;
+		activitynum = dieback;
 		break;
 	case 41:
-		activitynum = 7;
+		activitynum = 7; // probably a unused activity
 		break;
 	default:
 		ALERT(at_console, "Headcrab's monster state is bogus: %d", activity);
@@ -150,6 +161,7 @@ void CHeadCrab::Pain(int a2)
 
 void CHeadCrab::Die()
 {
+	const char* string = STRING(pev->classname);
 	if (pev->health > -30)
 	{
 		switch (rand() % 2)
@@ -164,7 +176,11 @@ void CHeadCrab::Die()
 			break;
 		}
 	}
-	//get_death_type(0);
+	m_iActivity = 35;
+	pev->ideal_yaw = pev->angles.y;
+	pev->nextthink = pev->pSystemGlobals->time + 0.1;
+	SetThink(&CBaseMonster::CallMonsterThink);
+	SetActivity(m_iActivity);
 }
 
 void CHeadCrab::Alert()

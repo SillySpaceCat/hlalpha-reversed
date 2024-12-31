@@ -40,7 +40,7 @@ Vector UTIL_VecToAngles(const float* vector)
 	return Vector(rgflVecOut);
 }
 
-void UTIL_MoveToOrigin(edict_t* pent, const Vector vecGoal, float flDist, int iMoveType)
+void UTIL_MoveToOrigin(edict_t* pent, const Vector &vecGoal, float flDist, int iMoveType)
 {
 	float rgfl[3];
 	vecGoal.CopyToArray(rgfl);

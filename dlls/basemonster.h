@@ -24,12 +24,13 @@ class CBaseMonster : public CBaseAnimating
 public:
 	int m_bloodColor;
 	int m_iActivity;
+	Vector goal_origin;
 	virtual int Classify() { return 0; };
-	virtual void Pain(int a2) { return; };
+	virtual void Pain(float flDamage) { return; };
 	virtual void Die() { return; };
 	virtual void Idle() { return; };
 	virtual void SetActivity(int activity) { return; };
-	virtual int CheckEnemy(int a2, float a3) { return 0; };
+	virtual int CheckEnemy(entvars_t *a2, float a3) { return 0; };
 	virtual void TakeDamage(entvars_t* pevInflictor, entvars_t* pevAttacker, float flDamage);
 	void Killed(int pevAttacker);
 	void MonsterInit();

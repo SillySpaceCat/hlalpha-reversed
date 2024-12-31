@@ -26,6 +26,20 @@ extern void DispatchRestore( entvars_t *pev, void *pSaveData );
 
 typedef enum { USE_OFF = 0, USE_ON = 1, USE_SET = 2, USE_TOGGLE = 3 } USE_TYPE;
 
+enum ACTIVITIES
+{
+	ACT_IDLE1 = 1,
+	ACT_IDLE2,
+	ACT_IDLE3,
+	ACT_WALK,
+	ACT_UNKNOWN,
+	ACT_AIM,
+	ACT_AIM2,
+	ACT_RUN,
+	ACT_RUN2,
+	ACT_FOLLOWPLAYER
+};
+
 #ifdef _WIN32
 #define EXPORT _declspec( dllexport )
 #else

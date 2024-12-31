@@ -22,6 +22,16 @@
 #include "util.h"
 #include "cbase.h"
 
+enum houndeye_anims
+{
+	idle1 = 0,
+	idle2,
+	idle3,
+	attack,
+	run,
+	die
+};
+
 class CHoundEye : public CBaseMonster
 {
 public:
@@ -95,7 +105,11 @@ void CHoundEye::Die()
 		else
 			EMIT_SOUND(ENT(pev), CHAN_VOICE, "houndeye/he_die3.wav", 1, ATTN_NORM);
 	}
-	//get_death_type(0);
+	m_iActivity = 35;
+	pev->ideal_yaw = pev->angles.y;
+	pev->nextthink = pev->pSystemGlobals->time + 0.1;
+	SetThink(&CBaseMonster::CallMonsterThink);
+	SetActivity(m_iActivity);
 }
 
 void CHoundEye::Pain(int a2)
@@ -185,37 +199,37 @@ void CHoundEye::SetActivity(int activity)
 	switch (activity)
 	{
 	case 1:
-		activitynum = 1;
+		activitynum = idle2;
 		break;
 	case 2:
-		activitynum = 0;
+		activitynum = idle1;
 		break;
 	case 3:
-		activitynum = 2;
+		activitynum = idle3;
 		break;
 	case 4:
-		activitynum = 4;
+		activitynum = run;
 		break;
 	case 6:
-		activitynum = 1;
+		activitynum = idle2;
 		break;
 	case 7:
-		activitynum = 1;
+		activitynum = idle2;
 		break;
 	case 8:
-		activitynum = 4;
+		activitynum = run;
 		break;
 	case 9:
-		activitynum = 4;
+		activitynum = run;
 		break;
 	case 29:
-		activitynum = 3;
+		activitynum = attack;
 		break;
 	case 30:
-		activitynum = 3;
+		activitynum = attack;
 		break;
 	case 35:
-		activitynum = 5;
+		activitynum = die;
 		break;
 	default:
 		ALERT(at_console, "Houndeye's monster state is bogus: %d", activity);
