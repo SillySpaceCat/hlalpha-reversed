@@ -2,8 +2,9 @@
 
 #### features that are yet to be added:
 - camera punch when taking fall damage
+- fix crouching
 - mp5 grenade
-- monster ai
+- monster ai (only scripted walking works)
 - some func_ entities
 - platform entities and trains (that includes mister john_train too)
 - seamless level transition (only thing left to do is figure out how to pass spawnflags info to client and stuff)
