@@ -53,9 +53,12 @@ typedef TraceResult(__cdecl* sv_move)(const float* start, const float* mins, con
 typedef int(__cdecl* sv_stepdirection)(edict_t* ent, float yaw, float dist);
 typedef int(__cdecl* sv_newchasedir2)(edict_t* actor, const float destination, float dist);
 
+sv_move SV_Move;
+sv_stepdirection SV_StepDirection;
+sv_newchasedir2 SV_NewChaseDir2;
+
 int droptofloor(edict_t* e)
 {
-    sv_move SV_Move = (sv_move)(baseAddress + 0x00048a60);
     vec3_t floor = e->v.origin;
     floor.z -= 256;
     TraceResult trace;
@@ -73,9 +76,6 @@ int droptofloor(edict_t* e)
 void movetoorigin(edict_t *ent, const float pflGoal, float dist, int iMoveType)
 {
     vec3_t	vecDist;
-
-    sv_stepdirection SV_StepDirection = (sv_stepdirection)(baseAddress + 0x000184D0);
-    sv_newchasedir2 SV_NewChaseDir2 = (sv_newchasedir2)(baseAddress + 0x00018AE0);
 
     //vecDist.x = pflGoal[0];
     //vecDist.y = pflGoal[1];
@@ -110,21 +110,32 @@ void movetoorigin(edict_t *ent, const float pflGoal, float dist, int iMoveType)
 
 void hooktoengine()
 {
+    const wchar_t* processname = L"engine.exe";
     DWORD processID = 0;
     HANDLE snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
     PROCESSENTRY32 processEntry;
     processEntry.dwSize = sizeof(PROCESSENTRY32);
-    if (Process32First(snapshot, &processEntry)) {
-        const wchar_t* processname = L"engine.exe";
+    if (Process32First(snapshot, &processEntry)) 
+    {
         do {
             if (wcscmp(processEntry.szExeFile, processname) == 0) {
                 processID = processEntry.th32ProcessID;
                 break;
             }
         } while (Process32Next(snapshot, &processEntry));
+
+        if (!processID) //opengl v
+        {
+            processname = L"enginegl.exe";
+            do {
+                if (wcscmp(processEntry.szExeFile, processname) == 0) {
+                    processID = processEntry.th32ProcessID;
+                    break;
+                }
+            } while (Process32Next(snapshot, &processEntry));
+        }
     }
     CloseHandle(snapshot);
-    processID = processID;
 
     HANDLE snapshot2 = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE | TH32CS_SNAPMODULE32, processID);
     if (snapshot2 != INVALID_HANDLE_VALUE) {
@@ -155,6 +166,49 @@ void hooktoengine()
 
     VirtualProtect(baseAddress + 0x00040330, 5, oldProtect1, &oldProtect1); // droptofloor
     VirtualProtect(baseAddress + 0x00018DF0, 5, oldProtect2, &oldProtect2); // movetoorigin
+
+    if (processname == L"engine.exe") //shitty way to see if its software or opengl
+    {
+        VirtualProtect(baseAddress + 0x00040330, 5, PAGE_EXECUTE_READWRITE, &oldProtect1);// droptofloor
+        VirtualProtect(baseAddress + 0x00018DF0, 5, PAGE_EXECUTE_READWRITE, &oldProtect2);// movetoorigin
+
+        BYTE jmp1[5] = { 0xE9 };
+        *(DWORD*)(jmp1 + 1) = (DWORD)droptofloor - ((DWORD)baseAddress + 0x00040330) - 5;// droptofloor
+        memcpy(baseAddress + 0x00040330, jmp1, 5);
+
+        BYTE jmp2[5] = { 0xE9 };
+        *(DWORD*)(jmp2 + 1) = (DWORD)movetoorigin - ((DWORD)baseAddress + 0x00018DF0) - 5;// movetoorigin
+        memcpy(baseAddress + 0x00018DF0, jmp2, 5);
+
+        VirtualProtect(baseAddress + 0x00040330, 5, oldProtect1, &oldProtect1); // droptofloor
+        VirtualProtect(baseAddress + 0x00018DF0, 5, oldProtect2, &oldProtect2); // movetoorigin
+
+
+        SV_Move = (sv_move)(baseAddress + 0x00048a60);
+        SV_StepDirection = (sv_stepdirection)(baseAddress + 0x000184D0);
+        SV_NewChaseDir2 = (sv_newchasedir2)(baseAddress + 0x00018AE0);
+    }
+    else
+    {
+        VirtualProtect(baseAddress + 0x0000331C, 5, PAGE_EXECUTE_READWRITE, &oldProtect1);// droptofloor
+        VirtualProtect(baseAddress + 0x00005BD9, 5, PAGE_EXECUTE_READWRITE, &oldProtect2);// movetoorigin
+
+        BYTE jmp1[5] = { 0xE9 };
+        *(DWORD*)(jmp1 + 1) = (DWORD)droptofloor - ((DWORD)baseAddress + 0x0000331C) - 5;// droptofloor
+        memcpy(baseAddress + 0x0000331C, jmp1, 5);
+
+        BYTE jmp2[5] = { 0xE9 };
+        *(DWORD*)(jmp2 + 1) = (DWORD)movetoorigin - ((DWORD)baseAddress + 0x00005BD9) - 5;// movetoorigin
+        memcpy(baseAddress + 0x00005BD9, jmp2, 5);
+
+        VirtualProtect(baseAddress + 0x0000331C, 5, oldProtect1, &oldProtect1); // droptofloor
+        VirtualProtect(baseAddress + 0x00005BD9, 5, oldProtect2, &oldProtect2); // movetoorigin
+
+
+        SV_Move = (sv_move)(baseAddress + 0x0002B17C);
+        SV_StepDirection = (sv_stepdirection)(baseAddress + 0x000052B4);
+        SV_NewChaseDir2 = (sv_newchasedir2)(baseAddress + 0x000058D4);
+    }
 }
 
 void DLLEXPORT GiveFnptrsToDll( enginefuncs_t* pengfuncsFromEngine )
