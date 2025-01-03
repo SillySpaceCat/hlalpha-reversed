@@ -64,7 +64,7 @@ typedef struct enginefuncs_s
 	void		(*pfnSaveSpawnParms)		(edict_t *ent);
 	float		(*pfnVecToYaw)				(const float *rgflVector);
 	void		(*pfnVecToAngles)			(const float *rgflVectorIn, float *rgflVectorOut);
-	void		(*pfnMoveToGoal)			(void);
+	void		(*pfnMoveToGoal)			(edict_t* ent, float dist);
 	void		(*pfnMoveToOrigin)			(edict_t *ent, const float *pflGoal, float dist, int iMoveType);
 	void		(*pfnChangeYaw)				(edict_t *ent);
 	void		(*pfnChangePitch)			(edict_t *ent);
@@ -76,8 +76,8 @@ typedef struct enginefuncs_s
 	edict_t*	(*pfnCreateEntity)			(void);
 	void		(*pfnRemoveEntity)			(edict_t* e);
 	void		(*pfnMakeStatic)			(edict_t *ent);
-	int			(*pfnEntIsOnFloor)			(edict_t *e);
-	int			(*pfnDropToFloor)			(edict_t* e);
+	qboolean	(*pfnEntIsOnFloor)			(edict_t *e);
+	int			(*pfnDropToFloor)			(edict_t *e);
 	float		(*pfnWalkMove)				(edict_t *ent, float yaw, float dist);
 	void		(*pfnSetOrigin)				(edict_t *e, const float *rgflOrigin);
 	void		(*pfnEmitSound)				(edict_t *e, int channel, const char *sample, float volume, float attenuation);

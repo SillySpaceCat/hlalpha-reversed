@@ -241,13 +241,13 @@ void CBaseMonster::WalkMonsterStart()
 		return;
 	}
 	pev->origin.z += 1;
-	//DROP_TO_FLOOR(ENT(pev)); //for some reason some monsters dissappear when this
-	                         //line executes ?????????
-	//if (!WALK_MOVE(ENT(pev), 0, 0))
-	//{
-	//	ALERT(at_warning, "Monster %s stuck in wall--level design error", STRING(pev->classname));
-	//	pev->effects = 1;
-	//}
+	DROP_TO_FLOOR(ENT(pev)); //for some reason some monsters dissappear when this                        
+							//line executes ?????????
+	if (!WALK_MOVE(ENT(pev), 0, 0))
+	{
+		ALERT(at_warning, "Monster %s stuck in wall--level design error", STRING(pev->classname));
+		pev->effects = 1;
+	}
 	pev->view_ofs.x = 0;
 	pev->view_ofs.y = 0;
 	pev->view_ofs.z = 64;
@@ -321,7 +321,7 @@ void CBaseMonster::CallMonsterThink()
 		//	m_iActivity = 2;
 		break;
 	case 4:
-		//UTIL_MoveToOrigin(ENT(pev), VARS(pev->goalentity)->origin, m_flGroundSpeed, 1);
+		UTIL_MoveToOrigin(ENT(pev), VARS(pev->goalentity)->origin, m_flGroundSpeed, 1);
 		//  the line above causes the screen to blink and monsters dissappear
 		//  and a bunch of other funky stuff i literally
 		//  do not know why

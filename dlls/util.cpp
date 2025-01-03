@@ -47,6 +47,11 @@ void UTIL_MoveToOrigin(edict_t* pent, const Vector &vecGoal, float flDist, int i
 	MOVE_TO_ORIGIN(pent, rgfl, flDist, iMoveType);
 }
 
+void UTIL_MoveToGoal(edict_t* pent, float flDist)
+{
+	MOVE_TO_GOAL(pent, flDist);
+}
+
 edict_t* UTIL_FindEntityInSphere(const float* vec1, float radius)
 {
 	return FIND_ENTITY_IN_SPHERE(vec1, radius);

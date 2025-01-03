@@ -71,8 +71,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>C:\Users\Alex SSD\Downloads\hl1-alpha\Half-Life\valve\dlls\</OutDir>
-    <IntDir>C:\Users\Alex SSD\Downloads\hl1-alpha\Half-Life\valve\dlls\</IntDir>
+    <OutDir>C:\Users\Alex SSD\Documents\GitHub\hl1-alpha\Half-Life\valve\dlls\</OutDir>
+    <IntDir>C:\Users\Alex SSD\Documents\GitHub\hl1-alpha\Half-Life\valve\dlls\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -80,7 +80,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\Alex SSD\Downloads\hlalpha-reversed\common;C:\Users\Alex SSD\Downloads\hlalpha-reversed\engine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\common;C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\engine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>/Zc:strictStrings- %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
@@ -88,7 +88,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EntryPointSymbol>
       </EntryPointSymbol>
-      <ModuleDefinitionFile>C:\Users\Alex SSD\Downloads\hlalpha-reversed\dlls\hl.def</ModuleDefinitionFile>
+      <ModuleDefinitionFile>C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\hl.def</ModuleDefinitionFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

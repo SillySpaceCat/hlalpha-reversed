@@ -202,9 +202,9 @@ void CBaseMonster::TakeDamage(entvars_t* pevInflictor, entvars_t* pevAttacker, f
 				goal_origin.z -= pev->origin.z;
 				pev->ideal_yaw = UTIL_VecToYaw(goal_origin);
 			}
+			if (pev->pSystemGlobals->time > pev->pain_finished)
+				Pain(flDamage);
 		}
-		else if (pev->pSystemGlobals->time > pev->pain_finished)
-			Pain(flDamage);
 
 	}
 }

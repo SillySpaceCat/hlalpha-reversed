@@ -52,7 +52,7 @@ public:
 	virtual int Classify() { return 5; };
 	virtual void SetActivity(int activity);
 	void Barney_Pissed();
-	virtual void Pain(int a2);
+	virtual void Pain(float flDamage);
 	virtual void Die();
 	virtual int CheckEnemy(int a2, float a3);
 };
@@ -193,7 +193,7 @@ void CBarney::Barney_Pissed()
     //*(float*)(this + 272) = pev->pSystemGlobals->time + 1;
 }
 
-void CBarney::Pain(int a2)
+void CBarney::Pain(float flDamage)
 {
     EMIT_SOUND(ENT(pev), CHAN_VOICE, "barney/ba_pain1.wav", 1, ATTN_NORM);
     Barney_Pissed();

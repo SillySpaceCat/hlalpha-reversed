@@ -1,120 +1,57 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\hl\\",
+  "WorkspaceRootPath": "C:\\Users\\Alex SSD\\Documents\\GitHub\\hlalpha-reversed\\dlls\\hl\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C745DF3B-CE37-4385-A17A-ABACCB5D69BE}|hl\\hl.vcxproj|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\subs.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{C745DF3B-CE37-4385-A17A-ABACCB5D69BE}|hl\\hl.vcxproj|C:\\Users\\Alex SSD\\Documents\\GitHub\\hlalpha-reversed\\dlls\\h_export.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C745DF3B-CE37-4385-A17A-ABACCB5D69BE}|hl\\hl.vcxproj|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\cbase.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{C745DF3B-CE37-4385-A17A-ABACCB5D69BE}|hl\\hl.vcxproj|C:\\Users\\Alex SSD\\Documents\\GitHub\\hlalpha-reversed\\dlls\\scientist.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C745DF3B-CE37-4385-A17A-ABACCB5D69BE}|hl\\hl.vcxproj|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\globals.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{C745DF3B-CE37-4385-A17A-ABACCB5D69BE}|hl\\hl.vcxproj|C:\\Users\\Alex SSD\\Documents\\GitHub\\hlalpha-reversed\\dlls\\subs.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C745DF3B-CE37-4385-A17A-ABACCB5D69BE}|hl\\hl.vcxproj|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\headcrab.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{C745DF3B-CE37-4385-A17A-ABACCB5D69BE}|hl\\hl.vcxproj|C:\\Users\\Alex SSD\\Documents\\GitHub\\hlalpha-reversed\\dlls\\panther.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C745DF3B-CE37-4385-A17A-ABACCB5D69BE}|hl\\hl.vcxproj|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\h_cycler.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{C745DF3B-CE37-4385-A17A-ABACCB5D69BE}|hl\\hl.vcxproj|C:\\Users\\Alex SSD\\Documents\\GitHub\\hlalpha-reversed\\dlls\\util.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C745DF3B-CE37-4385-A17A-ABACCB5D69BE}|hl\\hl.vcxproj|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\h_cine.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{C745DF3B-CE37-4385-A17A-ABACCB5D69BE}|hl\\hl.vcxproj|C:\\USERS\\ALEX SSD\\DOCUMENTS\\GITHUB\\HLALPHA-REVERSED\\ENGINE\\EIFACE.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C745DF3B-CE37-4385-A17A-ABACCB5D69BE}|hl\\hl.vcxproj|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\client.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{C745DF3B-CE37-4385-A17A-ABACCB5D69BE}|hl\\hl.vcxproj|C:\\Users\\Alex SSD\\Documents\\GitHub\\hlalpha-reversed\\dlls\\enginecallback.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C745DF3B-CE37-4385-A17A-ABACCB5D69BE}|hl\\hl.vcxproj|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\door.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{C745DF3B-CE37-4385-A17A-ABACCB5D69BE}|hl\\hl.vcxproj|C:\\Users\\Alex SSD\\Documents\\GitHub\\hlalpha-reversed\\dlls\\extdll.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C745DF3B-CE37-4385-A17A-ABACCB5D69BE}|hl\\hl.vcxproj|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\cbase.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{C745DF3B-CE37-4385-A17A-ABACCB5D69BE}|hl\\hl.vcxproj|C:\\Users\\Alex SSD\\Documents\\GitHub\\hlalpha-reversed\\dlls\\util.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C745DF3B-CE37-4385-A17A-ABACCB5D69BE}|hl\\hl.vcxproj|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\basemonster.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{C745DF3B-CE37-4385-A17A-ABACCB5D69BE}|hl\\hl.vcxproj|C:\\Users\\Alex SSD\\Documents\\GitHub\\hlalpha-reversed\\dlls\\barney.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C745DF3B-CE37-4385-A17A-ABACCB5D69BE}|hl\\hl.vcxproj|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\weapons.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{C745DF3B-CE37-4385-A17A-ABACCB5D69BE}|hl\\hl.vcxproj|C:\\Users\\Alex SSD\\Documents\\GitHub\\hlalpha-reversed\\dlls\\headcrab.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C745DF3B-CE37-4385-A17A-ABACCB5D69BE}|hl\\hl.vcxproj|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\panther.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{C745DF3B-CE37-4385-A17A-ABACCB5D69BE}|hl\\hl.vcxproj|C:\\Users\\Alex SSD\\Documents\\GitHub\\hlalpha-reversed\\dlls\\alien_slave.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C745DF3B-CE37-4385-A17A-ABACCB5D69BE}|hl\\hl.vcxproj|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\scientist.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{C745DF3B-CE37-4385-A17A-ABACCB5D69BE}|hl\\hl.vcxproj|C:\\Users\\Alex SSD\\Documents\\GitHub\\hlalpha-reversed\\dlls\\houndeye.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C745DF3B-CE37-4385-A17A-ABACCB5D69BE}|hl\\hl.vcxproj|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\houndeye.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{C745DF3B-CE37-4385-A17A-ABACCB5D69BE}|hl\\hl.vcxproj|C:\\Users\\Alex SSD\\Documents\\GitHub\\hlalpha-reversed\\dlls\\player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C745DF3B-CE37-4385-A17A-ABACCB5D69BE}|hl\\hl.vcxproj|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\barney.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\subs.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C745DF3B-CE37-4385-A17A-ABACCB5D69BE}|hl\\hl.vcxproj|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\alien_slave.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C745DF3B-CE37-4385-A17A-ABACCB5D69BE}|hl\\hl.vcxproj|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\pathcorner.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C745DF3B-CE37-4385-A17A-ABACCB5D69BE}|hl\\hl.vcxproj|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\enginecallback.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C745DF3B-CE37-4385-A17A-ABACCB5D69BE}|hl\\hl.vcxproj|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\bmodels.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C745DF3B-CE37-4385-A17A-ABACCB5D69BE}|hl\\hl.vcxproj|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\m44.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C745DF3B-CE37-4385-A17A-ABACCB5D69BE}|hl\\hl.vcxproj|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\buttons.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C745DF3B-CE37-4385-A17A-ABACCB5D69BE}|hl\\hl.vcxproj|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\util.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C745DF3B-CE37-4385-A17A-ABACCB5D69BE}|hl\\hl.vcxproj|C:\\USERS\\ALEX SSD\\DOWNLOADS\\HLALPHA-REVERSED\\ENGINE\\EIFACE.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C745DF3B-CE37-4385-A17A-ABACCB5D69BE}|hl\\hl.vcxproj|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\util.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C745DF3B-CE37-4385-A17A-ABACCB5D69BE}|hl\\hl.vcxproj|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\lights.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C745DF3B-CE37-4385-A17A-ABACCB5D69BE}|hl\\hl.vcxproj|C:\\USERS\\ALEX SSD\\DOWNLOADS\\HLALPHA-REVERSED\\ENGINE\\PROGDEFS.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C745DF3B-CE37-4385-A17A-ABACCB5D69BE}|hl\\hl.vcxproj|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C745DF3B-CE37-4385-A17A-ABACCB5D69BE}|hl\\hl.vcxproj|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C745DF3B-CE37-4385-A17A-ABACCB5D69BE}|hl\\hl.vcxproj|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\triggers.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{C745DF3B-CE37-4385-A17A-ABACCB5D69BE}|hl\\hl.vcxproj|C:\\Users\\Alex SSD\\Documents\\GitHub\\hlalpha-reversed\\dlls\\bmodels.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\engine\\studio.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C745DF3B-CE37-4385-A17A-ABACCB5D69BE}|hl\\hl.vcxproj|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\h_export.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C745DF3B-CE37-4385-A17A-ABACCB5D69BE}|hl\\hl.vcxproj|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\doors.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C745DF3B-CE37-4385-A17A-ABACCB5D69BE}|hl\\hl.vcxproj|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\plats.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C745DF3B-CE37-4385-A17A-ABACCB5D69BE}|hl\\hl.vcxproj|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\world.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C745DF3B-CE37-4385-A17A-ABACCB5D69BE}|hl\\hl.vcxproj|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\client.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C745DF3B-CE37-4385-A17A-ABACCB5D69BE}|hl\\hl.vcxproj|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\vector.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C745DF3B-CE37-4385-A17A-ABACCB5D69BE}|hl\\hl.vcxproj|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\extdll.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C745DF3B-CE37-4385-A17A-ABACCB5D69BE}|hl\\hl.vcxproj|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\weapons.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.22621.0\\ucrt\\stdlib.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
@@ -124,6 +61,114 @@
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\engine\\const.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\h_cycler.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\cbase.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\globals.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\headcrab.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\barney.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\client.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\h_cine.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\cbase.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\door.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\basemonster.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\alien_slave.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\weapons.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\scientist.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\panther.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\houndeye.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\pathcorner.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\enginecallback.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\bmodels.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\m44.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\buttons.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\util.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\engine\\eiface.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\util.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\lights.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\engine\\progdefs.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\triggers.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\h_export.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\doors.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\plats.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\world.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\client.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\vector.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\extdll.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\weapons.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -133,524 +178,683 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "h_cine.cpp",
-              "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\h_cine.cpp",
-              "RelativeDocumentMoniker": "..\\h_cine.cpp",
-              "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\h_cine.cpp",
-              "RelativeToolTip": "..\\h_cine.cpp",
-              "ViewState": "AgIAAL0AAAAAAAAAAAAuwMQAAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-12-14T19:23:25.14Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "client.cpp",
-              "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\client.cpp",
-              "RelativeDocumentMoniker": "..\\client.cpp",
-              "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\client.cpp",
-              "RelativeToolTip": "..\\client.cpp",
-              "ViewState": "AgIAAOsAAAAAAAAAAAASwPMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-12-11T17:33:34.533Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "h_cycler.cpp",
-              "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\h_cycler.cpp",
-              "RelativeDocumentMoniker": "..\\h_cycler.cpp",
-              "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\h_cycler.cpp",
-              "RelativeToolTip": "..\\h_cycler.cpp",
-              "ViewState": "AgIAAAQBAAAAAAAAAAAqwAsBAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-12-14T20:17:19.383Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "cbase.h",
-              "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\cbase.h",
-              "RelativeDocumentMoniker": "..\\cbase.h",
-              "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\cbase.h",
-              "RelativeToolTip": "..\\cbase.h",
-              "ViewState": "AgIAADwAAAAAAAAAAAAuwEkAAAAmAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-12-11T19:30:29.037Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "globals.cpp",
-              "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\globals.cpp",
-              "RelativeDocumentMoniker": "..\\globals.cpp",
-              "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\globals.cpp",
-              "RelativeToolTip": "..\\globals.cpp",
-              "ViewState": "AgIAABUAAAAAAAAAAAAjwCEAAAAdAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-12-11T23:53:34.968Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "headcrab.cpp",
-              "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\headcrab.cpp",
-              "RelativeDocumentMoniker": "..\\headcrab.cpp",
-              "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\headcrab.cpp",
-              "RelativeToolTip": "..\\headcrab.cpp",
-              "ViewState": "AgIAAEAAAAAAAAAAAAAWwEwAAAAcAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-12-22T00:24:04.812Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "subs.cpp",
-              "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\subs.cpp",
-              "RelativeDocumentMoniker": "..\\subs.cpp",
-              "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\subs.cpp",
-              "RelativeToolTip": "..\\subs.cpp",
-              "ViewState": "AgIAADwBAAAAAAAAAAAtwEcBAAAOAAAAAAAAAA==",
+              "Title": "h_export.cpp",
+              "DocumentMoniker": "C:\\Users\\Alex SSD\\Documents\\GitHub\\hlalpha-reversed\\dlls\\h_export.cpp",
+              "RelativeDocumentMoniker": "..\\h_export.cpp",
+              "ToolTip": "C:\\Users\\Alex SSD\\Documents\\GitHub\\hlalpha-reversed\\dlls\\h_export.cpp",
+              "RelativeToolTip": "..\\h_export.cpp",
+              "ViewState": "AgIAAI8AAAAAAAAAAAAAAJoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-12-11T19:29:52.92Z",
+              "WhenOpened": "2025-01-02T20:25:29.348Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "cbase.cpp",
-              "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\cbase.cpp",
-              "RelativeDocumentMoniker": "..\\cbase.cpp",
-              "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\cbase.cpp",
-              "RelativeToolTip": "..\\cbase.cpp",
-              "ViewState": "AgIAAK4AAAAAAAAAAAAuwM4AAAAAAAAAAAAAAA==",
+              "Title": "scientist.cpp",
+              "DocumentMoniker": "C:\\Users\\Alex SSD\\Documents\\GitHub\\hlalpha-reversed\\dlls\\scientist.cpp",
+              "RelativeDocumentMoniker": "..\\scientist.cpp",
+              "ToolTip": "C:\\Users\\Alex SSD\\Documents\\GitHub\\hlalpha-reversed\\dlls\\scientist.cpp",
+              "RelativeToolTip": "..\\scientist.cpp",
+              "ViewState": "AgIAALoAAAAAAAAAAAAhwMYAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-12-28T21:53:48.046Z",
+              "WhenOpened": "2025-01-02T20:03:44.724Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "panther.cpp",
+              "DocumentMoniker": "C:\\Users\\Alex SSD\\Documents\\GitHub\\hlalpha-reversed\\dlls\\panther.cpp",
+              "RelativeDocumentMoniker": "..\\panther.cpp",
+              "ToolTip": "C:\\Users\\Alex SSD\\Documents\\GitHub\\hlalpha-reversed\\dlls\\panther.cpp",
+              "RelativeToolTip": "..\\panther.cpp",
+              "ViewState": "AgIAAD8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-01-02T20:03:40.959Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "subs.cpp",
+              "DocumentMoniker": "C:\\Users\\Alex SSD\\Documents\\GitHub\\hlalpha-reversed\\dlls\\subs.cpp",
+              "RelativeDocumentMoniker": "..\\subs.cpp",
+              "ToolTip": "C:\\Users\\Alex SSD\\Documents\\GitHub\\hlalpha-reversed\\dlls\\subs.cpp",
+              "RelativeToolTip": "..\\subs.cpp",
+              "ViewState": "AgIAADsBAAAAAAAAAAAiwEMBAABRAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-01-02T19:52:46.126Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "enginecallback.h",
+              "DocumentMoniker": "C:\\Users\\Alex SSD\\Documents\\GitHub\\hlalpha-reversed\\dlls\\enginecallback.h",
+              "RelativeDocumentMoniker": "..\\enginecallback.h",
+              "ToolTip": "C:\\Users\\Alex SSD\\Documents\\GitHub\\hlalpha-reversed\\dlls\\enginecallback.h",
+              "RelativeToolTip": "..\\enginecallback.h",
+              "ViewState": "AgIAACAAAAAAAAAAAAAiwCgAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-01-02T20:05:50.106Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "eiface.h",
+              "DocumentMoniker": "C:\\Users\\Alex SSD\\Documents\\GitHub\\hlalpha-reversed\\engine\\eiface.h",
+              "RelativeDocumentMoniker": "..\\..\\engine\\eiface.h",
+              "ToolTip": "C:\\Users\\Alex SSD\\Documents\\GitHub\\hlalpha-reversed\\engine\\eiface.h",
+              "RelativeToolTip": "..\\..\\engine\\eiface.h",
+              "ViewState": "AgIAAD4AAAAAAAAAAAAiwEMAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-01-02T19:49:15.788Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 7,
-              "Title": "door.cpp",
-              "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\door.cpp",
-              "RelativeDocumentMoniker": "..\\door.cpp",
-              "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\door.cpp",
-              "RelativeToolTip": "..\\door.cpp",
-              "ViewState": "AgIAAE4BAAAAAAAAAADgv1kBAAACAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-12-12T00:57:33.797Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "basemonster.h",
-              "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\basemonster.h",
-              "RelativeDocumentMoniker": "..\\basemonster.h",
-              "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\basemonster.h",
-              "RelativeToolTip": "..\\basemonster.h",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAuwBUAAAAhAAAAAAAAAA==",
+              "Title": "extdll.h",
+              "DocumentMoniker": "C:\\Users\\Alex SSD\\Documents\\GitHub\\hlalpha-reversed\\dlls\\extdll.h",
+              "RelativeDocumentMoniker": "..\\extdll.h",
+              "ToolTip": "C:\\Users\\Alex SSD\\Documents\\GitHub\\hlalpha-reversed\\dlls\\extdll.h",
+              "RelativeToolTip": "..\\extdll.h",
+              "ViewState": "AgIAAD8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-12-21T18:13:09.748Z",
+              "WhenOpened": "2025-01-02T22:21:02.913Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "alien_slave.cpp",
-              "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\alien_slave.cpp",
-              "RelativeDocumentMoniker": "..\\alien_slave.cpp",
-              "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\alien_slave.cpp",
-              "RelativeToolTip": "..\\alien_slave.cpp",
-              "ViewState": "AgIAACEAAAAAAAAAAAAqwCkAAAASAAAAAAAAAA==",
+              "DocumentIndex": 4,
+              "Title": "util.cpp",
+              "DocumentMoniker": "C:\\Users\\Alex SSD\\Documents\\GitHub\\hlalpha-reversed\\dlls\\util.cpp",
+              "RelativeDocumentMoniker": "..\\util.cpp",
+              "ToolTip": "C:\\Users\\Alex SSD\\Documents\\GitHub\\hlalpha-reversed\\dlls\\util.cpp",
+              "RelativeToolTip": "..\\util.cpp",
+              "ViewState": "AgIAACIAAAAAAAAAAAAhwCoAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-12-22T00:12:55.682Z",
+              "WhenOpened": "2025-01-02T19:52:55.889Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 10,
-              "Title": "weapons.cpp",
-              "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\weapons.cpp",
-              "RelativeDocumentMoniker": "..\\weapons.cpp",
-              "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\weapons.cpp",
-              "RelativeToolTip": "..\\weapons.cpp",
-              "ViewState": "AgIAAJ8BAAAAAAAAAAAuwKsBAAAAAAAAAAAAAA==",
+              "Title": "headcrab.cpp",
+              "DocumentMoniker": "C:\\Users\\Alex SSD\\Documents\\GitHub\\hlalpha-reversed\\dlls\\headcrab.cpp",
+              "RelativeDocumentMoniker": "..\\headcrab.cpp",
+              "ToolTip": "C:\\Users\\Alex SSD\\Documents\\GitHub\\hlalpha-reversed\\dlls\\headcrab.cpp",
+              "RelativeToolTip": "..\\headcrab.cpp",
+              "ViewState": "AgIAAIcAAAAAAAAAAAAAAJkAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-12-11T19:30:02.374Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-02T20:03:23.804Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "scientist.cpp",
-              "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\scientist.cpp",
-              "RelativeDocumentMoniker": "..\\scientist.cpp",
-              "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\scientist.cpp",
-              "RelativeToolTip": "..\\scientist.cpp",
-              "ViewState": "AgIAAEgAAAAAAAAAAAAWwEwAAAAeAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-12-21T21:46:58.853Z",
+              "DocumentIndex": 8,
+              "Title": "util.h",
+              "DocumentMoniker": "C:\\Users\\Alex SSD\\Documents\\GitHub\\hlalpha-reversed\\dlls\\util.h",
+              "RelativeDocumentMoniker": "..\\util.h",
+              "ToolTip": "C:\\Users\\Alex SSD\\Documents\\GitHub\\hlalpha-reversed\\dlls\\util.h",
+              "RelativeToolTip": "..\\util.h",
+              "ViewState": "AgIAACEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-01-02T19:54:41.128Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 11,
-              "Title": "panther.cpp",
-              "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\panther.cpp",
-              "RelativeDocumentMoniker": "..\\panther.cpp",
-              "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\panther.cpp",
-              "RelativeToolTip": "..\\panther.cpp",
-              "ViewState": "AgIAACgAAAAAAAAAAAAIwC8AAAAtAAAAAAAAAA==",
+              "Title": "alien_slave.cpp",
+              "DocumentMoniker": "C:\\Users\\Alex SSD\\Documents\\GitHub\\hlalpha-reversed\\dlls\\alien_slave.cpp",
+              "RelativeDocumentMoniker": "..\\alien_slave.cpp",
+              "ToolTip": "C:\\Users\\Alex SSD\\Documents\\GitHub\\hlalpha-reversed\\dlls\\alien_slave.cpp",
+              "RelativeToolTip": "..\\alien_slave.cpp",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-12-22T02:53:28.865Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-02T20:03:18.588Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "barney.cpp",
+              "DocumentMoniker": "C:\\Users\\Alex SSD\\Documents\\GitHub\\hlalpha-reversed\\dlls\\barney.cpp",
+              "RelativeDocumentMoniker": "..\\barney.cpp",
+              "ToolTip": "C:\\Users\\Alex SSD\\Documents\\GitHub\\hlalpha-reversed\\dlls\\barney.cpp",
+              "RelativeToolTip": "..\\barney.cpp",
+              "ViewState": "AgIAAEwAAAAAAAAAAAAhwFQAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-01-02T20:02:40.732Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "houndeye.cpp",
+              "DocumentMoniker": "C:\\Users\\Alex SSD\\Documents\\GitHub\\hlalpha-reversed\\dlls\\houndeye.cpp",
+              "RelativeDocumentMoniker": "..\\houndeye.cpp",
+              "ToolTip": "C:\\Users\\Alex SSD\\Documents\\GitHub\\hlalpha-reversed\\dlls\\houndeye.cpp",
+              "RelativeToolTip": "..\\houndeye.cpp",
+              "ViewState": "AgIAAGwAAAAAAAAAAAAAAHIAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-01-02T20:03:31.74Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 13,
-              "Title": "houndeye.cpp",
-              "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\houndeye.cpp",
-              "RelativeDocumentMoniker": "..\\houndeye.cpp",
-              "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\houndeye.cpp",
-              "RelativeToolTip": "..\\houndeye.cpp",
-              "ViewState": "AgIAAEcAAAAAAAAAAAAWwE8AAAAVAAAAAAAAAA==",
+              "Title": "player.cpp",
+              "DocumentMoniker": "C:\\Users\\Alex SSD\\Documents\\GitHub\\hlalpha-reversed\\dlls\\player.cpp",
+              "RelativeDocumentMoniker": "..\\player.cpp",
+              "ToolTip": "C:\\Users\\Alex SSD\\Documents\\GitHub\\hlalpha-reversed\\dlls\\player.cpp",
+              "RelativeToolTip": "..\\player.cpp",
+              "ViewState": "AgIAABQBAAAAAAAAAAAAABUBAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-12-22T00:58:03.127Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-02T19:48:17.355Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "barney.cpp",
-              "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\barney.cpp",
-              "RelativeDocumentMoniker": "..\\barney.cpp",
-              "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\barney.cpp",
-              "RelativeToolTip": "..\\barney.cpp",
-              "ViewState": "AgIAAEoAAAAAAAAAAAAswFMAAAA3AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-12-20T20:45:10.399Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "pathcorner.cpp",
-              "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\pathcorner.cpp",
-              "RelativeDocumentMoniker": "..\\pathcorner.cpp",
-              "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\pathcorner.cpp",
-              "RelativeToolTip": "..\\pathcorner.cpp",
-              "ViewState": "AgIAADYAAAAAAAAAAAAswEIAAABXAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-12-30T03:12:51.951Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "enginecallback.h",
-              "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\enginecallback.h",
-              "RelativeDocumentMoniker": "..\\enginecallback.h",
-              "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\enginecallback.h",
-              "RelativeToolTip": "..\\enginecallback.h",
-              "ViewState": "AgIAAEAAAAAAAAAAAAAWwEgAAAAdAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-12-11T18:32:02.515Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 15,
               "Title": "bmodels.cpp",
-              "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\bmodels.cpp",
+              "DocumentMoniker": "C:\\Users\\Alex SSD\\Documents\\GitHub\\hlalpha-reversed\\dlls\\bmodels.cpp",
               "RelativeDocumentMoniker": "..\\bmodels.cpp",
-              "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\bmodels.cpp",
+              "ToolTip": "C:\\Users\\Alex SSD\\Documents\\GitHub\\hlalpha-reversed\\dlls\\bmodels.cpp",
               "RelativeToolTip": "..\\bmodels.cpp",
-              "ViewState": "AgIAAHwBAAAAAAAAAAArwIUBAAANAAAAAAAAAA==",
+              "ViewState": "AgIAAGMAAAAAAAAAAAAAADgAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-12-14T21:07:56.787Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "m44.cpp",
-              "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\m44.cpp",
-              "RelativeDocumentMoniker": "..\\m44.cpp",
-              "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\m44.cpp",
-              "RelativeToolTip": "..\\m44.cpp",
-              "ViewState": "AgIAABgAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-12-22T02:28:24.989Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-02T18:37:54.239Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 20,
-              "Title": "buttons.cpp",
-              "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\buttons.cpp",
-              "RelativeDocumentMoniker": "..\\buttons.cpp",
-              "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\buttons.cpp",
-              "RelativeToolTip": "..\\buttons.cpp",
-              "ViewState": "AgIAAFMAAAAAAAAAAAAqwFwAAAA9AAAAAAAAAA==",
+              "Title": "h_cycler.cpp",
+              "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\h_cycler.cpp",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\h_cycler.cpp",
+              "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\h_cycler.cpp",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\h_cycler.cpp",
+              "ViewState": "AgIAAAQBAAAAAAAAAAAqwAsBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-12-17T15:57:48.481Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-14T20:17:19.383Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 21,
-              "Title": "util.cpp",
-              "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\util.cpp",
-              "RelativeDocumentMoniker": "..\\util.cpp",
-              "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\util.cpp",
-              "RelativeToolTip": "..\\util.cpp",
-              "ViewState": "AgIAACUAAAAAAAAAAAAUwC4AAAAKAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-12-11T19:29:57.304Z",
-              "EditorCaption": ""
+              "Title": "cbase.h",
+              "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\cbase.h",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\cbase.h",
+              "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\cbase.h",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\cbase.h",
+              "ViewState": "AgIAADwAAAAAAAAAAAAuwEkAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-12-11T19:30:29.037Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 22,
-              "Title": "eiface.h",
-              "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\engine\\eiface.h",
-              "RelativeDocumentMoniker": "..\\..\\engine\\eiface.h",
-              "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\engine\\eiface.h",
-              "RelativeToolTip": "..\\..\\engine\\eiface.h",
-              "ViewState": "AgIAAEcAAAAAAAAAAAAWwE8AAAAlAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-12-14T19:59:53.499Z",
-              "EditorCaption": ""
+              "Title": "globals.cpp",
+              "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\globals.cpp",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\globals.cpp",
+              "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\globals.cpp",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\globals.cpp",
+              "ViewState": "AgIAABUAAAAAAAAAAAAjwCEAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-12-11T23:53:34.968Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 23,
-              "Title": "util.h",
-              "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\util.h",
-              "RelativeDocumentMoniker": "..\\util.h",
-              "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\util.h",
-              "RelativeToolTip": "..\\util.h",
-              "ViewState": "AgIAAFYAAAAAAAAAAAAUwF0AAAAeAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-12-11T19:30:35.146Z",
-              "EditorCaption": ""
+              "Title": "headcrab.cpp",
+              "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\headcrab.cpp",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\headcrab.cpp",
+              "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\headcrab.cpp",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\headcrab.cpp",
+              "ViewState": "AgIAAEAAAAAAAAAAAAAWwEwAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-12-22T00:24:04.812Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "subs.cpp",
+              "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\subs.cpp",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\subs.cpp",
+              "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\subs.cpp",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\subs.cpp",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-12-11T19:29:52.92Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 24,
-              "Title": "lights.cpp",
-              "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\lights.cpp",
-              "RelativeDocumentMoniker": "..\\lights.cpp",
-              "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\lights.cpp",
-              "RelativeToolTip": "..\\lights.cpp",
-              "ViewState": "AgIAAFIAAAAAAAAAAAAAwDUAAAABAAAAAAAAAA==",
+              "Title": "barney.cpp",
+              "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\barney.cpp",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\barney.cpp",
+              "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\barney.cpp",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\barney.cpp",
+              "ViewState": "AgIAAEoAAAAAAAAAAAAswFMAAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-12-16T21:07:48.41Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-20T20:45:10.399Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 25,
-              "Title": "progdefs.h",
-              "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\engine\\progdefs.h",
-              "RelativeDocumentMoniker": "..\\..\\engine\\progdefs.h",
-              "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\engine\\progdefs.h",
-              "RelativeToolTip": "..\\..\\engine\\progdefs.h",
-              "ViewState": "AgIAADoAAAAAAAAAAAAWwEIAAAAOAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-12-11T18:18:33.365Z",
-              "EditorCaption": ""
+              "Title": "client.cpp",
+              "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\client.cpp",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\client.cpp",
+              "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\client.cpp",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\client.cpp",
+              "ViewState": "AgIAAOsAAAAAAAAAAAASwPMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-12-11T17:33:34.533Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 26,
-              "Title": "player.cpp",
-              "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\player.cpp",
-              "RelativeDocumentMoniker": "..\\player.cpp",
-              "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\player.cpp",
-              "RelativeToolTip": "..\\player.cpp",
-              "ViewState": "AgIAAL8AAAAAAAAAAAAqwMIAAAALAAAAAAAAAA==",
+              "Title": "h_cine.cpp",
+              "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\h_cine.cpp",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\h_cine.cpp",
+              "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\h_cine.cpp",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\h_cine.cpp",
+              "ViewState": "AgIAAL0AAAAAAAAAAAAuwMQAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-12-11T17:30:59.589Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-14T19:23:25.14Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 27,
-              "Title": "player.h",
-              "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\player.h",
-              "RelativeDocumentMoniker": "..\\player.h",
-              "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\player.h",
-              "RelativeToolTip": "..\\player.h",
-              "ViewState": "AgIAAAkAAAAAAAAAAAASwBEAAAAgAAAAAAAAAA==",
+              "Title": "cbase.cpp",
+              "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\cbase.cpp",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\cbase.cpp",
+              "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\cbase.cpp",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\cbase.cpp",
+              "ViewState": "AgIAAK4AAAAAAAAAAAAuwM4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-12-28T21:53:48.046Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "door.cpp",
+              "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\door.cpp",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\door.cpp",
+              "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\door.cpp",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\door.cpp",
+              "ViewState": "AgIAAE4BAAAAAAAAAADgv1kBAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-12-12T00:57:33.797Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "basemonster.h",
+              "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\basemonster.h",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\basemonster.h",
+              "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\basemonster.h",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\basemonster.h",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAuwBUAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-12-11T19:30:34.061Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-21T18:13:09.748Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "alien_slave.cpp",
+              "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\alien_slave.cpp",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\alien_slave.cpp",
+              "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\alien_slave.cpp",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\alien_slave.cpp",
+              "ViewState": "AgIAACEAAAAAAAAAAAAqwCkAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-12-22T00:12:55.682Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "weapons.cpp",
+              "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\weapons.cpp",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\weapons.cpp",
+              "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\weapons.cpp",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\weapons.cpp",
+              "ViewState": "AgIAAJ8BAAAAAAAAAAAuwKsBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-12-11T19:30:02.374Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "scientist.cpp",
+              "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\scientist.cpp",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\scientist.cpp",
+              "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\scientist.cpp",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\scientist.cpp",
+              "ViewState": "AgIAAEgAAAAAAAAAAAAWwEwAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-12-21T21:46:58.853Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "panther.cpp",
+              "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\panther.cpp",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\panther.cpp",
+              "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\panther.cpp",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\panther.cpp",
+              "ViewState": "AgIAACgAAAAAAAAAAAAIwC8AAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-12-22T02:53:28.865Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "houndeye.cpp",
+              "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\houndeye.cpp",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\houndeye.cpp",
+              "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\houndeye.cpp",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\houndeye.cpp",
+              "ViewState": "AgIAAEcAAAAAAAAAAAAWwE8AAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-12-22T00:58:03.127Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "pathcorner.cpp",
+              "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\pathcorner.cpp",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\pathcorner.cpp",
+              "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\pathcorner.cpp",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\pathcorner.cpp",
+              "ViewState": "AgIAADYAAAAAAAAAAAAswEIAAABXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-12-30T03:12:51.951Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "enginecallback.h",
+              "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\enginecallback.h",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\enginecallback.h",
+              "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\enginecallback.h",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\enginecallback.h",
+              "ViewState": "AgIAAEAAAAAAAAAAAAAWwEgAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-12-11T18:32:02.515Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "bmodels.cpp",
+              "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\bmodels.cpp",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\bmodels.cpp",
+              "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\bmodels.cpp",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\bmodels.cpp",
+              "ViewState": "AgIAAHwBAAAAAAAAAAArwIUBAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-12-14T21:07:56.787Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "m44.cpp",
+              "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\m44.cpp",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\m44.cpp",
+              "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\m44.cpp",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\m44.cpp",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-12-22T02:28:24.989Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "buttons.cpp",
+              "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\buttons.cpp",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\buttons.cpp",
+              "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\buttons.cpp",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\buttons.cpp",
+              "ViewState": "AgIAAFMAAAAAAAAAAAAqwFwAAAA9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-12-17T15:57:48.481Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 40,
+              "Title": "util.cpp",
+              "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\util.cpp",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\util.cpp",
+              "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\util.cpp",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\util.cpp",
+              "ViewState": "AgIAACUAAAAAAAAAAAAUwC4AAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-12-11T19:29:57.304Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "eiface.h",
+              "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\engine\\eiface.h",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\engine\\eiface.h",
+              "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\engine\\eiface.h",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\engine\\eiface.h",
+              "ViewState": "AgIAAEcAAAAAAAAAAAAWwE8AAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-12-14T19:59:53.499Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "util.h",
+              "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\util.h",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\util.h",
+              "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\util.h",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\util.h",
+              "ViewState": "AgIAAFYAAAAAAAAAAAAUwF0AAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-12-11T19:30:35.146Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "lights.cpp",
+              "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\lights.cpp",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\lights.cpp",
+              "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\lights.cpp",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\lights.cpp",
+              "ViewState": "AgIAAFIAAAAAAAAAAAAAwDUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-12-16T21:07:48.41Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "progdefs.h",
+              "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\engine\\progdefs.h",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\engine\\progdefs.h",
+              "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\engine\\progdefs.h",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\engine\\progdefs.h",
+              "ViewState": "AgIAADoAAAAAAAAAAAAWwEIAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-12-11T18:18:33.365Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "player.cpp",
+              "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\player.cpp",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\player.cpp",
+              "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\player.cpp",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\player.cpp",
+              "ViewState": "AgIAAL8AAAAAAAAAAAAqwMIAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-12-11T17:30:59.589Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 46,
+              "Title": "player.h",
+              "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\player.h",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\player.h",
+              "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\player.h",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\player.h",
+              "ViewState": "AgIAAAkAAAAAAAAAAAASwBEAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-12-11T19:30:34.061Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
               "Title": "const.h",
               "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\engine\\const.h",
-              "RelativeDocumentMoniker": "..\\..\\engine\\const.h",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\engine\\const.h",
               "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\engine\\const.h",
-              "RelativeToolTip": "..\\..\\engine\\const.h",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\engine\\const.h",
               "ViewState": "AgIAADQAAAAAAAAAAAASwDwAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-12-12T17:00:36.174Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 47,
               "Title": "triggers.cpp",
               "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\triggers.cpp",
-              "RelativeDocumentMoniker": "..\\triggers.cpp",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\triggers.cpp",
               "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\triggers.cpp",
-              "RelativeToolTip": "..\\triggers.cpp",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\triggers.cpp",
               "ViewState": "AgIAAP4BAAAAAAAAAAAqwAcCAAAGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-12-15T21:30:09.418Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 16,
               "Title": "studio.h",
               "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\engine\\studio.h",
-              "RelativeDocumentMoniker": "..\\..\\engine\\studio.h",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\engine\\studio.h",
               "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\engine\\studio.h",
-              "RelativeToolTip": "..\\..\\engine\\studio.h",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\engine\\studio.h",
               "ViewState": "AgIAABgAAAAAAAAAAAAUwA0AAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-12-29T19:03:58.84Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 48,
               "Title": "h_export.cpp",
               "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\h_export.cpp",
-              "RelativeDocumentMoniker": "..\\h_export.cpp",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\h_export.cpp",
               "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\h_export.cpp",
-              "RelativeToolTip": "..\\h_export.cpp",
-              "ViewState": "AgIAACMAAAAAAAAAAAAWwC4AAAAHAAAAAAAAAA==",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\h_export.cpp",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-12-11T21:07:33.858Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 49,
               "Title": "doors.h",
               "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\doors.h",
-              "RelativeDocumentMoniker": "..\\doors.h",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\doors.h",
               "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\doors.h",
-              "RelativeToolTip": "..\\doors.h",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\doors.h",
               "ViewState": "AgIAAAEAAAAAAAAAAAAswAkAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-12-12T17:41:49.106Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 50,
               "Title": "plats.cpp",
               "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\plats.cpp",
-              "RelativeDocumentMoniker": "..\\plats.cpp",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\plats.cpp",
               "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\plats.cpp",
-              "RelativeToolTip": "..\\plats.cpp",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\plats.cpp",
               "ViewState": "AgIAAE4AAAAAAAAAAAAAAFIAAAA1AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-12-17T15:05:15.492Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 51,
               "Title": "world.cpp",
               "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\world.cpp",
-              "RelativeDocumentMoniker": "..\\world.cpp",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\world.cpp",
               "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\world.cpp",
-              "RelativeToolTip": "..\\world.cpp",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\world.cpp",
               "ViewState": "AgIAACwAAAAAAAAAAAAUwAYBAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-12-11T19:30:06.651Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 52,
               "Title": "client.h",
               "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\client.h",
-              "RelativeDocumentMoniker": "..\\client.h",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\client.h",
               "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\client.h",
-              "RelativeToolTip": "..\\client.h",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\client.h",
               "ViewState": "AgIAAAoAAAAAAAAAAAAAwBkAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-12-11T17:24:20.704Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 53,
               "Title": "vector.h",
               "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\vector.h",
-              "RelativeDocumentMoniker": "..\\vector.h",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\vector.h",
               "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\vector.h",
-              "RelativeToolTip": "..\\vector.h",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\vector.h",
               "ViewState": "AgIAAEIAAAAAAAAAAAAswFEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-12-11T19:30:39.447Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 54,
               "Title": "extdll.h",
               "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\extdll.h",
-              "RelativeDocumentMoniker": "..\\extdll.h",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\extdll.h",
               "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\extdll.h",
-              "RelativeToolTip": "..\\extdll.h",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\extdll.h",
               "ViewState": "AgIAADAAAAAAAAAAAAAnwDgAAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-12-12T19:08:44.563Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 55,
               "Title": "weapons.h",
               "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\weapons.h",
-              "RelativeDocumentMoniker": "..\\weapons.h",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\weapons.h",
               "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\dlls\\weapons.h",
-              "RelativeToolTip": "..\\weapons.h",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\dlls\\weapons.h",
               "ViewState": "AgIAAAcAAAAAAAAAAAAowBYAAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-12-11T19:30:40.37Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 18,
               "Title": "edict.h",
               "DocumentMoniker": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\engine\\edict.h",
-              "RelativeDocumentMoniker": "..\\..\\engine\\edict.h",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\engine\\edict.h",
               "ToolTip": "C:\\Users\\Alex SSD\\Downloads\\hlalpha-reversed\\engine\\edict.h",
-              "RelativeToolTip": "..\\..\\engine\\edict.h",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\Downloads\\hlalpha-reversed\\engine\\edict.h",
               "ViewState": "AgIAABIAAAAAAAAAAAAnwBkAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-12-19T00:34:14.393Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 17,
               "Title": "stdlib.h",
               "DocumentMoniker": "C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.22621.0\\ucrt\\stdlib.h",
-              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.22621.0\\ucrt\\stdlib.h",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\..\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.22621.0\\ucrt\\stdlib.h",
               "ToolTip": "C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.22621.0\\ucrt\\stdlib.h",
-              "RelativeToolTip": "..\\..\\..\\..\\..\\..\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.22621.0\\ucrt\\stdlib.h",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\..\\..\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.22621.0\\ucrt\\stdlib.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-12-11T19:12:46.619Z"

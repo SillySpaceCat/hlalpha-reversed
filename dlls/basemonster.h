@@ -29,6 +29,7 @@ public:
 	virtual void Pain(float flDamage) { return; };
 	virtual void Die() { return; };
 	virtual void Idle() { return; };
+	virtual void Alert() { return; };
 	virtual void SetActivity(int activity) { return; };
 	virtual int CheckEnemy(entvars_t *a2, float a3) { return 0; };
 	virtual void TakeDamage(entvars_t* pevInflictor, entvars_t* pevAttacker, float flDamage);

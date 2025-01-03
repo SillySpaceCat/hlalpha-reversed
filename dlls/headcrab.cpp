@@ -40,7 +40,7 @@ public:
 	virtual void SetActivity(int activity);
 	virtual int Classify() { return 8; };
 	virtual void Alert();
-	virtual void Pain(int a2);
+	virtual void Pain(float flDamage);
 	virtual void Die();
 	virtual void Idle();
 	virtual int CheckEnemy(int a2, float a3);
@@ -136,7 +136,7 @@ void CHeadCrab::SetActivity(int activity)
 	}
 }
 
-void CHeadCrab::Pain(int a2)
+void CHeadCrab::Pain(float flDamage)
 {
 	int sound = rand() % 3;
 	if (sound == 1)
@@ -151,7 +151,7 @@ void CHeadCrab::Pain(int a2)
 	{
 		EMIT_SOUND(ENT(pev), CHAN_VOICE, "headcrab/hc_pain1.wav", 1, ATTN_NORM);
 	}
-	if (a2 < 5)
+	if (flDamage < 5)
 	{
 		SetThink(&CHeadCrab::CallMonsterThink);
 		//if (pev->enemy)

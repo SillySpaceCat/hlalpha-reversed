@@ -39,7 +39,7 @@ public:
 	virtual int Classify() { return 3; };
 	virtual void SetActivity(int activity);
 	virtual void Alert();
-	virtual void Pain(int a2);
+	virtual void Pain(float flDamage);
 	virtual void Die();
 	virtual void Idle();
 	virtual int CheckEnemy(int a2, float a3);
@@ -112,7 +112,7 @@ void CHoundEye::Die()
 	SetActivity(m_iActivity);
 }
 
-void CHoundEye::Pain(int a2)
+void CHoundEye::Pain(float flDamage)
 {
 	float sound = UTIL_RandomFloat(0.0, 1.0);
 	if (sound <= 0.25)

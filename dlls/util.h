@@ -93,6 +93,7 @@ extern void			UTIL_SetSize			(entvars_t* pev, Vector vecMin, Vector vecMax);
 extern float		UTIL_VecToYaw			(const float* vector);
 extern Vector		UTIL_VecToAngles		(const float* vector);
 extern void			UTIL_MoveToOrigin		(edict_t* pent, const Vector &vecGoal, float flDist, int iMoveType);
+extern void			UTIL_MoveToGoal(edict_t* pent, float flDist);
 extern edict_t*		UTIL_FindEntityInSphere	(const float* vec1, float radius);
 extern void			UTIL_MakeVectors		(const Vector& vecAngles);
 extern void			UTIL_SetOrigin			(entvars_t* pev, Vector vecOrigin);

@@ -43,7 +43,7 @@ public:
 	virtual void Spawn();
 	virtual int Classify() { return 5; };
 	virtual void SetActivity(int activity);
-	virtual void Pain(int a2);
+	virtual void Pain(float flDamage);
 	virtual void Die();
 };
 
@@ -167,7 +167,7 @@ void CScientist::SetActivity(int activity)
     }
 }
 
-void CScientist::Pain(int a2)
+void CScientist::Pain(float flDamage)
 {
     EMIT_SOUND(ENT(pev), CHAN_VOICE, "barney/ba_pain1.wav", 1, ATTN_NORM);
 }
