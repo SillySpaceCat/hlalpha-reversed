@@ -161,7 +161,6 @@ void CHeadCrab::Pain(float flDamage)
 
 void CHeadCrab::Die()
 {
-	const char* string = STRING(pev->classname);
 	if (pev->health > -30)
 	{
 		switch (rand() % 2)

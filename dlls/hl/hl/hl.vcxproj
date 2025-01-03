@@ -149,6 +149,7 @@
     <ClInclude Include="..\..\weapons.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\agrunt.cpp" />
     <ClCompile Include="..\..\alien_slave.cpp" />
     <ClCompile Include="..\..\barney.cpp" />
     <ClCompile Include="..\..\bmodels.cpp" />
@@ -158,6 +159,7 @@
     <ClCompile Include="..\..\door.cpp" />
     <ClCompile Include="..\..\globals.cpp" />
     <ClCompile Include="..\..\headcrab.cpp" />
+    <ClCompile Include="..\..\hgrunt.cpp" />
     <ClCompile Include="..\..\houndeye.cpp" />
     <ClCompile Include="..\..\h_cine.cpp" />
     <ClCompile Include="..\..\h_cycler.cpp" />
@@ -168,6 +170,7 @@
     <ClCompile Include="..\..\pathcorner.cpp" />
     <ClCompile Include="..\..\plats.cpp" />
     <ClCompile Include="..\..\player.cpp" />
+    <ClCompile Include="..\..\polyrobo.cpp" />
     <ClCompile Include="..\..\scientist.cpp" />
     <ClCompile Include="..\..\sound.cpp" />
     <ClCompile Include="..\..\subs.cpp" />

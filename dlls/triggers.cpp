@@ -582,11 +582,11 @@ void CChangeLevel::TouchChangeLevel(entvars_t* pOther)
 	SetTouch(NULL);
 	pev->solid = SOLID_NOT;
 	float* parms = (float*)malloc(120);
+	memset(parms, 0, 120);
 	pgv->spawn_parms = parms;
 	parms[12] = 0;
 	strcpy_s(st_szNextMap, m_szMapName);
 	SUB_UseTargets(pev);
-	/*        gotta figure out how to pass info to the player
 	Vector v2; 
 	v2.z = pev->size.z * 0.5 + pev->absmin.z;
 	v2.y = pev->size.y * 0.5 + pev->absmin.y;
@@ -600,26 +600,31 @@ void CChangeLevel::TouchChangeLevel(entvars_t* pOther)
 		if (!strcmp(STRING(entity->v.classname), "info_landmark"))
 		{
 			parms[12] = 1;
-			parms[13] = entity->v.target;
-			parms[18] = thing->origin.x;
-			parms[19] = thing->origin.y;
-			parms[20] = thing->origin.z;
+			char string[32];
+			sprintf_s(string, sizeof(string), STRING(entity->v.target));
+			memcpy(&parms[13], &string, sizeof(string));
+			parms[18] = thing->origin.x - entity->v.origin.x;
+			parms[19] = thing->origin.y - entity->v.origin.y;
+			parms[20] = thing->origin.z - entity->v.origin.z;
 			parms[24] = thing->angles.x;
 			parms[25] = thing->angles.y;
 			parms[26] = thing->angles.z;
-			parms[9] = thing->weapon;
+			parms[36] = thing->weapon;
+			float weapon = parms[36];
 			parms[21] = thing->velocity.x;
 			parms[22] = thing->velocity.y;
 			parms[23] = thing->velocity.z;
+			parms[27] = thing->v_angle.x;
+			parms[28] = thing->v_angle.y;
+			parms[29] = thing->v_angle.z;
+			parms[29] = 0;
+			parms[26] = 0;
+			pgv->spawn_parms = parms;
 			break;
 		}
 		entity = ENT(entity->v.chain);
 	}
-	edict_t* landmark = FIND_ENTITY_BY_STRING(NULL, "classname", "info_landmark");
-	const char* str2 = STRING(landmark->v.classname);
-	const char* str3 = STRING(landmark->v.targetname);
-	const char* str4 = STRING(landmark->v.target);
-	strcpy_s(st_szNextSpot, STRING(entity->v.targetname));*/
+	strcpy_s(st_szNextSpot, STRING(entity->v.target));
 
 	CHANGE_LEVEL(st_szNextMap, st_szNextSpot);
 

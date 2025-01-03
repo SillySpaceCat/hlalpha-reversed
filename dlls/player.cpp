@@ -239,15 +239,15 @@ void CBasePlayer::Spawn( void )
 	//	pev->origin = VARS(pentSpawnSpot)->origin;
 	//	pev->angles = VARS(pentSpawnSpot)->angles;
 	//}
+    char teststring[32];
+	memcpy(&teststring, &pgv->spawn_parms[13], sizeof(teststring));
+	edict_t * landmark = FIND_ENTITY_BY_STRING(NULL, "targetname", teststring);
 	if (!pgv->spawn_parms || !pgv->spawn_parms[12])
 	{
 		goto label_8;
 	}
-	//else
-	//{
-		//edict_t* v8 = ENT(FIND_ENTITY_BY_STRING(NULL, "targetname", STRING(pgv->spawn_parms[13])));
-	//}
-	if (!FIND_ENTITY_BY_STRING(NULL, "targetname", STRING(pgv->spawn_parms[13])))
+	
+	if (!FIND_ENTITY_BY_STRING(NULL, "targetname", teststring))
 	{
 		label_8:
 		ALERT(at_console, "No Landmark:%s\n", STRING(pgv->spawn_parms[13]));
@@ -260,14 +260,21 @@ void CBasePlayer::Spawn( void )
 		goto label_9;
 	}
 	
-	pev->origin.x = pgv->spawn_parms[18];
-	pev->origin.y = pgv->spawn_parms[19];
-	pev->origin.z = pgv->spawn_parms[20];
-	pev->weapon = pgv->spawn_parms[9];
+	//pev->origin.x = pgv->spawn_parms[18];
+	//pev->origin.y = pgv->spawn_parms[19];
+	//pev->origin.z = pgv->spawn_parms[20];
+	pev->origin.x = landmark->v.origin.x + pgv->spawn_parms[18];
+	pev->origin.y = landmark->v.origin.y + pgv->spawn_parms[19];
+	pev->origin.z = landmark->v.origin.z + pgv->spawn_parms[20];
+	pev->weapon = pgv->spawn_parms[36];
+	selectedweapon = pev->weapon;
 	pev->angles.x = pgv->spawn_parms[24];
 	pev->angles.y = pgv->spawn_parms[25];
 	pev->angles.z = pgv->spawn_parms[26];
-	pev->v_angle = -pev->v_angle;
+	pev->v_angle.x = pgv->spawn_parms[27];
+	pev->v_angle.y = pgv->spawn_parms[28];
+	pev->v_angle.z = pgv->spawn_parms[29];
+	pev->v_angle.x = -pev->v_angle.x;
 	label_9:
 	pev->origin;
 	pev->angles;
