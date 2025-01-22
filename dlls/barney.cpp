@@ -52,9 +52,10 @@ public:
 	virtual int Classify() { return 5; };
 	virtual void SetActivity(int activity);
 	void Barney_Pissed();
+    void Barney_Shoot();
 	virtual void Pain(float flDamage);
 	virtual void Die();
-	virtual int CheckEnemy(int a2, float a3);
+	virtual int CheckEnemy(entvars_t *a2, float a3);
 };
 
 LINK_ENTITY_TO_CLASS(monster_barney, CBarney);
@@ -77,10 +78,9 @@ void CBarney::Spawn()
 	pev->health = 7;
 	pev->yaw_speed = 8;
 	pev->sequence = 17;
-	//unknownvariable = 1;
 	m_bloodColor = 70;
-	//unknownvariable3 = 384;
-	m_flFrameRate = 128;
+	m_sightDistance = 384;
+	m_followDistance = 128;
     pev->nextthink += UTIL_RandomFloat(0.0, 0.5) + 0.5;
 	SetThink(&CBarney::MonsterInit);
 }
@@ -88,6 +88,8 @@ void CBarney::Spawn()
 void CBarney::SetActivity(int activity)
 {
     int activitynum = NULL;
+    Vector v4;
+    float length;
     switch (activity)
     {
     case ACT_IDLE1:
@@ -115,22 +117,19 @@ void CBarney::SetActivity(int activity)
         activitynum = run;
         break;
     case ACT_FOLLOWPLAYER:                                    // player interacts with barney
-        //v4 = pev->origin - player->origin);
-        //v5 = v4 * v4;
-        //v6 = *(float*)(*((_DWORD*)this + 1) + 48) - *(float*)(*((_DWORD*)this + 79) + 48);
-        //v7 = *(float*)(*((_DWORD*)this + 1) + 40) - *(float*)(*((_DWORD*)this + 79) + 40);
-        //v10 = v4.normalize;
-        //if (this[65] * 2.0 >= v10)
-        //{
-        //    if (this[65] < (double)v10)
-        //        v3 = walk;
-        //    else
-        //        v3 = idle1;
-        //}
-        //else
-        //{
-        activitynum = run;
-        //}
+        v4 = (pev->origin - followentity->origin);
+        length = v4.Length();
+        if (m_followDistance * 2.0 >= length)
+        {
+            if (m_followDistance < length)
+                activitynum = walk;
+            else
+                activitynum = idle1;
+        }
+        else
+        {
+            activitynum = run;
+        }
         break;
     case 29:
         activitynum = run;
@@ -189,8 +188,35 @@ void CBarney::SetActivity(int activity)
 void CBarney::Barney_Pissed()
 {
     EMIT_SOUND(ENT(pev), CHAN_VOICE, "barney/ba_attack1.wav", 1, ATTN_NORM);
-    //*(_DWORD*)(this + 128) = 6;
-    //*(float*)(this + 272) = pev->pSystemGlobals->time + 1;
+    m_iActivity = 6;
+    nextattack = pev->pSystemGlobals->time + 1;
+}
+
+void CBarney::Barney_Shoot()
+{
+    pev->nextthink = pgv->time + 0.05;
+    if (m_iActivity != 30)
+    {
+        m_iActivity = 30;
+        SetActivity(30);
+        nextattack = UTIL_RandomFloat(0.5, 1.5) + pgv->time;
+    }
+    byte dispatchanimevents = DispatchAnimEvents(0.1);
+    StudioFrameAdvance(0.1);
+    CHANGE_YAW(ENT(pev));
+    if ((dispatchanimevents & 2) != 0)
+    {
+        EMIT_SOUND(ENT(pev), CHAN_VOICE, "barney/ba_attack2.wav", 1, ATTN_NORM);
+        UTIL_MakeVectors(pev->angles);
+        FireBullets(1, pgv->v_forward, Vector(0.05, 0.05, 0.05), 1024);
+        pev->effects = static_cast<int>(pev->effects) | 2;
+    }
+    if (m_fSequenceFinished)
+    {
+        SetThink(&CBaseMonster::CallMonsterThink);
+        m_iActivity = m_iIdealActivity;
+        eventfired = 0;
+    }
 }
 
 void CBarney::Pain(float flDamage)
@@ -236,25 +262,23 @@ void CBarney::Die()
     }
 }
 
-int CBarney::CheckEnemy(int a2, float a3)
+int CBarney::CheckEnemy(entvars_t *a2, float a3)
 {
-    /*
-    if (a3 <= 64 && sub_1000BCC0(a2))
+    if (a3 <= 64 && function1(a2))
     {
-        this[34] = 7;
-        this[3] = barney_shoot;
+        m_iIdealActivity = 7;
+        SetThink(&CBarney::Barney_Shoot);
         return 1;
     }
-    else if (checkenemyoncrosshairs((int)this, (int)a2) && a3 <= (double)flt_1002ECA4)
+    else if (CheckEnemyOnCrosshair(a2) && a3 <= 1024)
     {
-        this[34] = 7;                               // probably barneys ammo?
-        this[3] = barney_shoot;                     // shoot player
+        m_iIdealActivity = 7;                               // m_iactivity
+        SetThink(&CBarney::Barney_Shoot);                   // shoot player
         return 1;
     }
     else
     {
         return 0;                                   // player is not in barney's crosshair
     }
-    */
     return 0;
 }

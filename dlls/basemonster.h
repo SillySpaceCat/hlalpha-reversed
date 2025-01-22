@@ -24,7 +24,19 @@ class CBaseMonster : public CBaseAnimating
 public:
 	int m_bloodColor;
 	int m_iActivity;
+	int m_iIdealActivity;
+	float m_sightDistance;
 	Vector goal_origin;
+	float nextattack;
+	float nextidle;
+	float multi_damage;
+	int multi_ent;
+	byte byte1;
+	byte byte2;
+	byte byte3;
+	Vector enemyposition;
+	entvars_t* followentity;
+	float m_followDistance;
 	virtual int Classify() { return 0; };
 	virtual void Pain(float flDamage) { return; };
 	virtual void Die() { return; };
@@ -32,7 +44,15 @@ public:
 	virtual void Alert() { return; };
 	virtual void SetActivity(int activity) { return; };
 	virtual int CheckEnemy(entvars_t *a2, float a3) { return 0; };
+	float GetDistance(entvars_t* enemy);
+	BOOL function1(entvars_t* a2);
+	BOOL CheckEnemyOnCrosshair(entvars_t* a2);
 	virtual void TakeDamage(entvars_t* pevInflictor, entvars_t* pevAttacker, float flDamage);
+	void TraceAttack(float damage, int integer1, Vector dir);
+	void FireBullets(int number, Vector dir, Vector spread, float distance);
+	void ApplyMultiDamage();
+	void ClearMultiDamage();
+	void AddMultiDamage(float a3);
 	void Killed(int pevAttacker);
 	void MonsterInit();
 	void WalkMonsterStart();

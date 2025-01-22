@@ -20,7 +20,6 @@ class CBasePlayer : public CBaseMonster
 public:
 	float jumpflag;
 	int firegrenade;
-	float nextattack;
 	int weaponactivity;
 	int showlines;
 	int selectedweapon;
@@ -28,17 +27,15 @@ public:
 	float nextstep;
 	float nextuse;
 	int g_onladder;
-	float multi_damage;
-	int multi_ent;
 	virtual void Spawn( void );
 	virtual void Use(void);
 	virtual void Jump( void );
 	virtual void Duck( void );
 	virtual void PreThink( void );
 	virtual void PostThink( void );
-	virtual void Killed(void);
+	void Die();
+	void DeathThink(void);
 	void ImpulseCommands();
-	void FireBullets(int number, Vector dir, Vector spread, float distance);
 	void TraceAttack(float damage, int integer1, Vector dir);
 	void ClearMultiDamage();
 	void ApplyMultiDamage();

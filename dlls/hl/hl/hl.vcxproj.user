@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LocalDebuggerCommand>C:\Users\Alex SSD\Downloads\hl1-alpha\Half-Life\enginegl.exe</LocalDebuggerCommand>
-    <LocalDebuggerCommandArguments>+map hl1_alpha_test +exec gaben.cfg -width 800 -startwindowed -windowed -window -developer 1 +developer 1</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommand>D:\hl1-alpha\Half-Life\engine.exe</LocalDebuggerCommand>
+    <LocalDebuggerCommandArguments>+map maps +exec gaben.cfg -width 800 -startwindowed -windowed -window -developer 1 +developer 1</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
-    <LocalDebuggerWorkingDirectory>C:\Users\Alex SSD\Downloads\hl1-alpha\Half-Life\</LocalDebuggerWorkingDirectory>
+    <LocalDebuggerWorkingDirectory>D:\hl1-alpha\Half-Life\</LocalDebuggerWorkingDirectory>
   </PropertyGroup>
 </Project>

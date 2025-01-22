@@ -68,7 +68,7 @@ void CScientist::Spawn()
 	//unknownvariable = 1;
 	m_bloodColor = 70;
 	//unknownvariable3 = 384;
-	//unknownvariable4 = 128;
+	m_followDistance = 128;
     pev->nextthink = pev->pSystemGlobals->time + 0.5;
     if (pev->body == -1)
     {
@@ -80,6 +80,8 @@ void CScientist::Spawn()
 void CScientist::SetActivity(int activity)
 {
     int activitynum = NULL;
+    Vector v4;
+    float length;
     switch (activity)
     {
     case ACT_IDLE1:
@@ -103,23 +105,20 @@ void CScientist::SetActivity(int activity)
     case ACT_RUN2:
         activitynum = run;
         break;
-    case ACT_FOLLOWPLAYER:
-        //v4 = pev->origin - player->origin);
-        //v5 = v4 * v4;
-        //v6 = *(float*)(*((_DWORD*)this + 1) + 48) - *(float*)(*((_DWORD*)this + 79) + 48);
-        //v7 = *(float*)(*((_DWORD*)this + 1) + 40) - *(float*)(*((_DWORD*)this + 79) + 40);
-        //v10 = v4.normalize;
-        //if (this[65] * 2.0 >= v10)
-        //{
-        //    if (this[65] < (double)v10)
-        //        v3 = walk;
-        //    else
-        //        v3 = idle1;
-        //}
-        //else
-        //{
-        activitynum = run;
-        //}
+    case ACT_FOLLOWPLAYER:                                    // player interacts with barney
+        v4 = (pev->origin - followentity->origin);
+        length = v4.Length();
+        if (m_followDistance * 2.0 >= length)
+        {
+            if (m_followDistance < length)
+                activitynum = walk;
+            else
+                activitynum = idle1;
+        }
+        else
+        {
+            activitynum = run;
+        }
         break;
     case 29:
         activitynum = flinch;

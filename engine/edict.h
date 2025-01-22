@@ -17,8 +17,8 @@
 struct edict_s
 {
 	int	free;
-	int serialnumber;
 	link_t		area;				// linked to a division node or leaf
+	int serialnumber;
 	
 	int			num_leafs;
 	short		leafnums[MAX_ENT_LEAFS];

@@ -230,7 +230,7 @@ void CCineBlood::BloodGush(void)
 	{// decals the floor with blood.
 		vecSplatDir = Vector(0, 0, -1);
 		vecSplatDir = vecSplatDir + (UTIL_RandomFloat(-1, 1) * 0.6 * pev->pSystemGlobals->v_right) + (UTIL_RandomFloat(-1, 1) * 0.6 * pev->pSystemGlobals->v_forward);// randomize a bit
-		UTIL_TraceLine(pev->origin + Vector(0, 0, 64), pev->origin + vecSplatDir * 256, ENT(pev), &tr);
+		UTIL_TraceLine(pev->origin + Vector(0, 0, 64), pev->origin + vecSplatDir * 256, 0,  ENT(pev), &tr);
 		if (tr.flFraction != 1.0)
 		{
 			// Decal with a bloodsplat

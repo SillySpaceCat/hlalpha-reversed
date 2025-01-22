@@ -30,6 +30,8 @@ using namespace std;
 #include "cbase.h"
 #include "player.h"
 #include "weapons.h"
+
+extern void respawn(entvars_t* pev);
 extern Vector VecBModelOrigin(entvars_t* pevBModel);
 
 extern DLL_GLOBAL ULONG		g_ulModelIndexPlayer;
@@ -88,14 +90,14 @@ void CheckWaterJump(entvars_t* pev)
 	VectorNormalize(pev->pSystemGlobals->v_forward);
 	Vector end = start + pev->pSystemGlobals->v_forward * 24;
 	TraceResult *trace = new TraceResult;
-	UTIL_TraceLine(start, end, ENT(pev), trace);
+	UTIL_TraceLine(start, end, 0, ENT(pev), trace);
 	if (trace->flFraction < 1)
 	{
 		// solid at waist
 		start.z += pev->maxs.z - 8;
 		end = start + pev->pSystemGlobals->v_forward * 24;
 		pev->movedir = trace->vecPlaneNormal * -50;
-		UTIL_TraceLine(start, end, ENT(pev), trace);
+		UTIL_TraceLine(start, end, 0, ENT(pev), trace);
 		if (trace->flFraction == 1)
 		{   // open at eye level
 			SetBits(pev->flags, FL_WATERJUMP);
@@ -192,7 +194,54 @@ void WaterMove(entvars_t* pev)
 	*/
 }
 
-void CBasePlayer::Killed(void)
+void CBasePlayer::DeathThink()
+{
+	float flForward;
+	if (FBitSet(pev->flags, FL_ONGROUND))
+	{
+		flForward = pev->velocity.Length() - 20;
+		if (flForward <= 0)
+			pev->velocity = g_vecZero;
+		else
+			pev->velocity = flForward * pev->velocity.Normalize();
+	}
+	if (m_fSequenceFinished || pev->deadflag != 1)
+	{
+		if (pev->deadflag == 1)
+			pev->deadflag = 2;
+
+		if (pev->deadflag = 2)
+		{
+			if (!pev->button)
+				pev->deadflag = 3;
+		}
+	    if (pev->button)
+		{
+			pev->button = 0;
+			respawn(pev);
+			pev->nextthink = -1;
+		}
+	}
+	else
+	{
+		StudioFrameAdvance(0.1);
+	}
+}
+
+void PlayerPain(entvars_t *pev)
+{
+	switch (UTIL_RandomLong(1, 5))
+	{
+	case 1:
+		return EMIT_SOUND(ENT(pev), CHAN_VOICE, "player/pl_pain5.wav", 1, ATTN_NORM);
+	case 2:
+		return EMIT_SOUND(ENT(pev), CHAN_VOICE, "player/pl_pain6.wav", 1, ATTN_NORM);
+	case 3:
+		return EMIT_SOUND(ENT(pev), CHAN_VOICE, "player/pl_pain7.wav", 1, ATTN_NORM);
+	}
+}
+
+void CBasePlayer::Die()
 {
 	pev->modelindex = g_ulModelIndexPlayer;
 	pev->weaponmodel = 0;
@@ -204,14 +253,15 @@ void CBasePlayer::Killed(void)
 	if (pev->velocity.z < 10)
 		pev->velocity.z += UTIL_RandomFloat(0.0, 300);
 
-	if (pev->health < -40)
-	{
-		//Pain();
-		pev->angles.x = 0;
-		pev->angles.z = 0;
-		//DeathSound();
-		//SetThink(&CBasePlayer::PlayerDeathThink)
-	}
+	//if (pev->health < -40)
+	//{
+	PlayerPain(pev);
+	pev->angles.x = 0;
+	pev->angles.z = 0;
+	SetActivity(35);
+	SetThink(&CBasePlayer::DeathThink);
+	pev->nextthink = 0.1;
+	//}
 }
 
 void CBasePlayer::Spawn( void )
@@ -228,6 +278,8 @@ void CBasePlayer::Spawn( void )
 	pev->effects		= 0;
 	pev->sequence		= 9;
 	pev->deadflag		= DEAD_NO;
+	m_bloodColor = 70;
+	nextattack = pgv->time;
 	SetChangeParms( pgv );
 
 	// TODO: SaveRestore
@@ -316,6 +368,34 @@ void CBasePlayer::Use()
 				if (pTarget)
 					pTarget->Use(0);
 			}
+			else if (FClassnameIs(VARS(entity), "func_door") || (FClassnameIs(VARS(entity), "func_door_rotating")))
+			{
+				if (FBitSet(VARS(entity)->spawnflags, FL_ITEM))
+				{
+					CBaseEntity* pTarget = CBaseEntity::Instance(entity);
+					if (pTarget)
+						pTarget->Use(0);
+				}
+			}
+			else if (FClassnameIs(VARS(entity), "monster_scientist") || (FClassnameIs(VARS(entity), "monster_barney")))
+			{
+				if (!ENT(entity))
+				{
+					entity = ENT(CREATE_ENTITY());
+				}
+				CBaseMonster* pTarget = (CBaseMonster *)CBaseEntity::Instance(entity);
+				if (pTarget->followentity == pev)
+				{
+					pTarget->followentity = VARS(entity);
+					pTarget->m_iActivity = 1;
+				}
+				else
+				{
+					pTarget->followentity = pev;
+					pTarget->m_iActivity = 10;
+				}
+				return;
+			}
 		}
 	}
 }
@@ -403,7 +483,7 @@ void CBasePlayer::PreThink(void)
 
 	if (pev->deadflag >= DEAD_DYING)
 	{
-		//PlayerDeadThink();
+		DeathThink();
 		return;
 	}
 

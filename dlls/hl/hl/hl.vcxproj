@@ -71,8 +71,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>C:\Users\Alex SSD\Documents\GitHub\hl1-alpha\Half-Life\valve\dlls\</OutDir>
-    <IntDir>C:\Users\Alex SSD\Documents\GitHub\hl1-alpha\Half-Life\valve\dlls\</IntDir>
+    <OutDir>D:\hl1-alpha\Half-Life\valve\dlls\</OutDir>
+    <IntDir>D:\hl1-alpha\Half-Life\valve\dlls\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

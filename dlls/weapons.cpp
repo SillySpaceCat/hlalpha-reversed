@@ -155,13 +155,13 @@ void CBasePlayer::ImpulseCommands()
 	}
 }
 
-void CBasePlayer::ClearMultiDamage()
+void CBaseMonster::ClearMultiDamage()
 {
 	multi_damage = 0;
 	multi_ent = 0;
 }
 
-void CBasePlayer::AddMultiDamage(float a3)
+void CBaseMonster::AddMultiDamage(float a3)
 {
 	if (pgv->trace_ent)
 	{
@@ -178,7 +178,7 @@ void CBasePlayer::AddMultiDamage(float a3)
 	}
 }
 
-void CBasePlayer::ApplyMultiDamage()
+void CBaseMonster::ApplyMultiDamage()
 {
 	if (!multi_ent)
 		return;
@@ -187,7 +187,7 @@ void CBasePlayer::ApplyMultiDamage()
 		pMonster->TakeDamage(VARS(multi_ent), pev, multi_damage);
 }
 
-void CBasePlayer::TraceAttack(float damage, int integer1, Vector dir)
+void CBaseMonster::TraceAttack(float damage, int integer1, Vector dir)
 {
 	Vector  vel, org;
 
@@ -217,7 +217,7 @@ void CBasePlayer::TraceAttack(float damage, int integer1, Vector dir)
 		WRITE_BYTE(MSG_BROADCAST, damage);
 
 
-		if (VARS(pgv->trace_ent)->health <= 0)
+		if (VARS(pgv->trace_ent)->health <= multi_damage)
 		{
 			WRITE_BYTE(MSG_BROADCAST, SVC_TEMPENTITY);
 			WRITE_BYTE(MSG_BROADCAST, TE_BLOODSTREAM);
@@ -256,7 +256,7 @@ void CBasePlayer::TraceAttack(float damage, int integer1, Vector dir)
 //   other monsters use this but for now only the player has this function
 
 
-void CBasePlayer::FireBullets(int number, Vector dir, Vector spread, float distance)
+void CBaseMonster::FireBullets(int number, Vector dir, Vector spread, float distance)
 {
 	UTIL_MakeVectors(pev->v_angle);
 
@@ -268,13 +268,13 @@ void CBasePlayer::FireBullets(int number, Vector dir, Vector spread, float dista
 	ClearMultiDamage();
 	TraceResult tr;
 
-	UTIL_TraceLine(src, src + dir * 2048, FALSE, &tr);
+	UTIL_TraceLine(src, src + dir * 2048, 1, FALSE, &tr);
 	//puff_org = trace_endpos - dir * 4;
 
 	while (number > 0)
 	{
 		direction = dir + UTIL_RandomFloat(-1, 1) * spread.x * pgv->v_right + UTIL_RandomFloat(-1, 1) * spread.y * pgv->v_up;
-		UTIL_TraceLine(src, src + direction * distance, ENT(pev), &tr);
+		UTIL_TraceLine(src, src + direction * distance, 1, ENT(pev), &tr);
 		if (tr.flFraction != 1.0)
 		{
 			//TraceAttack(2, integer1, direction);
@@ -307,7 +307,7 @@ void CBasePlayer::Swing_Crowbar()
 
 void CBasePlayer::Shoot_Pistol()
 {
-	pev->effects == static_cast<int>(pev->effects) | 2;
+	pev->effects = static_cast<int>(pev->effects) | 2;
 	UTIL_MakeVectors(pev->v_angle);
 	pev->pSystemGlobals->msg_entity = OFFSET(pev); //i think
 
@@ -328,7 +328,7 @@ void CBasePlayer::Shoot_Pistol()
 }
 void CBasePlayer::Shoot_Mp5()
 {
-	pev->effects == static_cast<int>(pev->effects) | 2;
+	pev->effects = static_cast<int>(pev->effects) | 2;
 
 	pev->pSystemGlobals->msg_entity = OFFSET(pev); //i think
 

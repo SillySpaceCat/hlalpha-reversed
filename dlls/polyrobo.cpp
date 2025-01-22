@@ -79,10 +79,13 @@ void CPolyRobo::Think()
 	}
 	DispatchAnimEvents(0.1);
 	StudioFrameAdvance(0.1);
+	BoneController(0, (int)(pgv->time * 10) % 45);
+	Vector oldangles = pev->angles;
 	if (pev->enemy)
 	{
 		edict_t *enemy = ENT(pev->enemy);
 		Vector origin = enemy->v.origin - pev->origin;
 		pev->angles.y = UTIL_VecToYaw(origin);
 	}
+	BoneController(0, pev->angles.y - oldangles.y);
 }

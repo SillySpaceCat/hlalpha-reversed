@@ -169,16 +169,21 @@ public:
 	void EXPORT DelayThink(void);
 };
 
+#include "studio.h"
 
 class CBaseAnimating : public CBaseDelay
 {
 public:
-	float				m_flFrameRate;		// computed FPS for current sequence
-	float				m_flGroundSpeed;	// computed linear movement rate for current sequence
-	BOOL				m_fSequenceFinished;
-	void StudioFrameAdvance(float flInterval);
-	void ResetSequenceInfo(float flInterval);
-	void DispatchAnimEvents(float flInterval);
+	float m_flFrameRate;		// computed FPS for current sequence
+	float m_flGroundSpeed;	// computed linear movement rate for current sequence
+	BOOL  m_fSequenceFinished;
+	int	  eventfired; //shitty way to avoid an event from firing twice
+
+	void  StudioFrameAdvance(float flInterval);
+	void  ResetSequenceInfo(float flInterval);
+	byte  HandleAnimEvent(void* phdr, float flInterval);
+	byte  DispatchAnimEvents(float flInterval);
+	float BoneController(int nCtrlId, float flValue);
 };
 
 

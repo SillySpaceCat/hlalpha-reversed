@@ -75,9 +75,9 @@ void UTIL_EmitAmbientSound( Vector vecOrigin, const char *samp, float vol, float
 	EMIT_AMBIENT_SOUND(rgfl, samp, vol, attenuation);
 }
 
-void UTIL_TraceLine(const Vector& vecStart, const Vector& vecEnd, edict_t* pentIgnore, TraceResult* ptr)
+void UTIL_TraceLine(const Vector& vecStart, const Vector& vecEnd, int ignoremonsters, edict_t* pentIgnore, TraceResult* ptr)
 {
-	TRACE_LINE(vecStart, vecEnd, 0, pentIgnore, ptr);
+	TRACE_LINE(vecStart, vecEnd, (ignoremonsters == 0), pentIgnore, ptr);
 }
 Vector UTIL_GetAimVector(edict_t* pent, float flSpeed)
 {

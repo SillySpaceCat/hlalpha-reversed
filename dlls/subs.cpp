@@ -228,6 +228,105 @@ float CBaseToggle::AxisDelta(int flags, const Vector& angle1, const Vector& angl
 	return angle1.y - angle2.y;
 }
 
+//                 //
+//    MONSTER AI   //
+//				   // 
+
+BOOL function3(entvars_t* pev, entvars_t* enemy, float a3)
+{
+	Vector v10;
+	float v12, v13, v14, length, length2;
+
+	UTIL_MakeVectors(pev->angles);
+
+	v10.x = pev->origin.x - enemy->origin.x;
+	v10.y = pev->origin.y - enemy->origin.y;
+	v10.z = pev->origin.z - enemy->origin.z;
+	length = v10.Length();
+	if (length < 64)
+	{
+		v12 = 0;
+		v13 = 0;
+		v14 = 0;
+	}
+	else
+	{
+		v12 = (pev->origin.x - enemy->origin.x) / length;
+		v13 = (pev->origin.y - enemy->origin.y) / length;
+		v14 = (pev->origin.z - enemy->origin.z) / length;
+	}
+
+	length2 = pev->pSystemGlobals->v_forward[0] * v12 + pev->pSystemGlobals->v_forward[1] * v13 + pev->pSystemGlobals->v_forward[2] * v14;
+	if (-length2 > a3)
+		return 1;
+	else
+		return 0;
+}
+
+BOOL function2(entvars_t* pev, entvars_t* enemy, float a3)
+{
+	return function3(pev, enemy, a3);
+}
+
+BOOL CanSeePlayer(entvars_t* pev, entvars_t* enemy)
+{
+	Vector viewofs_pev, viewofs_enemy;
+	TraceResult tr;
+	viewofs_pev = pev->view_ofs + pev->origin;
+	viewofs_enemy = enemy->view_ofs + enemy->origin;
+
+	UTIL_TraceLine(viewofs_pev, viewofs_enemy, 0, ENT(pev), &tr);
+
+	return (pev->pSystemGlobals->trace_fraction == 1.0);
+}
+
+BOOL CBaseMonster::function1(entvars_t* a2)
+{
+	if (pgv->time < nextattack)
+		return 0;
+	if (!function2(pev, a2, 0.1))
+		return 0;
+	if (CanSeePlayer(pev, a2))
+		return (fabs(a2->origin.z - pev->origin.z) <= 48.0);
+	return 0;
+}
+
+BOOL CBaseMonster::CheckEnemyOnCrosshair(entvars_t* a2)
+{
+	if (pgv->time < nextattack)
+		return 0;
+	if (function2(pev, a2, 0.9))
+		return (CanSeePlayer(pev, a2));
+}
+
+float CBaseMonster::GetDistance(entvars_t* enemy)
+{
+	float length;
+	Vector origin;
+	origin = enemy->origin - pev->origin;
+
+	byte1 = byte1 & 253;
+	byte1 = (byte1 & 253) & 254;
+
+	if (CanSeePlayer(pev, enemy))
+		byte1 |= 2;
+	if (function2(pev, enemy, 0.1))
+		byte1 |= 1;
+
+	length = sqrt(origin.x * origin.x + origin.y * origin.y + origin.z * origin.z);
+
+	if ((byte1 & 2) != 0 && (byte1 & 1) != 0 || (byte1 & 2) != 0 && length < 256)
+	{
+		byte3 = 0;
+		byte2 = 0;
+		byte1 |= 4;
+		enemyposition = enemy->origin;
+	}
+	pev->ideal_yaw = UTIL_VecToYaw(enemy->origin - pev->origin);
+	return length;
+
+}
+
 void CBaseMonster::MonsterInit()
 {
 	WalkMonsterStart();
@@ -241,7 +340,8 @@ void CBaseMonster::WalkMonsterStart()
 		return;
 	}
 	pev->origin.z += 1;
-	DROP_TO_FLOOR(ENT(pev)); //for some reason some monsters dissappear when this                        
+
+	DROP_TO_FLOOR(ENT(OFFSET(pev))); //for some reason some monsters dissappear when this                        
 							//line executes ?????????
 	if (!WALK_MOVE(ENT(pev), 0, 0))
 	{
@@ -283,6 +383,7 @@ void CBaseMonster::CallMonsterThink()
 {
 	entvars_t *enemy = NULL;
 	float distance = NULL;
+	Vector length = Vector(0, 0, 0);
 	pev->nextthink = pgv->time + 0.1;
 	SetActivity(m_iActivity);
 	StudioFrameAdvance(0.1);
@@ -291,34 +392,44 @@ void CBaseMonster::CallMonsterThink()
 	{
 		if (pev->health > 0)
 		{
-			enemy = VARS(enemy);
+			enemy = VARS(pev->enemy);
 			if (VARS(pev->enemy)->health <= 0)
 			{
 				pev->enemy = NULL;
 				m_iActivity = 1;
 				return;
 			}
-			//distance = somethingsomething
+			distance = GetDistance(enemy);
 		}
 	}
+    else
+	{
+		if (function2(pev, VARS(FIND_CLIENT_IN_PVS()), 0.1))
+			return;
+		//if (CanSeePlayer(pev, VARS(FIND_CLIENT_IN_PVS())))
+		//	return;
+	}
+
 	switch (m_iActivity)
 	{
 	case 1:
 	case 2:
 	case 3:
-		//if (pgv->time > nextidle)
-		//	Idle();
-		//if (variable)
-		//int random = rand() % 10;
-		//if (random)
-		//{
-		//	if (random == 1)
-		//		m_iActivity = 3;
-		//	else
-		//		m_iActivity = 1;
-		// }
-		//else
-		//	m_iActivity = 2;
+		if (pgv->time > nextidle)
+			Idle();
+		if (m_fSequenceFinished)
+		{
+			int random = rand() % 10;
+			if (random)
+			{
+				if (random == 1)
+					m_iActivity = 3;
+				else
+					m_iActivity = 1;
+			}
+			else
+				m_iActivity = 2;
+		}
 		break;
 	case 4:
 		UTIL_MoveToOrigin(ENT(pev), VARS(pev->goalentity)->origin, m_flGroundSpeed, 1);
@@ -335,16 +446,29 @@ void CBaseMonster::CallMonsterThink()
 		CHANGE_YAW(ENT(pev));
 		if (!CheckEnemy(enemy, distance))
 		{
-			//v25 = this[248];
-			//if ((v25 & 2) != 0 && (v25 & 1) != 0)
-			//	*((_DWORD*)this + 32) = ACT_AIM2;
+			if ((byte1 & 2) != 0 && (byte1 & 1) != 0)
+				m_iActivity = ACT_AIM2;
 		}
 	case 7:
 		CHANGE_YAW(ENT(pev));
-		if (!CheckEnemy(enemy, distance) && WALK_MOVE(ENT(pev), pev->ideal_yaw, 15))
+		if (!CheckEnemy(enemy, distance) 
+			&& m_sightDistance < distance 
+			&& (byte1 & 2) != 0 
+			&& WALK_MOVE(ENT(pev), pev->ideal_yaw, 15))
 		{
 			m_iActivity = ACT_RUN;
 		}
+		break;
+	case 10:
+		GetDistance(followentity);
+		length = pev->origin - followentity->origin;
+		if (length.Length() <= m_followDistance)
+			CHANGE_YAW(ENT(pev));
+		else
+		{
+			UTIL_MoveToOrigin(ENT(pev), followentity->origin, m_flGroundSpeed, 1);
+		}
+		break;
 	case 27:
 		break;
 	case 29:
@@ -372,6 +496,7 @@ void CBaseMonster::CallMonsterThink()
 		SetThink(NULL);
 		break;
 	}
+
 	if (Classify() != 5)
 	{
 		if (!FBitSet(pev->spawnflags, 1))
@@ -422,7 +547,7 @@ void CBaseAnimating::StudioFrameAdvance(float flInterval)
 		pev->frame = (pgv->time - pev->animtime) * pev->framerate * m_flFrameRate + pev->frame;
 	pev->animtime = pgv->time;
 	if (pev->frame < 0.0 || pev->frame >= 256.0)
-		pev->frame += (int)(pev->frame / 256.0) * -256.0;
+		pev->frame += (pev->frame / 256.0) * -256.0;
 	float flEnd = pev->frame + flInterval * m_flFrameRate * pev->framerate;
 
 	m_fSequenceFinished = FALSE;
@@ -441,7 +566,62 @@ void CBaseAnimating::ResetSequenceInfo(float flInterval)
 	m_flGroundSpeed *= flInterval;
 }
 
-void CBaseAnimating::DispatchAnimEvents(float flInterval)
+byte CBaseAnimating::HandleAnimEvent(void *phdr, float flInterval)
 {
-	//HandleAnimEvent(GET_MODEL_PTR(ENT(pev)), pev, flInterval);
+	studiohdr_t *pstudiohdr = (studiohdr_t*)phdr;
+	float flStart;
+
+	mstudioseqdesc_t *seqdesc = (mstudioseqdesc_t*)((byte*)pstudiohdr + pstudiohdr->seqindex) + (int)pev->sequence;
+	mstudioevent_t* event = (mstudioevent_t*)((byte*)pstudiohdr + seqdesc->eventindex);
+	byte eventnum = 0;
+	if ((!phdr) || (pstudiohdr->numseq <= pev->sequence) || (!seqdesc->numevents))
+		return 0;
+	flStart = (float)seqdesc->numframes / 256.0 * pev->frame;
+	for (int i = 0; i < seqdesc->numevents; i++)
+	{
+		if (event->frame >= flStart)
+		{
+			float flCurrentFrame = seqdesc->fps * flInterval + flStart;
+			if ((flCurrentFrame > event->frame && !eventfired))
+			{
+				eventnum |= 1 << event->type;
+				eventfired = 1;
+			}
+		}
+		event++;
+	}
+	return eventnum;
+}
+
+byte CBaseAnimating::DispatchAnimEvents(float flInterval)
+{
+	return HandleAnimEvent(GET_MODEL_PTR(ENT(pev)), flInterval);
+}
+
+float BoneControllerInternal(void* phdr, entvars_t *pev, int nCtrlId, float flValue)
+{
+	float var1;
+	studiohdr_t* pstudiohdr = (studiohdr_t *)phdr;
+	if ((!pstudiohdr) || (nCtrlId >= pstudiohdr->numbonecontrollers))
+		return 0;
+	mstudiobonecontroller_t* bonecontroller = (mstudiobonecontroller_t*)((byte*)pstudiohdr + pstudiohdr->bonecontrollerindex) + nCtrlId;
+
+	if ((bonecontroller->type & 56 != 0) &&
+		(bonecontroller->start + 359.0) >= bonecontroller->end &&
+		(bonecontroller->start + bonecontroller->end) / 2 + 180.0 < flValue)
+		flValue -= 360.0;
+
+	var1 = (flValue - bonecontroller->start) / (bonecontroller->end - bonecontroller->start) * 255.0;
+	if (var1 < 0)
+		var1 = 0;
+	if (var1 > 255)
+		var1 = 255;
+
+	pev->controller = var1;
+	return var1;
+}
+
+float CBaseAnimating::BoneController(int nCtrlId, float flInterval)
+{
+	return BoneControllerInternal(GET_MODEL_PTR(ENT(pev)), pev, nCtrlId, flInterval);
 }

@@ -98,7 +98,7 @@ extern edict_t*		UTIL_FindEntityInSphere	(const float* vec1, float radius);
 extern void			UTIL_MakeVectors		(const Vector& vecAngles);
 extern void			UTIL_SetOrigin			(entvars_t* pev, Vector vecOrigin);
 extern void			UTIL_EmitAmbientSound	(Vector vecOrigin, const char* samp, float vol, float attenuation);
-extern void			UTIL_TraceLine			(const Vector& vecStart, const Vector& vecEnd, edict_t* pentIgnore, TraceResult* ptr);
+extern void			UTIL_TraceLine			(const Vector& vecStart, const Vector& vecEnd, int ignoremonsters, edict_t* pentIgnore, TraceResult* ptr);
 extern Vector		UTIL_GetAimVector		(edict_t* pent, float flSpeed);
 extern void			UTIL_ParticleEffect		(const Vector& vecOrigin, const Vector& vecDirection, ULONG ulColor, ULONG ulCount);
 extern int			UTIL_PointContents		(const Vector& vec);
