@@ -83,11 +83,13 @@ void set_suicide_frame(entvars_t *pev)
 void CheckWaterJump(entvars_t* pev)
 {
 	// check for a jump-out-of-water
-	UTIL_MakeVectors(pev->angles);
 	Vector start = pev->origin;
+	Vector vforward = pev->pSystemGlobals->v_forward;
+	float length;
+	UTIL_MakeVectors(pev->angles);
 	start.z += 8;
-	pev->pSystemGlobals->v_forward.z = 0;
-	VectorNormalize(pev->pSystemGlobals->v_forward);
+	vforward.z = 0;
+	vforward = -vforward.Normalize();
 	Vector end = start + pev->pSystemGlobals->v_forward * 24;
 	TraceResult *trace = new TraceResult;
 	UTIL_TraceLine(start, end, 0, ENT(pev), trace);
@@ -449,11 +451,24 @@ void CBasePlayer::Duck(void)
 		if (!FBitSet(pev->flags, FL_DUCKING))
 		{
 			UTIL_SetSize(pev, VEC_DUCK_HULL_MIN, VEC_DUCK_HULL_MAX);
+			SetBits(pev->flags, FL_DUCKING);
+			pev->view_ofs[2] = 12;
 		}
 	}
 	else
 	{
+		SetBits(pev->flags, FL_PARTIALGROUND);
 		UTIL_SetSize(pev, VEC_HULL_MIN, VEC_HULL_MAX);
+		if (!WALK_MOVE(ENT(pev), 0, 0))
+		{
+			UTIL_SetSize(pev, VEC_DUCK_HULL_MIN, VEC_DUCK_HULL_MAX);
+			//pev->origin[2] += 18;
+		}
+		else
+		{
+			ClearBits(pev->flags, FL_DUCKING);
+			pev->view_ofs[2] = 28;
+		}
 	}
 }
 

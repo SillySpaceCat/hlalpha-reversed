@@ -350,8 +350,8 @@
 
 #define TE_DECAL			104		// Decal applied to a brush entity (not the world)
 // coord, coord, coord (x,y,z), decal position (center of texture in world)
-// byte (texture index of precached decal texture name)
 // short (entity index)
+// byte (texture index of precached decal texture name)
 
 #define TE_FIZZ				105		// create alpha sprites inside of entity, float upwards
 // short (entity)

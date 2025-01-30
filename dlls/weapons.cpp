@@ -129,15 +129,13 @@ void CBasePlayer::ImpulseCommands()
 	//}
 	if (pev->impulse == 100)
 	{
-		if (pev->effects == 8)
+		if (FBitSet(pev->effects, 8))
 		{
-			//v44[0] = v8 & 0xFFFFFFF7;
-			//*v7 = (float)(v8 & 0xFFFFFFF7);
+			ClearBits(pev->effects, 8);
 		}
 		else
 		{
-			//v44[0] = v8 | 8;
-			//*v7 = (float)(int)(v8 | 8);
+			SetBits(pev->effects, 8);
 		}
 	}
 	if (pev->impulse == 200)
@@ -153,6 +151,8 @@ void CBasePlayer::ImpulseCommands()
 			ALERT(at_console, "Lines On");
 		}
 	}
+
+	pev->impulse = 0;
 }
 
 void CBaseMonster::ClearMultiDamage()
@@ -185,6 +185,14 @@ void CBaseMonster::ApplyMultiDamage()
 	CBaseMonster* pMonster = (CBaseMonster*)GET_PRIVATE(ENT(multi_ent));
 	if (pMonster)
 		pMonster->TakeDamage(VARS(multi_ent), pev, multi_damage);
+	if (!FClassnameIs(VARS(multi_ent), "cycler"))
+	{
+		if (UTIL_RandomFloat(0.0, 1.0) < 0.3)
+		{
+			//UTIL_MakeVectors(pev->origin - VARS(multi_ent)->origin);
+
+		}
+	}
 }
 
 void CBaseMonster::TraceAttack(float damage, int integer1, Vector dir)
@@ -234,26 +242,29 @@ void CBaseMonster::TraceAttack(float damage, int integer1, Vector dir)
 	}
 	if (!integer1)
 	{
-		if (VARS(pgv->trace_ent)->solid == SOLID_BSP)
+		entvars_t *entity = VARS(pgv->trace_ent);
+		if (entity->solid == SOLID_BSP)
 		{
 			WRITE_BYTE(MSG_BROADCAST, SVC_TEMPENTITY);
 			WRITE_BYTE(MSG_BROADCAST, TE_GUNSHOT);
 			WRITE_COORD(MSG_BROADCAST, pgv->trace_endpos.x);
 			WRITE_COORD(MSG_BROADCAST, pgv->trace_endpos.y);
 			WRITE_COORD(MSG_BROADCAST, pgv->trace_endpos.z);
+
 			WRITE_BYTE(MSG_BROADCAST, SVC_TEMPENTITY);
 			WRITE_BYTE(MSG_BROADCAST, TE_DECAL);
 			WRITE_COORD(MSG_BROADCAST, pgv->trace_endpos.x);
 			WRITE_COORD(MSG_BROADCAST, pgv->trace_endpos.y);
 			WRITE_COORD(MSG_BROADCAST, pgv->trace_endpos.z);
-			WRITE_SHORT(MSG_BROADCAST, 0);
+			WRITE_SHORT(MSG_BROADCAST, ENTINDEX(pgv->trace_ent));
 			WRITE_BYTE(MSG_BROADCAST, rand() % 5);
 		}
 	}
 }
 
-//   GUN ATTACK
-//   other monsters use this but for now only the player has this function
+// 
+// GUN ATTACK
+//
 
 
 void CBaseMonster::FireBullets(int number, Vector dir, Vector spread, float distance)
@@ -262,7 +273,6 @@ void CBaseMonster::FireBullets(int number, Vector dir, Vector spread, float dist
 
 	Vector src = pev->origin + (pgv->v_forward * 10);
 	Vector direction;
-	//src.z -= pev->absmin.z + pev->size.z * 0.7;
 	src.z = pev->view_ofs.z - 4 + pev->origin.z;
 
 	ClearMultiDamage();
@@ -275,6 +285,37 @@ void CBaseMonster::FireBullets(int number, Vector dir, Vector spread, float dist
 	{
 		direction = dir + UTIL_RandomFloat(-1, 1) * spread.x * pgv->v_right + UTIL_RandomFloat(-1, 1) * spread.y * pgv->v_up;
 		UTIL_TraceLine(src, src + direction * distance, 1, ENT(pev), &tr);
+		if (FClassnameIs(pev, "player"))
+		{
+			if (pev->weapon == 4)
+			{
+				Vector v_forward;
+				Vector v_right;
+				Vector total;
+				if FBitSet(pev->flags, FL_DUCKING)
+				{
+					v_forward = pev->pSystemGlobals->v_forward * 16;
+					v_right = pev->pSystemGlobals->v_right * 2.0 + pev->origin;
+					v_right.z += 6.0;
+					total = v_forward + v_right;
+				}
+				else
+				{
+					v_forward = pev->pSystemGlobals->v_forward * 16;
+					v_right = pev->pSystemGlobals->v_right * 2.0 + pev->origin;
+					v_right.z += 24.0;
+					total = v_forward + v_right;
+				}
+				WRITE_BYTE(MSG_BROADCAST, SVC_TEMPENTITY);
+				WRITE_BYTE(MSG_BROADCAST, TE_TRACER);
+				WRITE_COORD(MSG_BROADCAST, total.x);
+				WRITE_COORD(MSG_BROADCAST, total.y);
+				WRITE_COORD(MSG_BROADCAST, total.z);
+				WRITE_COORD(MSG_BROADCAST, tr.vecEndPos.x);
+				WRITE_COORD(MSG_BROADCAST, tr.vecEndPos.y);
+				WRITE_COORD(MSG_BROADCAST, tr.vecEndPos.z);
+			}
+		}
 		if (tr.flFraction != 1.0)
 		{
 			//TraceAttack(2, integer1, direction);
@@ -335,11 +376,12 @@ void CBasePlayer::Shoot_Mp5()
 	WRITE_BYTE(1, SVC_WEAPONANIM);
 	WRITE_BYTE(1, 0);
 	pev->pSystemGlobals->msg_entity = 0;
+	UTIL_MakeVectors(pev->v_angle);
 
-	int sound = UTIL_RandomFloat(0.0, 1.0);
-	//if (v8) damn you ida pro and your undefined values
-	//	EMIT_SOUND(ENT(pev), CHAN_WEAPON, "weapons/hks1.wav", 1, ATTN_NORM);
-	if (sound < 0.66)
+	float sound = UTIL_RandomFloat(0.0, 1.0);
+	if (sound < 0.33)
+		EMIT_SOUND(ENT(pev), CHAN_WEAPON, "weapons/hks1.wav", 1, ATTN_NORM);
+	else if (sound < 0.66)
 		EMIT_SOUND(ENT(pev), CHAN_WEAPON, "weapons/hks2.wav", 1, ATTN_NORM);
 	else
 		EMIT_SOUND(ENT(pev), CHAN_WEAPON, "weapons/hks3.wav", 1, ATTN_NORM);

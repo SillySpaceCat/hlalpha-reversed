@@ -115,7 +115,7 @@ typedef struct enginefuncs_s
 	entvars_t*	(*pfnGetVarsOfEnt)			(edict_t *pEdict);
 	edict_t*	(*pfnPEntityOfEntOffset)	(int iEntOffset);
 	int			(*pfnEntOffsetOfPEntity)	(const edict_t *pEdict);
-	int			(*pfnIndexOfEdict)			(edict_t* pEdict);
+	int			(*pfnIndexOfEdict)			(int pEdict);
 	edict_t*	(*pfnFindEntityByVars)		(struct entvars_s* pvars);
 	void*		(*pfnGetModelPtr)			(edict_t *pEdict);
 } enginefuncs_t;

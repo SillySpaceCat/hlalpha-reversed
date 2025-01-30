@@ -75,7 +75,7 @@ inline EOFFSET		OFFSET(entvars_t *pev)			{ return OFFSET(ENT(pev)); }
 inline entvars_t	*VARS(entvars_t *pev)			{ return pev; }
 inline entvars_t	*VARS(edict_t *pent)			{ return (*g_engfuncs.pfnGetVarsOfEnt)(pent); }
 inline entvars_t*	VARS(EOFFSET eoffset)			{ return VARS(ENT(eoffset)); }
-inline int			ENTINDEX(edict_t* pEdict)		{ return (*g_engfuncs.pfnIndexOfEdict)(pEdict); }
+inline int			ENTINDEX(int pEdict)		{ return (*g_engfuncs.pfnIndexOfEdict)(pEdict); }
 
 // Testing the three types of "entity" for nullity
 #define eoNullEntity 0

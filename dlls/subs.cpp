@@ -384,6 +384,7 @@ void CBaseMonster::CallMonsterThink()
 	entvars_t *enemy = NULL;
 	float distance = NULL;
 	Vector length = Vector(0, 0, 0);
+	edict_t* player = FIND_CLIENT_IN_PVS();
 	pev->nextthink = pgv->time + 0.1;
 	SetActivity(m_iActivity);
 	StudioFrameAdvance(0.1);
@@ -404,10 +405,14 @@ void CBaseMonster::CallMonsterThink()
 	}
     else
 	{
-		if (function2(pev, VARS(FIND_CLIENT_IN_PVS()), 0.1))
-			return;
-		//if (CanSeePlayer(pev, VARS(FIND_CLIENT_IN_PVS())))
-		//	return;
+		if (Classify() == 5)
+		{
+			if (CanSeePlayer(pev, VARS(player)))
+			{
+				if (function2(pev, VARS(player), 0.1))
+					return;
+			}
+		}
 	}
 
 	switch (m_iActivity)
@@ -496,17 +501,22 @@ void CBaseMonster::CallMonsterThink()
 		SetThink(NULL);
 		break;
 	}
-
-	if (Classify() != 5)
-	{
-		if (!FBitSet(pev->spawnflags, 1))
+		if (Classify() != 5 && !pev->enemy)
 		{
-			//pev->enemy = OFFSET(FIND_CLIENT_IN_PVS());
-			//pev->goalentity = pev->enemy;
-			//goal_origin = VARS(pev->enemy)->origin;
-			//Alert();
+			if (FClassnameIs(player, "player"))
+			{
+				if (CanSeePlayer(pev, VARS(player)) && function2(pev, VARS(player), 0.1))
+				{
+					if (!FBitSet(pev->spawnflags, 1) || function2(pev, VARS(player), 0.7))
+					{
+						pev->enemy = OFFSET(player);
+						pev->goalentity = pev->enemy;
+						enemyposition = player->v.origin;
+						Alert();
+					}
+				}
+			}
 		}
-	}
 }
 
 void GetSequenceInfo(void* pmodel, entvars_t* pev, float* pflFrameRate, float* pflGroundSpeed)
