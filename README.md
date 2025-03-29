@@ -1,7 +1,6 @@
 ### This repository is held under the HL1 SDK License provided by Valve Corporations.
 
 #### features that are yet to be added:
-- camera punch when taking fall damage
 - mp5 grenade
 - monster ai
 - some func_ entities
