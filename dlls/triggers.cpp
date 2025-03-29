@@ -382,7 +382,7 @@ void CBaseTrigger::HurtTouch(entvars_t* pOther)
 		return;
 
 	CBaseMonster* otherthing = GetClassPtr((CBaseMonster*)thing);
-	otherthing->TakeDamage(pev, pev, pev->dmg);
+	otherthing->TakeDamage(pev, pev->dmg);
 
 	m_flDelay += 0.5;
 }

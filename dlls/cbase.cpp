@@ -116,22 +116,15 @@ void CBaseEntity::Restore( void *pSaveData )
 {
 }
 
-void CBaseMonster::TakeDamage(entvars_t* pevInflictor, entvars_t* pevAttacker, float flDamage)
+void CBaseMonster::TakeDamage(entvars_t* pevAttacker, float flDamage)
 {
 	Vector			vecTemp;
 
 	if (!pev->takedamage)
 		return;
 
-	if (pevAttacker == pevInflictor)
-	{
-		vecTemp = pevInflictor->origin - (VecBModelOrigin(pev));
-	}
-	else
-		// an actual missile was involved.
-	{
-		vecTemp = pevInflictor->origin - (VecBModelOrigin(pev));
-	}
+
+	vecTemp = pevAttacker->origin - (VecBModelOrigin(pev));
 
 	// this global is still used for glass and other non-monster killables, along with decals.
 	g_vecAttackDir = vecTemp.Normalize();
@@ -143,9 +136,9 @@ void CBaseMonster::TakeDamage(entvars_t* pevInflictor, entvars_t* pevAttacker, f
 	{
 		pev->dmg_take += ceil(flDamage - ceil(pev->armortype * flDamage));
 		pev->dmg_save += ceil(pev->armortype * flDamage);
-		pev->dmg_inflictor = OFFSET(pevInflictor);
+		pev->dmg_inflictor = OFFSET(pevAttacker);
 	}
-	if (pevInflictor && OFFSET(pevInflictor))
+	if (pevAttacker)
 	{
 		if (pev->movetype == MOVETYPE_WALK && pev->solid != SOLID_TRIGGER)
 		{

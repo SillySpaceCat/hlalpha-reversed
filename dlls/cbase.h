@@ -61,7 +61,7 @@ public:
 	virtual void	Unknown() { return; }
 	virtual int		Save( void *pSaveData );
 	virtual void	Restore( void *pSaveData );
-	virtual void	TakeDamage(entvars_t* pevInflictor, entvars_t* pevAttacker, float flDamage) {return;}; // just so the game doesn't crash
+	virtual void	TakeDamage(entvars_t* pevAttacker, float flDamage) {return;}; // just so the game doesn't crash
 	// fundamental callbacks
 	void (CBaseEntity ::*m_pfnThink)( void );
 	void (CBaseEntity ::*m_pfnTouch)( entvars_t *pevOther );
@@ -255,7 +255,7 @@ public:
 	void TriggerAndWait(void);
 	void ButtonReturn(void);
 	void ButtonBackHome(void);
-	virtual void TakeDamage(entvars_t* pevInflictor, entvars_t* pevAttacker, float flDamage);
+	virtual void TakeDamage(entvars_t* pevAttacker, float flDamage);
 	BOOL	m_fStayPushed;	// button stays pushed in until touched again?
 	BOOL	m_fRotating;		// a rotating button?  default is a sliding button.
 	int m_sounds;

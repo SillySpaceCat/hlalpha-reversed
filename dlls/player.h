@@ -50,4 +50,17 @@ public:
 	void W_WeaponFrame(void);
 };
 
+class CBaseItem : public CBaseEntity
+{
+public:
+	void Touch(entvars_t* pevOther);
+};
+
+class CBaseGrenade : public CBaseMonster //why is it monster
+{
+public:
+	void Touch(entvars_t* pActivator);
+	void Explosion();
+};
+
 #endif // PLAYER_H

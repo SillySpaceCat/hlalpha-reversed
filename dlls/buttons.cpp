@@ -132,7 +132,7 @@ void CBaseButton::KeyValue(KeyValueData* pkvd)
 }
 
 //void CBaseButton::Pain( ) ???is cbasebutton based on cbasemonster what do you mean
-void CBaseButton::TakeDamage(entvars_t* pevInflictor, entvars_t* pevAttacker, float flDamage)
+void CBaseButton::TakeDamage(entvars_t* pevAttacker, float flDamage)
 {
 	pev->health = 9999;
 	if (m_toggle_state == TS_GOING_UP && m_toggle_state == TS_GOING_DOWN)

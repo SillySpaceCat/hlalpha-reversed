@@ -144,7 +144,7 @@ void CFuncGlass::Touch(entvars_t* pActivator)
 	if (FBitSet(thing, FL_CLIENT))
 	{
 		if (pev->takedamage)
-			TakeDamage(thing, thing, pev->health);
+			TakeDamage(thing, pev->health);
 	}
 }
 void CFuncGlass::Use(entvars_t* pActivator)
@@ -306,7 +306,7 @@ void CFuncRotating::Touch(entvars_t* pActivator)
 	{
 		pev->dmg = pev->avelocity.Length() / 10;
 		CBaseMonster* otherthing = GetClassPtr((CBaseMonster*)thing);
-		otherthing->TakeDamage(pev, pev, pev->dmg);
+		otherthing->TakeDamage(pev, pev->dmg);
 
 		thing->velocity = (thing->origin - VecBModelOrigin(pev)).Normalize() * pev->dmg;
 	}
@@ -387,7 +387,7 @@ void CFuncRotating::Blocked(entvars_t* pOther)
 {
 	entvars_t* thing = VARS(pev->pSystemGlobals->other);
 	CBaseMonster* otherthing = GetClassPtr((CBaseMonster*)thing);
-	otherthing->TakeDamage(pev, pev, pev->dmg);
+	otherthing->TakeDamage(pev, pev->dmg);
 }
 
 class CFuncPushable : public CBaseEntity

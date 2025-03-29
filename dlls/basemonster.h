@@ -16,6 +16,8 @@
 #ifndef BASEMONSTER_H
 #define BASEMONSTER_H
 
+extern class CBaseGrenade;
+
 //
 // generic Monster
 //
@@ -47,9 +49,10 @@ public:
 	float GetDistance(entvars_t* enemy);
 	BOOL function1(entvars_t* a2);
 	BOOL CheckEnemyOnCrosshair(entvars_t* a2);
-	virtual void TakeDamage(entvars_t* pevInflictor, entvars_t* pevAttacker, float flDamage);
+	virtual void TakeDamage(entvars_t* pevAttacker, float flDamage);
 	void TraceAttack(float damage, int integer1, Vector dir);
 	void FireBullets(int number, Vector dir, Vector spread, float distance);
+	void ShootGrenade(CBaseGrenade *grenade, entvars_t* owner, Vector origin, Vector dir);
 	void ApplyMultiDamage();
 	void ClearMultiDamage();
 	void AddMultiDamage(float a3);

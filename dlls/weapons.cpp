@@ -184,7 +184,7 @@ void CBaseMonster::ApplyMultiDamage()
 		return;
 	CBaseMonster* pMonster = (CBaseMonster*)GET_PRIVATE(ENT(multi_ent));
 	if (pMonster)
-		pMonster->TakeDamage(VARS(multi_ent), pev, multi_damage);
+		pMonster->TakeDamage(pev, multi_damage);
 	if (!FClassnameIs(VARS(multi_ent), "cycler"))
 	{
 		if (UTIL_RandomFloat(0.0, 1.0) < 0.3)
@@ -415,6 +415,52 @@ void CBasePlayer::W_Attack(void)
 		}
 	}
 }
+
+void CBaseItem::Touch(entvars_t* pActivator)
+{
+	edict_t* entity = ENT(pgv->other);
+	if (!strcmp(STRING(entity->v.classname), "player"))
+	{
+		SetThink(&CBaseItem::SUB_Remove);
+		pev->nextthink = pev->pSystemGlobals->time + 0.1;
+	}
+}
+
+void CBaseMonster::ShootGrenade(CBaseGrenade *grenade, entvars_t *owner, Vector origin, Vector dir)
+{
+	Vector angles;
+
+	grenade->pev->movetype = MOVETYPE_BOUNCE;
+	grenade->pev->classname = ALLOC_STRING("grenade");
+	grenade->pev->renderamt = 0;
+	grenade->pev->rendermode = 0;
+	grenade->pev->renderfx = 0;
+	if (!strcmp(STRING(owner->classname), "player"))
+		grenade->pev->gravity = 0.4;
+	grenade->pev->solid = SOLID_BBOX;
+	grenade->pev->owner = OFFSET(owner);
+	SET_MODEL(ENT(grenade->pev), "models/grenade.mdl");
+	UTIL_SetSize(grenade->pev, Vector(0, 0, 0), Vector(0, 0, 0));
+	grenade->pev->origin = origin;
+	grenade->pev->velocity = dir;
+	angles = UTIL_VecToAngles(grenade->pev->velocity);
+	grenade->pev->angles = angles;
+	grenade->pev->dmg = 100;
+
+	if (!strcmp(STRING(owner->classname), "player"))
+	{
+		grenade->m_pfnThink = (&CBaseMonster::SUB_DoNothing);
+		grenade->pev->avelocity.x = UTIL_RandomFloat(-100.0, -500.0);
+	}
+	else //timed explosion
+	{
+		grenade->m_pfnThink = static_cast <void (CBaseEntity::*)(void)> (&CBaseGrenade::Explosion);
+		grenade->pev->nextthink = grenade->pev->pSystemGlobals->time + 2.0;
+		grenade->pev->avelocity.x = -400;
+	}
+}
+
+
 void CBasePlayer::W_WeaponFrame(void)
 {
 	if (pgv->time >= nextattack)
@@ -447,7 +493,9 @@ void CBasePlayer::W_WeaponFrame(void)
 				else
 					EMIT_SOUND(ENT(pev), CHAN_WEAPON, "weapons/glauncher2.wav", 0.75, ATTN_NORM);
 				
-				//spawn grenade i think
+				CBaseGrenade* grenade = GetClassPtr((CBaseGrenade*)NULL);
+				ShootGrenade(grenade, pev, pev->origin + pev->view_ofs, (pev->pSystemGlobals->v_forward * 800));
+				pev->button &= ~IN_ATTACK2;
 				nextgrenade = pev->pSystemGlobals->time + 1.0;
 			}
 		}
@@ -470,5 +518,87 @@ void CBasePlayer::W_WeaponFrame(void)
 		}
 		else
 			weaponactivity = 0;
+	}
+}
+
+void ExplodeModel(const Vector& vecOrigin, float speed, int model, int count)
+{
+	WRITE_BYTE(MSG_BROADCAST, SVC_TEMPENTITY);
+	WRITE_BYTE(MSG_BROADCAST, TE_EXPLODEMODEL);
+	WRITE_COORD(MSG_BROADCAST, vecOrigin.x);
+	WRITE_COORD(MSG_BROADCAST, vecOrigin.y);
+	WRITE_COORD(MSG_BROADCAST, vecOrigin.z);
+	WRITE_COORD(MSG_BROADCAST, speed);
+	WRITE_SHORT(MSG_BROADCAST, model);
+	WRITE_SHORT(MSG_BROADCAST, count);
+	WRITE_BYTE(MSG_BROADCAST, 15);// 1.5 seconds
+}
+
+void CBaseGrenade::Explosion()
+{
+	TraceResult tr;
+	pev->model = 0;
+	pev->solid = SOLID_NOT;
+	WRITE_BYTE(MSG_BROADCAST, SVC_TEMPENTITY);
+	WRITE_BYTE(MSG_BROADCAST, TE_EXPLOSION);
+	WRITE_COORD(MSG_BROADCAST, pev->origin.x);
+	WRITE_COORD(MSG_BROADCAST, pev->origin.y);
+	WRITE_COORD(MSG_BROADCAST, pev->origin.z);
+	ExplodeModel(pev->origin, 400, g_sModelIndexShrapnel, 30);
+	//RadiusDamage(pev, ENT(pev->owner), pev->dmg, 0);
+
+	Vector vecSpot = pev->origin - pev->velocity.Normalize() * 32;
+
+	if (pev->velocity != g_vecZero)
+		UTIL_TraceLine(vecSpot, vecSpot + pev->velocity.Normalize() * 64, 0, ENT(pev), &tr);
+	else //grenade is probably on the ground
+		UTIL_TraceLine(vecSpot, Vector(pev->origin.x, pev->origin.y + 8.0, pev->origin.z - 24), 0, ENT(pev), &tr);
+
+
+	WRITE_BYTE(MSG_BROADCAST, SVC_TEMPENTITY);
+	WRITE_BYTE(MSG_BROADCAST, TE_DECAL);
+	WRITE_COORD(MSG_BROADCAST, pev->origin.x);
+	WRITE_COORD(MSG_BROADCAST, pev->origin.y);
+	WRITE_COORD(MSG_BROADCAST, pev->origin.z);
+	WRITE_SHORT(MSG_BROADCAST, ENTINDEX(pgv->trace_ent));
+	if (UTIL_RandomFloat(0.0, 1.0) >= 0.5)
+		WRITE_BYTE(MSG_BROADCAST, 13);
+	else
+		WRITE_BYTE(MSG_BROADCAST, 12);
+
+	SetThink(&CBaseGrenade::SUB_Remove);
+	pev->nextthink = pev->pSystemGlobals->time + 2.0;
+}
+
+void CBaseGrenade::Touch(entvars_t* pActivator)
+{
+	edict_t* owner = ENT(pev->owner);
+	edict_t* toucher = ENT(pgv->other);
+	const char *classname = STRING(owner->v.classname);
+	if (!strcmp(classname, "player"))
+	{
+		pev->enemy = OFFSET(ENT(pgv->other)->v.pContainingEntity);
+		SetThink(&CBaseGrenade::Explosion);
+		pev->nextthink = pev->pSystemGlobals->time;
+		if (!strcmp(STRING(toucher->v.classname), "func_breakable") || !strcmp(STRING(toucher->v.classname), "func_glass"))
+		{
+			CBaseEntity* breakable = (CBaseEntity*)GET_PRIVATE(toucher->v.pContainingEntity);
+			breakable->TakeDamage(pev, pev->dmg);
+		}
+	}
+	else
+	{
+		pev->movetype = MOVETYPE_BOUNCE;
+		pev->avelocity = Vector(300, 300, 300);
+		pev->gravity = 1;
+		if (pev->pSystemGlobals->other != pev->owner)
+		{
+			//play bounce sound
+			//
+			//
+
+
+			pev->velocity = pev->velocity * 0.8;
+		}
 	}
 }

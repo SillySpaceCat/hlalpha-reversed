@@ -618,7 +618,7 @@ void CBasePlayer::PostThink( void )
 		else if (jumpflag < -650)
 		{
 			//T_Damage(self, world, world, 5);
-			TakeDamage(pev, pev, 5);// im too lazy to implement that
+			TakeDamage(pev, 5);// im too lazy to implement that
 			if (UTIL_RandomFloat(0.0, 1.0) <= 0.66)
 				EMIT_SOUND(ENT(pev), CHAN_VOICE, "player/pl_fallpain2.wav", 1, ATTN_NORM);
 			else
