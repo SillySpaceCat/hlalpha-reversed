@@ -33,6 +33,7 @@ public:
 	virtual void Duck( void );
 	virtual void PreThink( void );
 	virtual void PostThink( void );
+	virtual void SetActivity(int activity);
 	void Die();
 	void DeathThink(void);
 	void ImpulseCommands();

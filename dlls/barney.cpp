@@ -178,8 +178,8 @@ void CBarney::SetActivity(int activity)
             return;
         default:
             ALERT(at_console, "Bogus Barney anim: %d", activitynum);
-            //m_flFrameRate = 0.0;
-            //m_flGroundSpeed = 0.0;
+            m_flFrameRate = 0.0;
+            m_flGroundSpeed = 0.0;
             break;
         }
     }

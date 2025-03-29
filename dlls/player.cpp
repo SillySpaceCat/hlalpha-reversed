@@ -24,6 +24,17 @@
 
 using namespace std;
 
+enum PLAYER_SEQUENCES
+{
+	walk = 0,
+	walright,
+	walkshoot,
+	shoot,
+	run,
+	walkjump,
+	die1,
+};
+
 #include "extdll.h"
 #include "util.h"
 
@@ -549,6 +560,45 @@ void DLLEXPORT PlayerPostThink( globalvars_t *pgv )
 		pPlayer->PostThink();
 }
 
+void CBasePlayer::SetActivity(int activity)
+{
+	int sequence;
+	switch (activity)
+	{
+		case 1:
+			sequence = 7;
+			break;
+		case 4:
+			sequence = walk;
+			break;
+		case 30: //shoot
+			if (pev->velocity[0] != 0 || pev->velocity[1] != 0)
+				sequence = walkshoot;
+			else
+				sequence = shoot;
+			break;
+		case 35:
+			sequence = die1;
+			break;
+		case 40:
+			sequence = walkjump;
+			break;
+		default:
+			return;
+	}
+	if (pev->sequence != sequence)
+	{
+		pev->sequence = sequence;
+		pev->frame = 0;
+		ResetSequenceInfo(0.1);
+		if (sequence > die1)
+		{
+			m_flFrameRate = 0.0;
+			m_flGroundSpeed = 0.0;
+		}
+	}
+}
+
 
 void CBasePlayer::PostThink( void )
 {
@@ -568,17 +618,31 @@ void CBasePlayer::PostThink( void )
 		else if (jumpflag < -650)
 		{
 			//T_Damage(self, world, world, 5);
-			pev->health -= 5; // TakeDamage(pev, pOwner->pev, 5, DMG_GENERIC) im too lazy to implement that
+			TakeDamage(pev, pev, 5);// im too lazy to implement that
 			if (UTIL_RandomFloat(0.0, 1.0) <= 0.66)
-			    EMIT_SOUND(ENT(pev), CHAN_VOICE, "player/pl_fallpain2.wav", 1, ATTN_NORM);
+				EMIT_SOUND(ENT(pev), CHAN_VOICE, "player/pl_fallpain2.wav", 1, ATTN_NORM);
 			else
 				EMIT_SOUND(ENT(pev), CHAN_VOICE, "player/pl_fallpain3.wav", 1, ATTN_NORM);
 		}
 		else
 			EMIT_SOUND(ENT(pev), CHAN_VOICE, "player/pl_jumpland2.wav", 1, ATTN_NORM);
+		pev->punchangle.x = jumpflag * -0.013; //thanks serecky
+		pev->punchangle.z = jumpflag * -0.005; //
+		jumpflag = 0;
+		SetActivity(4);
 	}
 	// bunch of punch angle code i think its related to punch angle
 	jumpflag = pev->velocity[2];
+	if (pev->deadflag == DEAD_NO)
+	{
+		if (pev->velocity[0] != 0 || pev->velocity[1] != 0)
+		{
+			if (FBitSet(pev->flags, FL_ONGROUND))
+				SetActivity(4);
+		}
+		else
+			SetActivity(1);
+	}
 	CheckPowerUps(pev);
 
 }
