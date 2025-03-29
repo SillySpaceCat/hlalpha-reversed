@@ -1,0 +1,552 @@
+﻿  agrunt.cpp
+  alien_slave.cpp
+  barney.cpp
+  bmodels.cpp
+  buttons.cpp
+  cbase.cpp
+  client.cpp
+  door.cpp
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\engine\eiface.h(132,9): warning C4005: 'ARRAYSIZE': macro redefinition
+  (compiling source file '../../client.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h(1375,9):
+      see previous definition of 'ARRAYSIZE'
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(80,42): warning C4267: 'argument': conversion from 'size_t' to 'long', possible loss of data
+  (compiling source file '../../client.cpp')
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\engine\eiface.h(132,9): warning C4005: 'ARRAYSIZE': macro redefinition
+  (compiling source file '../../agrunt.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h(1375,9):
+      see previous definition of 'ARRAYSIZE'
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(282,7): warning C4291: 'void *CBaseEntity::operator new(size_t,entvars_t *)': no matching operator delete found; memory will not be freed if initialization throws an exception
+  (compiling source file '../../client.cpp')
+      C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(78,11):
+      see declaration of 'CBaseEntity::operator new'
+      C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(282,7):
+      the template instantiation context (the oldest one first) is
+          C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\client.cpp(215,12):
+          see reference to function template instantiation 'T *GetClassPtr<CBasePlayer>(T *)' being compiled
+          with
+          [
+              T=CBasePlayer
+          ]
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(80,42): warning C4267: 'argument': conversion from 'size_t' to 'long', possible loss of data
+  (compiling source file '../../agrunt.cpp')
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\engine\eiface.h(132,9): warning C4005: 'ARRAYSIZE': macro redefinition
+  (compiling source file '../../bmodels.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h(1375,9):
+      see previous definition of 'ARRAYSIZE'
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\engine\eiface.h(132,9): warning C4005: 'ARRAYSIZE': macro redefinition
+  (compiling source file '../../door.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h(1375,9):
+      see previous definition of 'ARRAYSIZE'
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\engine\eiface.h(132,9): warning C4005: 'ARRAYSIZE': macro redefinition
+  (compiling source file '../../cbase.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h(1375,9):
+      see previous definition of 'ARRAYSIZE'
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(80,42): warning C4267: 'argument': conversion from 'size_t' to 'long', possible loss of data
+  (compiling source file '../../door.cpp')
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(80,42): warning C4267: 'argument': conversion from 'size_t' to 'long', possible loss of data
+  (compiling source file '../../bmodels.cpp')
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(282,7): warning C4291: 'void *CBaseEntity::operator new(size_t,entvars_t *)': no matching operator delete found; memory will not be freed if initialization throws an exception
+  (compiling source file '../../agrunt.cpp')
+      C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(78,11):
+      see declaration of 'CBaseEntity::operator new'
+      C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(282,7):
+      the template instantiation context (the oldest one first) is
+          C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\agrunt.cpp(55,1):
+          see reference to function template instantiation 'T *GetClassPtr<CAlienGrunt>(T *)' being compiled
+          with
+          [
+              T=CAlienGrunt
+          ]
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(80,42): warning C4267: 'argument': conversion from 'size_t' to 'long', possible loss of data
+  (compiling source file '../../cbase.cpp')
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\door.cpp(188,8): warning C4101: 'pszSound': unreferenced local variable
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(282,7): warning C4291: 'void *CBaseEntity::operator new(size_t,entvars_t *)': no matching operator delete found; memory will not be freed if initialization throws an exception
+  (compiling source file '../../door.cpp')
+      C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(78,11):
+      see declaration of 'CBaseEntity::operator new'
+      C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(282,7):
+      the template instantiation context (the oldest one first) is
+          C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\door.cpp(52,1):
+          see reference to function template instantiation 'T *GetClassPtr<CBaseDoor>(T *)' being compiled
+          with
+          [
+              T=CBaseDoor
+          ]
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\engine\eiface.h(132,9): warning C4005: 'ARRAYSIZE': macro redefinition
+  (compiling source file '../../barney.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h(1375,9):
+      see previous definition of 'ARRAYSIZE'
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\bmodels.cpp(144,6): warning C4311: 'type cast': pointer truncation from 'entvars_t *' to 'int'
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\bmodels.cpp(144,6): warning C4302: 'type cast': truncation from 'entvars_t *' to 'int'
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(80,42): warning C4267: 'argument': conversion from 'size_t' to 'long', possible loss of data
+  (compiling source file '../../barney.cpp')
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\bmodels.cpp(342,8): warning C4101: 'vecdir': unreferenced local variable
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\bmodels.cpp(449,9): warning C4311: 'type cast': pointer truncation from 'entvars_t *' to 'int'
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\bmodels.cpp(449,9): warning C4302: 'type cast': truncation from 'entvars_t *' to 'int'
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(282,7): warning C4291: 'void *CBaseEntity::operator new(size_t,entvars_t *)': no matching operator delete found; memory will not be freed if initialization throws an exception
+  (compiling source file '../../bmodels.cpp')
+      C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(78,11):
+      see declaration of 'CBaseEntity::operator new'
+      C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(282,7):
+      the template instantiation context (the oldest one first) is
+          C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\bmodels.cpp(308,30):
+          see reference to function template instantiation 'T *GetClassPtr<CBaseMonster>(T *)' being compiled
+          with
+          [
+              T=CBaseMonster
+          ]
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(282,7): warning C4291: 'void *CBaseEntity::operator new(size_t,entvars_t *)': no matching operator delete found; memory will not be freed if initialization throws an exception
+  (compiling source file '../../barney.cpp')
+      C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(78,11):
+      see declaration of 'CBaseEntity::operator new'
+      C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(282,7):
+      the template instantiation context (the oldest one first) is
+          C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\barney.cpp(61,1):
+          see reference to function template instantiation 'T *GetClassPtr<CBarney>(T *)' being compiled
+          with
+          [
+              T=CBarney
+          ]
+  
+  globals.cpp
+  headcrab.cpp
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\engine\eiface.h(132,9): warning C4005: 'ARRAYSIZE': macro redefinition
+  (compiling source file '../../buttons.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h(1375,9):
+      see previous definition of 'ARRAYSIZE'
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(80,42): warning C4267: 'argument': conversion from 'size_t' to 'long', possible loss of data
+  (compiling source file '../../buttons.cpp')
+  
+  hgrunt.cpp
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\engine\eiface.h(132,9): warning C4005: 'ARRAYSIZE': macro redefinition
+  (compiling source file '../../alien_slave.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h(1375,9):
+      see previous definition of 'ARRAYSIZE'
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(80,42): warning C4267: 'argument': conversion from 'size_t' to 'long', possible loss of data
+  (compiling source file '../../alien_slave.cpp')
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(282,7): warning C4291: 'void *CBaseEntity::operator new(size_t,entvars_t *)': no matching operator delete found; memory will not be freed if initialization throws an exception
+  (compiling source file '../../buttons.cpp')
+      C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(78,11):
+      see declaration of 'CBaseEntity::operator new'
+      C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(282,7):
+      the template instantiation context (the oldest one first) is
+          C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\buttons.cpp(155,1):
+          see reference to function template instantiation 'T *GetClassPtr<CBaseButton>(T *)' being compiled
+          with
+          [
+              T=CBaseButton
+          ]
+  
+  houndeye.cpp
+  h_cine.cpp
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(282,7): warning C4291: 'void *CBaseEntity::operator new(size_t,entvars_t *)': no matching operator delete found; memory will not be freed if initialization throws an exception
+  (compiling source file '../../alien_slave.cpp')
+      C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(78,11):
+      see declaration of 'CBaseEntity::operator new'
+      C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(282,7):
+      the template instantiation context (the oldest one first) is
+          C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\alien_slave.cpp(33,1):
+          see reference to function template instantiation 'T *GetClassPtr<CAlienSlave>(T *)' being compiled
+          with
+          [
+              T=CAlienSlave
+          ]
+  
+  h_cycler.cpp
+  h_export.cpp
+  lights.cpp
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\engine\eiface.h(132,9): warning C4005: 'ARRAYSIZE': macro redefinition
+  (compiling source file '../../globals.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h(1375,9):
+      see previous definition of 'ARRAYSIZE'
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(80,42): warning C4267: 'argument': conversion from 'size_t' to 'long', possible loss of data
+  (compiling source file '../../globals.cpp')
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\engine\eiface.h(132,9): warning C4005: 'ARRAYSIZE': macro redefinition
+  (compiling source file '../../headcrab.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h(1375,9):
+      see previous definition of 'ARRAYSIZE'
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\engine\eiface.h(132,9): warning C4005: 'ARRAYSIZE': macro redefinition
+  (compiling source file '../../houndeye.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h(1375,9):
+      see previous definition of 'ARRAYSIZE'
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(80,42): warning C4267: 'argument': conversion from 'size_t' to 'long', possible loss of data
+  (compiling source file '../../headcrab.cpp')
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(80,42): warning C4267: 'argument': conversion from 'size_t' to 'long', possible loss of data
+  (compiling source file '../../houndeye.cpp')
+  
+  m44.cpp
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(282,7): warning C4291: 'void *CBaseEntity::operator new(size_t,entvars_t *)': no matching operator delete found; memory will not be freed if initialization throws an exception
+  (compiling source file '../../headcrab.cpp')
+      C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(78,11):
+      see declaration of 'CBaseEntity::operator new'
+      C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(282,7):
+      the template instantiation context (the oldest one first) is
+          C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\headcrab.cpp(51,1):
+          see reference to function template instantiation 'T *GetClassPtr<CHeadCrab>(T *)' being compiled
+          with
+          [
+              T=CHeadCrab
+          ]
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\engine\eiface.h(132,9): warning C4005: 'ARRAYSIZE': macro redefinition
+  (compiling source file '../../h_cine.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h(1375,9):
+      see previous definition of 'ARRAYSIZE'
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(282,7): warning C4291: 'void *CBaseEntity::operator new(size_t,entvars_t *)': no matching operator delete found; memory will not be freed if initialization throws an exception
+  (compiling source file '../../houndeye.cpp')
+      C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(78,11):
+      see declaration of 'CBaseEntity::operator new'
+      C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(282,7):
+      the template instantiation context (the oldest one first) is
+          C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\houndeye.cpp(49,1):
+          see reference to function template instantiation 'T *GetClassPtr<CHoundEye>(T *)' being compiled
+          with
+          [
+              T=CHoundEye
+          ]
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(80,42): warning C4267: 'argument': conversion from 'size_t' to 'long', possible loss of data
+  (compiling source file '../../h_cine.cpp')
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(282,7): warning C4291: 'void *CBaseEntity::operator new(size_t,entvars_t *)': no matching operator delete found; memory will not be freed if initialization throws an exception
+  (compiling source file '../../h_cine.cpp')
+      C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(78,11):
+      see declaration of 'CBaseEntity::operator new'
+      C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(282,7):
+      the template instantiation context (the oldest one first) is
+          C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\h_cine.cpp(93,1):
+          see reference to function template instantiation 'T *GetClassPtr<CCineScientist>(T *)' being compiled
+          with
+          [
+              T=CCineScientist
+          ]
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\engine\eiface.h(132,9): warning C4005: 'ARRAYSIZE': macro redefinition
+  (compiling source file '../../hgrunt.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h(1375,9):
+      see previous definition of 'ARRAYSIZE'
+  
+  panther.cpp
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(80,42): warning C4267: 'argument': conversion from 'size_t' to 'long', possible loss of data
+  (compiling source file '../../hgrunt.cpp')
+  
+  pathcorner.cpp
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(282,7): warning C4291: 'void *CBaseEntity::operator new(size_t,entvars_t *)': no matching operator delete found; memory will not be freed if initialization throws an exception
+  (compiling source file '../../hgrunt.cpp')
+      C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(78,11):
+      see declaration of 'CBaseEntity::operator new'
+      C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(282,7):
+      the template instantiation context (the oldest one first) is
+          C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\hgrunt.cpp(64,1):
+          see reference to function template instantiation 'T *GetClassPtr<CHumanGrunt>(T *)' being compiled
+          with
+          [
+              T=CHumanGrunt
+          ]
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\engine\eiface.h(132,9): warning C4005: 'ARRAYSIZE': macro redefinition
+  (compiling source file '../../h_cycler.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h(1375,9):
+      see previous definition of 'ARRAYSIZE'
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(80,42): warning C4267: 'argument': conversion from 'size_t' to 'long', possible loss of data
+  (compiling source file '../../h_cycler.cpp')
+  
+  plats.cpp
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(282,7): warning C4291: 'void *CBaseEntity::operator new(size_t,entvars_t *)': no matching operator delete found; memory will not be freed if initialization throws an exception
+  (compiling source file '../../h_cycler.cpp')
+      C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(78,11):
+      see declaration of 'CBaseEntity::operator new'
+      C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(282,7):
+      the template instantiation context (the oldest one first) is
+          C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\h_cycler.cpp(213,1):
+          see reference to function template instantiation 'T *GetClassPtr<CCyclerScientist>(T *)' being compiled
+          with
+          [
+              T=CCyclerScientist
+          ]
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\engine\eiface.h(132,9): warning C4005: 'ARRAYSIZE': macro redefinition
+  (compiling source file '../../lights.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h(1375,9):
+      see previous definition of 'ARRAYSIZE'
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(80,42): warning C4267: 'argument': conversion from 'size_t' to 'long', possible loss of data
+  (compiling source file '../../lights.cpp')
+  
+  player.cpp
+  polyrobo.cpp
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\engine\eiface.h(132,9): warning C4005: 'ARRAYSIZE': macro redefinition
+  (compiling source file '../../h_export.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h(1375,9):
+      see previous definition of 'ARRAYSIZE'
+  
+  scientist.cpp
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(80,42): warning C4267: 'argument': conversion from 'size_t' to 'long', possible loss of data
+  (compiling source file '../../h_export.cpp')
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\h_export.cpp(601,30): warning C4311: 'type cast': pointer truncation from 'void (__cdecl *)(lump_t *)' to 'DWORD'
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\h_export.cpp(601,30): warning C4302: 'type cast': truncation from 'void (__cdecl *)(lump_t *)' to 'DWORD'
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\h_export.cpp(601,57): warning C4311: 'type cast': pointer truncation from 'BYTE *' to 'DWORD'
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\h_export.cpp(601,57): warning C4302: 'type cast': truncation from 'BYTE *' to 'DWORD'
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\h_export.cpp(612,30): warning C4311: 'type cast': pointer truncation from 'void (__cdecl *)(lump_t *)' to 'DWORD'
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\h_export.cpp(612,30): warning C4302: 'type cast': truncation from 'void (__cdecl *)(lump_t *)' to 'DWORD'
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\h_export.cpp(612,56): warning C4311: 'type cast': pointer truncation from 'BYTE *' to 'DWORD'
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\h_export.cpp(612,56): warning C4302: 'type cast': truncation from 'BYTE *' to 'DWORD'
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\h_export.cpp(624,30): warning C4311: 'type cast': pointer truncation from 'void (__cdecl *)(lump_t *)' to 'DWORD'
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\h_export.cpp(624,30): warning C4302: 'type cast': truncation from 'void (__cdecl *)(lump_t *)' to 'DWORD'
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\h_export.cpp(624,64): warning C4311: 'type cast': pointer truncation from 'BYTE *' to 'DWORD'
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\h_export.cpp(624,64): warning C4302: 'type cast': truncation from 'BYTE *' to 'DWORD'
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\h_export.cpp(635,30): warning C4311: 'type cast': pointer truncation from 'void (__cdecl *)(lump_t *)' to 'DWORD'
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\h_export.cpp(635,30): warning C4302: 'type cast': truncation from 'void (__cdecl *)(lump_t *)' to 'DWORD'
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\h_export.cpp(635,63): warning C4311: 'type cast': pointer truncation from 'BYTE *' to 'DWORD'
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\h_export.cpp(635,63): warning C4302: 'type cast': truncation from 'BYTE *' to 'DWORD'
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\h_export.cpp(690,27): warning C4311: 'type cast': pointer truncation from 'int (__cdecl *)(edict_t *)' to 'DWORD'
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\h_export.cpp(690,27): warning C4302: 'type cast': truncation from 'int (__cdecl *)(edict_t *)' to 'DWORD'
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\h_export.cpp(690,49): warning C4311: 'type cast': pointer truncation from 'BYTE *' to 'DWORD'
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\h_export.cpp(690,49): warning C4302: 'type cast': truncation from 'BYTE *' to 'DWORD'
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\h_export.cpp(694,27): warning C4311: 'type cast': pointer truncation from 'void (__cdecl *)(edict_t *,const float,float,int)' to 'DWORD'
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\h_export.cpp(694,27): warning C4302: 'type cast': truncation from 'void (__cdecl *)(edict_t *,const float,float,int)' to 'DWORD'
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\h_export.cpp(694,50): warning C4311: 'type cast': pointer truncation from 'BYTE *' to 'DWORD'
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\h_export.cpp(694,50): warning C4302: 'type cast': truncation from 'BYTE *' to 'DWORD'
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\h_export.cpp(706,31): warning C4311: 'type cast': pointer truncation from 'int (__cdecl *)(edict_t *)' to 'DWORD'
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\h_export.cpp(706,31): warning C4302: 'type cast': truncation from 'int (__cdecl *)(edict_t *)' to 'DWORD'
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\h_export.cpp(706,53): warning C4311: 'type cast': pointer truncation from 'BYTE *' to 'DWORD'
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\h_export.cpp(706,53): warning C4302: 'type cast': truncation from 'BYTE *' to 'DWORD'
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\h_export.cpp(710,31): warning C4311: 'type cast': pointer truncation from 'void (__cdecl *)(edict_t *,const float,float,int)' to 'DWORD'
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\h_export.cpp(710,31): warning C4302: 'type cast': truncation from 'void (__cdecl *)(edict_t *,const float,float,int)' to 'DWORD'
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\h_export.cpp(710,54): warning C4311: 'type cast': pointer truncation from 'BYTE *' to 'DWORD'
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\h_export.cpp(710,54): warning C4302: 'type cast': truncation from 'BYTE *' to 'DWORD'
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\h_export.cpp(728,31): warning C4311: 'type cast': pointer truncation from 'int (__cdecl *)(edict_t *)' to 'DWORD'
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\h_export.cpp(728,31): warning C4302: 'type cast': truncation from 'int (__cdecl *)(edict_t *)' to 'DWORD'
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\h_export.cpp(728,53): warning C4311: 'type cast': pointer truncation from 'BYTE *' to 'DWORD'
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\h_export.cpp(728,53): warning C4302: 'type cast': truncation from 'BYTE *' to 'DWORD'
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\h_export.cpp(732,31): warning C4311: 'type cast': pointer truncation from 'void (__cdecl *)(edict_t *,const float,float,int)' to 'DWORD'
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\h_export.cpp(732,31): warning C4302: 'type cast': truncation from 'void (__cdecl *)(edict_t *,const float,float,int)' to 'DWORD'
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\h_export.cpp(732,54): warning C4311: 'type cast': pointer truncation from 'BYTE *' to 'DWORD'
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\h_export.cpp(732,54): warning C4302: 'type cast': truncation from 'BYTE *' to 'DWORD'
+  sound.cpp
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\engine\eiface.h(132,9): warning C4005: 'ARRAYSIZE': macro redefinition
+  (compiling source file '../../m44.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h(1375,9):
+      see previous definition of 'ARRAYSIZE'
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(80,42): warning C4267: 'argument': conversion from 'size_t' to 'long', possible loss of data
+  (compiling source file '../../m44.cpp')
+  
+  subs.cpp
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\engine\eiface.h(132,9): warning C4005: 'ARRAYSIZE': macro redefinition
+  (compiling source file '../../plats.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h(1375,9):
+      see previous definition of 'ARRAYSIZE'
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\engine\eiface.h(132,9): warning C4005: 'ARRAYSIZE': macro redefinition
+  (compiling source file '../../panther.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h(1375,9):
+      see previous definition of 'ARRAYSIZE'
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(80,42): warning C4267: 'argument': conversion from 'size_t' to 'long', possible loss of data
+  (compiling source file '../../plats.cpp')
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(80,42): warning C4267: 'argument': conversion from 'size_t' to 'long', possible loss of data
+  (compiling source file '../../panther.cpp')
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(282,7): warning C4291: 'void *CBaseEntity::operator new(size_t,entvars_t *)': no matching operator delete found; memory will not be freed if initialization throws an exception
+  (compiling source file '../../plats.cpp')
+      C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(78,11):
+      see declaration of 'CBaseEntity::operator new'
+      C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(282,7):
+      the template instantiation context (the oldest one first) is
+          C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\plats.cpp(42,1):
+          see reference to function template instantiation 'T *GetClassPtr<CFuncPlat>(T *)' being compiled
+          with
+          [
+              T=CFuncPlat
+          ]
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(282,7): warning C4291: 'void *CBaseEntity::operator new(size_t,entvars_t *)': no matching operator delete found; memory will not be freed if initialization throws an exception
+  (compiling source file '../../panther.cpp')
+      C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(78,11):
+      see declaration of 'CBaseEntity::operator new'
+      C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(282,7):
+      the template instantiation context (the oldest one first) is
+          C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\panther.cpp(34,1):
+          see reference to function template instantiation 'T *GetClassPtr<CPanther>(T *)' being compiled
+          with
+          [
+              T=CPanther
+          ]
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\engine\eiface.h(132,9): warning C4005: 'ARRAYSIZE': macro redefinition
+  (compiling source file '../../pathcorner.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h(1375,9):
+      see previous definition of 'ARRAYSIZE'
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\engine\eiface.h(132,9): warning C4005: 'ARRAYSIZE': macro redefinition
+  (compiling source file '../../scientist.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h(1375,9):
+      see previous definition of 'ARRAYSIZE'
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(80,42): warning C4267: 'argument': conversion from 'size_t' to 'long', possible loss of data
+  (compiling source file '../../scientist.cpp')
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(80,42): warning C4267: 'argument': conversion from 'size_t' to 'long', possible loss of data
+  (compiling source file '../../pathcorner.cpp')
+  
+  triggers.cpp
+  util.cpp
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\engine\eiface.h(132,9): warning C4005: 'ARRAYSIZE': macro redefinition
+  (compiling source file '../../polyrobo.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h(1375,9):
+      see previous definition of 'ARRAYSIZE'
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(282,7): warning C4291: 'void *CBaseEntity::operator new(size_t,entvars_t *)': no matching operator delete found; memory will not be freed if initialization throws an exception
+  (compiling source file '../../scientist.cpp')
+      C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(78,11):
+      see declaration of 'CBaseEntity::operator new'
+      C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(282,7):
+      the template instantiation context (the oldest one first) is
+          C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\scientist.cpp(50,1):
+          see reference to function template instantiation 'T *GetClassPtr<CScientist>(T *)' being compiled
+          with
+          [
+              T=CScientist
+          ]
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(282,7): warning C4291: 'void *CBaseEntity::operator new(size_t,entvars_t *)': no matching operator delete found; memory will not be freed if initialization throws an exception
+  (compiling source file '../../pathcorner.cpp')
+      C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(78,11):
+      see declaration of 'CBaseEntity::operator new'
+      C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(282,7):
+      the template instantiation context (the oldest one first) is
+          C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\pathcorner.cpp(33,1):
+          see reference to function template instantiation 'T *GetClassPtr<CPathCorner>(T *)' being compiled
+          with
+          [
+              T=CPathCorner
+          ]
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(80,42): warning C4267: 'argument': conversion from 'size_t' to 'long', possible loss of data
+  (compiling source file '../../polyrobo.cpp')
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(282,7): warning C4291: 'void *CBaseEntity::operator new(size_t,entvars_t *)': no matching operator delete found; memory will not be freed if initialization throws an exception
+  (compiling source file '../../polyrobo.cpp')
+      C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(78,11):
+      see declaration of 'CBaseEntity::operator new'
+      C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(282,7):
+      the template instantiation context (the oldest one first) is
+          C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\polyrobo.cpp(40,1):
+          see reference to function template instantiation 'T *GetClassPtr<CPolyRobo>(T *)' being compiled
+          with
+          [
+              T=CPolyRobo
+          ]
+  
+  weapons.cpp
+  world.cpp
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\engine\eiface.h(132,9): warning C4005: 'ARRAYSIZE': macro redefinition
+  (compiling source file '../../sound.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h(1375,9):
+      see previous definition of 'ARRAYSIZE'
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(80,42): warning C4267: 'argument': conversion from 'size_t' to 'long', possible loss of data
+  (compiling source file '../../sound.cpp')
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\engine\eiface.h(132,9): warning C4005: 'ARRAYSIZE': macro redefinition
+  (compiling source file '../../player.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h(1375,9):
+      see previous definition of 'ARRAYSIZE'
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(80,42): warning C4267: 'argument': conversion from 'size_t' to 'long', possible loss of data
+  (compiling source file '../../player.cpp')
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\player.cpp(88,8): warning C4101: 'length': unreferenced local variable
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\player.cpp(556,8): warning C4101: 'v12': unreferenced local variable
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\player.cpp(555,8): warning C4101: 'v13': unreferenced local variable
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\engine\eiface.h(132,9): warning C4005: 'ARRAYSIZE': macro redefinition
+  (compiling source file '../../subs.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h(1375,9):
+      see previous definition of 'ARRAYSIZE'
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(80,42): warning C4267: 'argument': conversion from 'size_t' to 'long', possible loss of data
+  (compiling source file '../../subs.cpp')
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\subs.cpp(619,28): warning C4554: '&': check operator precedence for possible error; use parentheses to clarify precedence
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\subs.cpp(300,1): warning C4715: 'CBaseMonster::CheckEnemyOnCrosshair': not all control paths return a value
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\engine\eiface.h(132,9): warning C4005: 'ARRAYSIZE': macro redefinition
+  (compiling source file '../../util.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h(1375,9):
+      see previous definition of 'ARRAYSIZE'
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\engine\eiface.h(132,9): warning C4005: 'ARRAYSIZE': macro redefinition
+  (compiling source file '../../triggers.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h(1375,9):
+      see previous definition of 'ARRAYSIZE'
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(80,42): warning C4267: 'argument': conversion from 'size_t' to 'long', possible loss of data
+  (compiling source file '../../util.cpp')
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(80,42): warning C4267: 'argument': conversion from 'size_t' to 'long', possible loss of data
+  (compiling source file '../../triggers.cpp')
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\triggers.cpp(71,9): warning C4101: 'tmp': unreferenced local variable
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\triggers.cpp(256,14): warning C4553: '==': result of expression not used; did you intend '='?
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\triggers.cpp(258,14): warning C4553: '==': result of expression not used; did you intend '='?
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(282,7): warning C4291: 'void *CBaseEntity::operator new(size_t,entvars_t *)': no matching operator delete found; memory will not be freed if initialization throws an exception
+  (compiling source file '../../triggers.cpp')
+      C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(78,11):
+      see declaration of 'CBaseEntity::operator new'
+      C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(282,7):
+      the template instantiation context (the oldest one first) is
+          C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\triggers.cpp(57,1):
+          see reference to function template instantiation 'T *GetClassPtr<CMultiManager>(T *)' being compiled
+          with
+          [
+              T=CMultiManager
+          ]
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\engine\eiface.h(132,9): warning C4005: 'ARRAYSIZE': macro redefinition
+  (compiling source file '../../world.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h(1375,9):
+      see previous definition of 'ARRAYSIZE'
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(80,42): warning C4267: 'argument': conversion from 'size_t' to 'long', possible loss of data
+  (compiling source file '../../world.cpp')
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\engine\eiface.h(132,9): warning C4005: 'ARRAYSIZE': macro redefinition
+  (compiling source file '../../weapons.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h(1375,9):
+      see previous definition of 'ARRAYSIZE'
+  
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\cbase.h(80,42): warning C4267: 'argument': conversion from 'size_t' to 'long', possible loss of data
+  (compiling source file '../../weapons.cpp')
+  
+     Creating library C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\hl\x64\Debug\hl.lib and object C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\hl\x64\Debug\hl.exp
+MSVCRTD.lib(exe_main.obj) : error LNK2019: unresolved external symbol main referenced in function "int __cdecl invoke_main(void)" (?invoke_main@@YAHXZ)
+C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\dlls\hl\x64\Debug\hl.exe : fatal error LNK1120: 1 unresolved externals

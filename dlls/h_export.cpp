@@ -208,7 +208,7 @@ void mod_loadtextures(lump_t *l)
             mt->offsets[j] = LittleLong(mt->offsets[j]);
 
         if ((mt->width & 15) || (mt->height & 15))
-            ALERT(at_console, "Texture %s is not 16 aligned", mt->name);
+            ALERT(at_console, (char*)"Texture %s is not 16 aligned", mt->name);
         pixels = 85 * mt->height * mt->width / 64;
         palette = 3 * *(unsigned __int16*)((char*)mt + sizeof(miptex_t) + pixels);
         tx = (texture_t*)Hunk_AllocName(2 + 8 * palette + pixels + sizeof(texture_t), loadname);
@@ -357,7 +357,7 @@ void mod_loadtexinfo(lump_t* l)
 
     in = (texinfo_t*)(mod_base + l->fileofs);
     if (l->filelen % sizeof(*in))
-        ALERT(at_console, "mod_loadtexinfo: funny lump size in %s",loadmodel->name);
+        ALERT(at_console, (char*)"mod_loadtexinfo: funny lump size in %s",loadmodel->name);
     count = l->filelen / sizeof(*in);
     out = (mtexinfo_t*)Hunk_AllocName(count * sizeof(*out), loadname);
 
@@ -394,7 +394,7 @@ void mod_loadtexinfo(lump_t* l)
         else
         {
             if (miptex >= loadmodel->numtextures)
-                ALERT(at_console, "miptex >= loadmodel->numtextures");
+                ALERT(at_console, (char*)"miptex >= loadmodel->numtextures");
             out->texture = loadmodel->textures[miptex];
             if (!out->texture)
             {
@@ -452,7 +452,7 @@ void opengl_mod_loadtextures(lump_t* l)
             mt->offsets[j] = LittleLong(mt->offsets[j]);
 
         if ((mt->width & 15) || (mt->height & 15))
-            ALERT(at_console, "Texture %s is not 16 aligned", mt->name);
+            ALERT(at_console, (char*)"Texture %s is not 16 aligned", mt->name);
         pixels = 85 * mt->height * mt->width / 64;
         palette = 3 * *(unsigned __int16*)((char*)mt + sizeof(miptex_t) + pixels);
         tx = (texture_t*)Hunk_AllocName(2 + 8 * palette + pixels + sizeof(texture_t), loadname);

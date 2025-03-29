@@ -6,4 +6,10 @@
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
     <LocalDebuggerWorkingDirectory>D:\hl1-alpha\Half-Life\</LocalDebuggerWorkingDirectory>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LocalDebuggerCommand>D:\hl1-alpha\Half-Life\engine.exe</LocalDebuggerCommand>
+    <LocalDebuggerCommandArguments>+windowed +window +exec gaben.cfg -width 800 -startwindowed -windowed -developer +developer 1</LocalDebuggerCommandArguments>
+    <LocalDebuggerWorkingDirectory>D:\hl1-alpha\Half-Life\</LocalDebuggerWorkingDirectory>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
 </Project>
