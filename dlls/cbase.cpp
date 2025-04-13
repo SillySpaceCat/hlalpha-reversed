@@ -142,42 +142,16 @@ void CBaseMonster::TakeDamage(entvars_t* pevAttacker, float flDamage)
 	{
 		if (pev->movetype == MOVETYPE_WALK && pev->solid != SOLID_TRIGGER)
 		{
-			Vector v15 = pev->origin;
-			float v16 = v15[2] - pev->absmax.z + pev->absmin.z * 0.5;
-			float v17 = v15[1] - pev->absmax.y + pev->absmin.y * 0.5;
-			Vector v38 = v15 - pev->absmin + pev->absmax * 0.5;
-			float v39 = v17;
-			float v40 = v16;
-			Vector v18 = v38.Normalize();
-			Vector v41 = v18;
-			Vector v35 = Vector(0, 0, 0);
-			float v36 = 0;
-			float v37 = 0;
-			if (v18.x <= 64 && v18.y <= 64 && v18.z <= 64)
-			{
-				v35 = Vector(0, 0, 0);
-			}
-			else
-			{
-				float v21 = 1.0 / v41.x;
-				v35 = v38 * v21;
-				v36 = v39 * v21;
-				v37 = v21 * v40;
-			}
-			v38 = v35;
-			v39 = v36;
-			v40 = v37;
-			Vector v22 = pev->velocity;
-			v35.x = v35.x * flDamage * 8.0 + v22.x;
-			v36 = v36 * flDamage * 8.0 + v22[1];
-			v37 = v37 * flDamage * 8.0 + v22[2];
-			pev->velocity[0] = v35[0];
-			pev->velocity[1] = v36;
-			pev->velocity[2] = v37;
+			Vector distance = pev->origin - (pevAttacker->absmax + pevAttacker->absmin) * 0.5;
+			Vector vecDir = (distance).Normalize();
+			vecDir.x = vecDir.x * flDamage * 8.0;
+			vecDir.y = vecDir.y * flDamage * 8.0;
+			vecDir.z = vecDir.z * flDamage * 8.0;
+			pev->velocity = vecDir;
 		}
 	}
 
-	if ((!FClassnameIs(pev, "player") || (!FBitSet(pev->flags, FL_GODMODE) && !pgv->coop || pev->team <= 0 || pev->team != pevAttacker->team)))
+	if ((strcmp(STRING(pev->classname), "player") || !FBitSet(pev->flags, FL_GODMODE) && (!pgv->coop || pev->team <= 0 || pev->team != pevAttacker->team)))
 	{
 		pev->health -= ceil(flDamage - ceil(pev->armortype * flDamage));
 		if (pev->health <= 0)

@@ -534,6 +534,51 @@ void ExplodeModel(const Vector& vecOrigin, float speed, int model, int count)
 	WRITE_BYTE(MSG_BROADCAST, 15);// 1.5 seconds
 }
 
+void RadiusDamage(entvars_t* pevInflictor, entvars_t* pevAttacker, float flDamage, int iClassIgnore)
+{
+	TraceResult	tr;
+	trace_t trace;
+	float		flAdjustedDamage, falloff;
+	Vector		vecSpot;
+
+	pevInflictor->origin.z = pevInflictor->origin.z + 1.0;
+
+	// iterate on all entities in the vicinity.
+	edict_t* entity = UTIL_FindEntityInSphere(pevInflictor->origin, flDamage * 2.0);
+	edict_t* entity2 = NULL;
+	while (1)
+	{
+		if (!OFFSET(entity))
+			break;
+		if (entity->v.takedamage != DAMAGE_NO)
+		{
+			CBaseMonster* pTarget = (CBaseMonster*)(CBaseEntity::Instance(entity));
+			if (!pTarget)
+				return;
+			if (pTarget->Classify() == iClassIgnore)
+			{
+				break;
+			}
+
+			UTIL_TraceLine(pevInflictor->origin, Vector(entity->v.origin.x, entity->v.origin.y, entity->v.origin.z + (entity->v.size.y * 0.5)), 0, ENT(pevInflictor), &tr);
+			
+			Vector distance = Vector(pevInflictor->origin.x - entity->v.origin.x,
+									pevInflictor->origin.y - entity->v.origin.y,
+									pevInflictor->origin.z - entity->v.origin.z);
+			flAdjustedDamage = flDamage - distance.Length() * 0.4;
+
+			if (tr.flFraction == 1.0)
+			{
+				pTarget->TakeDamage(pevInflictor, flAdjustedDamage);
+			}
+		}
+
+		entity = ENT(entity->v.chain);
+		if (entity == NULL)
+			return;
+	}
+}
+
 void CBaseGrenade::Explosion()
 {
 	TraceResult tr;
@@ -545,7 +590,7 @@ void CBaseGrenade::Explosion()
 	WRITE_COORD(MSG_BROADCAST, pev->origin.y);
 	WRITE_COORD(MSG_BROADCAST, pev->origin.z);
 	ExplodeModel(pev->origin, 400, g_sModelIndexShrapnel, 30);
-	//RadiusDamage(pev, ENT(pev->owner), pev->dmg, 0);
+	RadiusDamage(pev, VARS(pev->owner), pev->dmg, 0);
 
 	Vector vecSpot = pev->origin - pev->velocity.Normalize() * 32;
 

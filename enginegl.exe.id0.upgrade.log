@@ -1,0 +1,20 @@
+IDA has found an unpacked version of database: C:\Users\Alex SSD\Documents\GitHub\hlalpha-reversed\enginegl.exe.idb
+on the disk.
+
+Should we proceed with the unpacked files?
+ -> Pro~c~eed with unpacked base
+
+  bytes   pages size description
+--------- ----- ---- --------------------------------------------
+  4644864   567 8192 allocating memory for b-tree...
+  1802240   220 8192 allocating memory for virtual array...
+   262144    32 8192 allocating memory for name pointers...
+-----------------------------------------------------------------
+  6709248            total memory allocated
+
+Loading type libraries...
+Can't use BIOS comments base. -> OK
+Autoanalysis subsystem has been initialized.
+Database for file 'enginegl.exe' has been loaded.
+Flushing buffers, please wait...ok
+Unloading IDP module pc...

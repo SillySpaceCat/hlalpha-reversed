@@ -239,6 +239,9 @@ BOOL function3(entvars_t* pev, entvars_t* enemy, float a3)
 
 	UTIL_MakeVectors(pev->angles);
 
+	if (!enemy) //avoid crashes, ai code isnt very complete
+		return 0;
+
 	v10.x = pev->origin.x - enemy->origin.x;
 	v10.y = pev->origin.y - enemy->origin.y;
 	v10.z = pev->origin.z - enemy->origin.z;
@@ -282,6 +285,8 @@ BOOL CanSeePlayer(entvars_t* pev, entvars_t* enemy)
 
 BOOL CBaseMonster::function1(entvars_t* a2)
 {
+	if (a2 == NULL)
+		return 0;
 	if (pgv->time < nextattack)
 		return 0;
 	if (!function2(pev, a2, 0.1))

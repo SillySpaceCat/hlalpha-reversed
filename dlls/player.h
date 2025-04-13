@@ -48,6 +48,7 @@ public:
 	void W_SetCurrentAmmo( void );
 	void W_Attack(void);
 	void W_WeaponFrame(void);
+	int Classify(void) { return 4; }
 };
 
 class CBaseItem : public CBaseEntity
