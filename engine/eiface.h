@@ -65,7 +65,7 @@ typedef struct enginefuncs_s
 	float		(*pfnVecToYaw)				(const float *rgflVector);
 	void		(*pfnVecToAngles)			(const float *rgflVectorIn, float *rgflVectorOut);
 	void		(*pfnMoveToGoal)			(edict_t* ent, float dist);
-	void		(*pfnMoveToOrigin)			(edict_t *ent, const float *pflGoal, float dist, int iMoveType);
+	double		(*pfnMoveToOrigin)			(edict_t *ent, const float *pflGoal, float dist, int iMoveType);
 	void		(*pfnChangeYaw)				(edict_t *ent);
 	void		(*pfnChangePitch)			(edict_t *ent);
 	edict_t*	(*pfnFindEntityByString)	(edict_t *pEdictStartSearchAfter, const char *pszField, const char *pszValue);

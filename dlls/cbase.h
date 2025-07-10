@@ -96,26 +96,6 @@ public:
 
 };
 
-//
-// EHANDLE. Safe way to point to CBaseEntities who may die between frames
-//
-class EHANDLE
-{
-private:
-	edict_t* m_pent;
-	int		m_serialnumber;
-public:
-	edict_t* Get(void);
-	edict_t* Set(edict_t* pent);
-
-	operator int();
-
-	operator CBaseEntity* ();
-
-	CBaseEntity* operator = (CBaseEntity* pEntity);
-	CBaseEntity* operator ->();
-};
-
 
 
 // Ugly technique to override base member functions

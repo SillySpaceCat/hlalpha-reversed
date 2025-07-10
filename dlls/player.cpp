@@ -366,6 +366,9 @@ void CBasePlayer::Use()
 	Vector		vecLOS;
 	float flMaxDot = 0.7;
 	float flDot;
+
+	int idealyawoffset = offsetof(edict_t, v) + offsetof(entvars_t, ideal_yaw); //debugging: NEEDS TO BE 536
+
 	if (entity)
 	{
 		vecLOS = (VecBModelOrigin(VARS(entity)) - (pev->origin + pev->view_ofs));

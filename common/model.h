@@ -41,6 +41,7 @@ typedef struct mplane_s
 	byte	pad[2];
 } mplane_t;
 
+//software
 typedef struct texture_s
 {
 	char		name[16]; //16
@@ -53,6 +54,24 @@ typedef struct texture_s
 	unsigned paloffset;
 
 } texture_t;
+
+//opengl
+
+typedef struct opengl_texture_s
+{
+	char		name[16];
+	unsigned	width, height;
+	int			gl_texturenum;
+	struct opengl_msurface_s* texturechain;	// for gl_texsort drawing
+	int			anim_total;				// total tenths in sequence ( 0 = no)
+	int			anim_min, anim_max;		// time for this frame min <=time< max
+	struct opengl_texture_s* anim_next;		// in the animation sequence
+	struct opengl_texture_s* alternate_anims;	// bmodels in frmae 1 use these
+	unsigned	offsets[4];		// four mip maps stored
+	unsigned int paloffset;
+	char offset[2];
+
+} opengl_texture_t;
 
 typedef struct
 {
@@ -70,6 +89,14 @@ typedef struct
 	texture_t* texture;
 	int			flags;
 } mtexinfo_t;
+
+typedef struct
+{
+	float		vecs[2][4];
+	float		mipadjust;
+	opengl_texture_t* texture;
+	int			flags;
+} opengl_mtexinfo_t;
 
 typedef struct msurface_s
 {
@@ -96,6 +123,32 @@ typedef struct msurface_s
 	byte		styles[4];
 	byte* samples;		// [numstyles*surfsize]
 } msurface_t;
+
+typedef struct opengl_msurface_s
+{
+	int			visframe;		// should be drawn when node is crossed
+
+	int			dlightframe;
+	int			dlightbits;
+
+	mplane_t* plane;
+	int			flags;
+
+	int			firstedge;	// look up in model->surfedges[], negative numbers
+	int			numedges;	// are backwards edges
+
+	// surface generation data
+	struct surfcache_s* cachespots[4];
+
+	short		texturemins[2];
+	short		extents[2];
+
+	opengl_mtexinfo_t* texinfo;
+
+	// lighting info
+	byte		styles[4];
+	byte* samples;		// [numstyles*surfsize]
+} opengl_msurface_t;
 
 #define	MIPLEVELS	4
 typedef struct miptex_s
@@ -137,6 +190,26 @@ typedef struct mleaf_s
 	int			key;			// BSP sequence number for leaf's contents
 	byte		ambient_sound_level[4];
 } mleaf_t;
+
+typedef struct opengl_mleaf_s
+{
+	// common with node
+	int			contents;		// wil be a negative contents number
+	int			visframe;		// node needs to be traversed if current
+
+	short		minmaxs[6];		// for bounding box culling
+
+	struct mnode_s* parent;
+
+	// leaf specific
+	byte* compressed_vis;
+	efrag_t* efrags;
+
+	opengl_msurface_t** firstmarksurface;
+	int			nummarksurfaces;
+	int			key;			// BSP sequence number for leaf's contents
+	byte		ambient_sound_level[4];
+} opengl_mleaf_t;
 
 typedef struct
 {
@@ -188,6 +261,7 @@ typedef struct cache_user_s
 	void* data;
 } cache_user_t;
 
+//software
 typedef struct model_s
 {
 	char name[64];
@@ -231,6 +305,52 @@ typedef struct model_s
 	char* entities;
 	cache_user_t cache;
 }model_t;
+
+//opengl
+typedef struct openglmodel_s
+{
+	char name[64];
+	int offset[7];
+	qboolean needload;
+	modtype_t type;
+	int numframes;
+	synctype_t synctype;
+	int flags;
+	vec3_t mins;
+	vec3_t maxs;
+	float radius;
+	int firstmodelsurface;
+	int nummodelsurfaces;
+	int numsubmodels;
+	dmodel_t* submodels;
+	int numplanes;
+	mplane_t* planes;
+	int numleafs;
+	opengl_mleaf_t* leafs;
+	int numvertexes;
+	mvertex_t* vertexes;
+	int numedges;
+	medge_t* edges;
+	int numnodes;
+	mnode_t* nodes;
+	int numtexinfo;
+	opengl_mtexinfo_t* texinfo;
+	int numsurfaces;
+	opengl_msurface_t* surfaces;
+	int numsurfedges;
+	int* surfedges;
+	int numclipnodes;
+	dclipnode_t* clipnodes;
+	int nummarksurfaces;
+	opengl_msurface_t** marksurfaces;
+	hull_t hulls[4];
+	int numtextures;
+	opengl_texture_t** textures;
+	byte* visdata;
+	byte* lightdata;
+	char* entities;
+	cache_user_t cache;
+}opengl_model_t;
 
 typedef struct lump_s
 {

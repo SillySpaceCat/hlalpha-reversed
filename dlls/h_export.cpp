@@ -29,6 +29,8 @@
 #include "cbase.h"
 
 
+#define OFFSET_(type, variable) ((const void*)&(((type*)NULL)->variable))
+
 // Required DLL entry point
 BOOL WINAPI DllMain(
    HINSTANCE hinstDLL,
@@ -55,11 +57,13 @@ typedef int(__cdecl* sv_stepdirection)(edict_t* ent, float yaw, float dist);
 typedef int(__cdecl* sv_newchasedir2)(edict_t* actor, const float destination, float dist);
 typedef void(__cdecl* sv_linkedict)(edict_t* actor, int touchtrigger);
 typedef void *(__cdecl* hunk_allocname)(int size, char* name);
+typedef int (__cdecl* gl_loadtexture)(char* identifier, int width, int height, byte *data, int mipmap, int alpha, byte *pal);
 
 sv_move SV_Move;
 sv_stepdirection SV_StepDirection;
 sv_newchasedir2 SV_NewChaseDir2;
 hunk_allocname Hunk_AllocName;
+gl_loadtexture GL_LoadTexture;
 sv_linkedict SV_LinkEdict;
 
 const wchar_t* processname;
@@ -332,9 +336,9 @@ void mod_loadtextures(lump_t *l)
         }
     }
     //WriteProcessMemory(hProcess, LPVOID(baseAddress + 0x00190494), &r_notexture_mip, sizeof(r_notexture_mip), NULL);
-    //WriteProcessMemory(hProcess, LPVOID(baseAddress + 0x00130F10), &mod_base, sizeof(mod_base), NULL);
+    WriteProcessMemory(hProcess, LPVOID(baseAddress + 0x00130F10), &mod_base, sizeof(mod_base), NULL);
     WriteProcessMemory(hProcess, LPVOID(baseAddress + 0x00118700), &loadmodel, sizeof(loadmodel), NULL);
-    //WriteProcessMemory(hProcess, LPVOID(baseAddress + 0x001186E0), &loadname, sizeof(loadname), NULL);
+    WriteProcessMemory(hProcess, LPVOID(baseAddress + 0x001186E0), &loadname, sizeof(loadname), NULL);
 }
 
 void mod_loadtexinfo(lump_t* l)
@@ -403,31 +407,31 @@ void mod_loadtexinfo(lump_t* l)
             }
         }
     }
-    WriteProcessMemory(hProcess, LPVOID(baseAddress + 0x00118700), &loadmodel, sizeof(loadmodel), NULL);
 }
 
 void opengl_mod_loadtextures(lump_t* l)
 {
     HANDLE hProcess = OpenProcess(PROCESS_VM_READ, FALSE, processID);
     byte* mod_base;
-    model_t* loadmodel;
+    opengl_model_t* loadmodel;
     char loadname[32];
+    int texture_mode;
+    int palette;
     //thanks for this chatgpt
-    ReadProcessMemory(hProcess, LPCVOID(baseAddress + 0x00130F10), &mod_base, sizeof(mod_base), NULL);
-    ReadProcessMemory(hProcess, LPCVOID(baseAddress + 0x00118700), &loadmodel, sizeof(loadmodel), NULL);
-    ReadProcessMemory(hProcess, LPCVOID(baseAddress + 0x001186E0), &loadname, sizeof(loadname), NULL);
+    ReadProcessMemory(hProcess, LPCVOID(baseAddress + 0x00934690), &mod_base, sizeof(mod_base), NULL);
+    ReadProcessMemory(hProcess, LPCVOID(baseAddress + 0x008F0480), &loadmodel, sizeof(loadmodel), NULL);
+    ReadProcessMemory(hProcess, LPCVOID(baseAddress + 0x008F0460), &loadname, sizeof(loadname), NULL);
 
-    Hunk_AllocName = (hunk_allocname)(baseAddress + 0x000194D0);
+    Hunk_AllocName = (hunk_allocname)(baseAddress + 0x00024B99);
+    GL_LoadTexture = (gl_loadtexture)(baseAddress + 0x0001A52C);
 
-    int		i, j, pixels, num, max, altmax, palette;
+    int		i, j, pixels, num, max, altmax;
     miptex_t* mt;
-    texture_t* tx, * tx2;
-    texture_t* anims[10];
-    texture_t* altanims[10];
+    opengl_texture_t* tx, * tx2;
+    opengl_texture_t* anims[10];
+    opengl_texture_t* altanims[10];
     dmiptexlump_t* m;
-    pixels = 0;
-    if (!l)
-        return;
+
     if (!l->filelen)
     {
         loadmodel->textures = NULL;
@@ -438,7 +442,7 @@ void opengl_mod_loadtextures(lump_t* l)
     m->nummiptex = LittleLong(m->nummiptex);
 
     loadmodel->numtextures = m->nummiptex;
-    loadmodel->textures = (texture_t**)Hunk_AllocName(4 * m->nummiptex * sizeof(*loadmodel->textures), loadname);
+    loadmodel->textures = (opengl_texture_t**)Hunk_AllocName(m->nummiptex * sizeof(*loadmodel->textures), loadname);
 
     for (i = 0; i < m->nummiptex; i++)
     {
@@ -451,36 +455,36 @@ void opengl_mod_loadtextures(lump_t* l)
         for (j = 0; j < MIPLEVELS; j++)
             mt->offsets[j] = LittleLong(mt->offsets[j]);
 
+        int textureoffset = offsetof(opengl_model_t, textures);
+
         if ((mt->width & 15) || (mt->height & 15))
-            ALERT(at_console, (char*)"Texture %s is not 16 aligned", mt->name);
-        pixels = 85 * mt->height * mt->width / 64;
+            ALERT(at_console, "Texture %s is not 16 aligned", mt->name);
+        pixels = 85 * ( (mt->width * mt->height) / 64 );
         palette = 3 * *(unsigned __int16*)((char*)mt + sizeof(miptex_t) + pixels);
-        tx = (texture_t*)Hunk_AllocName(2 + 8 * palette + pixels + sizeof(texture_t), loadname);
+        tx = (opengl_texture_t*)Hunk_AllocName(sizeof(opengl_texture_t) + pixels, loadname);
         loadmodel->textures[i] = tx;
 
         memcpy(tx->name, mt->name, sizeof(tx->name));
         tx->width = mt->width;
         tx->height = mt->height;
         for (j = 0; j < MIPLEVELS; j++)
-            tx->offsets[j] = mt->offsets[j] + sizeof(texture_t) - sizeof(miptex_t);
-        tx->paloffset = sizeof(texture_t) + pixels + 2;
+            tx->offsets[j] = mt->offsets[j] + sizeof(opengl_texture_t) - sizeof(miptex_t);
         // the pixels immediately follow the structures
-        memcpy(&tx[1], &mt[1], pixels + palette + 2);
+        memcpy(tx + 1, mt + 1, pixels);
+
 
         //if (!Q_strncmp(mt->name, "sky", 3))
-            //R_InitSky(tx);
-        unsigned __int8* mippal;
-        unsigned __int16* texpal;
-        static byte texgamma[256];
-        ReadProcessMemory(hProcess, LPCVOID(baseAddress + 0x0013CFA0), &texgamma, sizeof(texgamma), NULL);
-        mippal = (unsigned __int8*)&mt[1] + tx->paloffset;
-        texpal = (unsigned __int16*)((char*)&tx[1] + tx->paloffset);
-        for (int j = 0; j < palette; j++)
-        {
-            mippal = (unsigned __int8*)&mt[1] + tx->paloffset + j;
-            texpal = (unsigned __int16*)((char*)&tx[1] + tx->paloffset + j);
-            texpal[0] = texgamma[mippal[0]];
-        }
+        //    R_InitSky(tx);
+        //else
+        //{
+            byte* pixel_data = (byte*)(mt + 1); // Pixels follow miptex_t
+            unsigned short pal_size = *(unsigned short*)(pixel_data + pixels); // 256
+            byte* pal_data = pixel_data + pixels + 2; // Skip 2-byte count
+            //texture_mode = GL_LINEAR_MIPMAP_NEAREST; //_LINEAR;
+
+            tx->gl_texturenum = GL_LoadTexture(mt->name, tx->width, tx->height, (byte*)(tx + 1), 1, 0, pal_data);
+            //texture_mode = GL_LINEAR;
+        //}
     }
 
     //
@@ -516,8 +520,8 @@ void opengl_mod_loadtextures(lump_t* l)
             altanims[altmax] = tx;
             altmax++;
         }
-        //else
-            //Sys_Error("Bad animating texture %s", tx->name);
+        else
+            ALERT(at_console, "Bad animating texture %s", tx->name);
 
         for (j = i + 1; j < m->nummiptex; j++)
         {
@@ -544,8 +548,8 @@ void opengl_mod_loadtextures(lump_t* l)
                 if (num + 1 > altmax)
                     altmax = num + 1;
             }
-            //else
-                //Sys_Error("Bad animating texture %s", tx->name);
+            else
+                ALERT(at_console, "Bad animating texture %s", tx->name);
         }
 
 #define	ANIM_CYCLE	2
@@ -553,8 +557,8 @@ void opengl_mod_loadtextures(lump_t* l)
         for (j = 0; j < max; j++)
         {
             tx2 = anims[j];
-            //if (!tx2)
-                //Sys_Error("Missing frame %i of %s", j, tx->name);
+            if (!tx2)
+                ALERT(at_console, "Missing frame %i of %s", j, tx->name);
             tx2->anim_total = max * ANIM_CYCLE;
             tx2->anim_min = j * ANIM_CYCLE;
             tx2->anim_max = (j + 1) * ANIM_CYCLE;
@@ -565,8 +569,8 @@ void opengl_mod_loadtextures(lump_t* l)
         for (j = 0; j < altmax; j++)
         {
             tx2 = altanims[j];
-            //if (!tx2)
-                //Sys_Error("Missing frame %i of %s", j, tx->name);
+            if (!tx2)
+                ALERT(at_console,"Missing frame %i of %s", j, tx->name);
             tx2->anim_total = altmax * ANIM_CYCLE;
             tx2->anim_min = j * ANIM_CYCLE;
             tx2->anim_max = (j + 1) * ANIM_CYCLE;
@@ -575,10 +579,6 @@ void opengl_mod_loadtextures(lump_t* l)
                 tx2->alternate_anims = anims[0];
         }
     }
-    //WriteProcessMemory(hProcess, LPVOID(baseAddress + 0x00190494), &r_notexture_mip, sizeof(r_notexture_mip), NULL);
-    //WriteProcessMemory(hProcess, LPVOID(baseAddress + 0x00130F10), &mod_base, sizeof(mod_base), NULL);
-    WriteProcessMemory(hProcess, LPVOID(baseAddress + 0x00118700), &loadmodel, sizeof(loadmodel), NULL);
-    //WriteProcessMemory(hProcess, LPVOID(baseAddress + 0x001186E0), &loadname, sizeof(loadname), NULL);
 }
 
 void opengl_mod_loadtexinfo(lump_t* l)
@@ -607,12 +607,12 @@ void REtest()
         //MOD_LOADTEXINFO
         //
 
-        VirtualProtect(baseAddress + 0x0004B320, 5, PAGE_EXECUTE_READWRITE, &oldProtect);
-
-        *(DWORD*)(jmp + 1) = (DWORD)mod_loadtexinfo - ((DWORD)baseAddress + 0x0004B320) - 5;
-        memcpy(baseAddress + 0x0004B320, jmp, 5);
-
-        VirtualProtect(baseAddress + 0x0004B320, 5, oldProtect, &oldProtect);
+        //VirtualProtect(baseAddress + 0x0004B320, 5, PAGE_EXECUTE_READWRITE, &oldProtect);
+        //
+        //*(DWORD*)(jmp + 1) = (DWORD)mod_loadtexinfo - ((DWORD)baseAddress + 0x0004B320) - 5;
+        //memcpy(baseAddress + 0x0004B320, jmp, 5);
+        //
+        //VirtualProtect(baseAddress + 0x0004B320, 5, oldProtect, &oldProtect);
     }
     else
     {
@@ -620,22 +620,22 @@ void REtest()
         //MOD_LOADTEXTURES
         //
         VirtualProtect(baseAddress + 0x0001141A, 5, PAGE_EXECUTE_READWRITE, &oldProtect);
-
+        
         *(DWORD*)(jmp + 1) = (DWORD)opengl_mod_loadtextures - ((DWORD)baseAddress + 0x0001141A) - 5;
         memcpy(baseAddress + 0x0001141A, jmp, 5);
-
+        
         VirtualProtect(baseAddress + 0x0001141A, 5, oldProtect, &oldProtect);
 
         //
         //MOD_LOADTEXINFO
         //
 
-        VirtualProtect(baseAddress + 0x00011BCF, 5, PAGE_EXECUTE_READWRITE, &oldProtect);
-
-        *(DWORD*)(jmp + 1) = (DWORD)opengl_mod_loadtexinfo - ((DWORD)baseAddress + 0x00011BCF) - 5;
-        memcpy(baseAddress + 0x00011BCF, jmp, 5);
-
-        VirtualProtect(baseAddress + 0x00011BCF, 5, oldProtect, &oldProtect);
+        //VirtualProtect(baseAddress + 0x00011BCF, 5, PAGE_EXECUTE_READWRITE, &oldProtect);
+        //
+        //*(DWORD*)(jmp + 1) = (DWORD)opengl_mod_loadtexinfo - ((DWORD)baseAddress + 0x00011BCF) - 5;
+        //memcpy(baseAddress + 0x00011BCF, jmp, 5);
+        //
+        //VirtualProtect(baseAddress + 0x00011BCF, 5, oldProtect, &oldProtect);
     }
 }
 
@@ -644,7 +644,8 @@ void hooktoengine()
     processname = L"engine.exe";
     HANDLE snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
     PROCESSENTRY32 processEntry;
-    processEntry.dwSize = sizeof(PROCESSENTRY32);
+    PROCESSENTRY32 processEntry2;
+    processEntry.dwSize = processEntry2.dwSize = sizeof(PROCESSENTRY32);
     if (Process32First(snapshot, &processEntry)) 
     {
         do {
@@ -656,13 +657,14 @@ void hooktoengine()
 
         if (!processID) //opengl
         {
+            Process32First(snapshot, &processEntry2);
             processname = L"enginegl.exe";
             do {
-                if (wcscmp(processEntry.szExeFile, processname) == 0) {
-                    processID = processEntry.th32ProcessID;
+                if (wcscmp(processEntry2.szExeFile, processname) == 0) {
+                    processID = processEntry2.th32ProcessID;
                     break;
                 }
-            } while (Process32Next(snapshot, &processEntry));
+            } while (Process32Next(snapshot, &processEntry2));
         }
     }
     CloseHandle(snapshot);
@@ -747,11 +749,11 @@ void DLLEXPORT GiveFnptrsToDll( enginefuncs_t* pengfuncsFromEngine )
 {
 	memcpy(&g_engfuncs, pengfuncsFromEngine, sizeof(enginefuncs_t));
 	
-    hooktoengine(); //i have to put some of the engine's
+    //hooktoengine(); //i have to put some of the engine's
                     //functions here because i can't
                     //for the life of me figure out why
                     //move_to_origin and drop_to_floor make
                     //the engine freak out.
 
-    //REtest(); // just to help me reverse engineer the engine
+    REtest(); // just to help me reverse engineer the engine
 }
