@@ -80,26 +80,30 @@ void CBasePlayer::W_ChangeWeapon(int weapon)
 
 void CBasePlayer::W_SetCurrentAmmo( void )
 {
-	if ( pev->weapon == WEAPON_CROWBAR )
-	{
-		pev->weaponmodel = ALLOC_STRING("models/v_crowbar.mdl");
-		pev->currentammo = 99.0;
-	}
-	else if ( pev->weapon == WEAPON_GLOCK )
-	{
-		pev->weaponmodel = ALLOC_STRING("models/v_glock.mdl");
-		pev->currentammo = 99.0;
-	}
-	else if ( pev->weapon == WEAPON_MP5 )
-	{
-		pev->weaponmodel = ALLOC_STRING("models/v_mp5.mdl");
-		pev->currentammo = 99.0;
-	}
-	else
-	{
-		pev->weaponmodel = 0;
-		pev->currentammo = 0;
-	}
+    if ( pev->weapon == WEAPON_CROWBAR )
+    {
+        pev->weaponmodel = ALLOC_STRING("models/v_crowbar.mdl");
+        pev->currentammo = 99.0;
+    }
+    else if ( pev->weapon == WEAPON_GLOCK )
+    {
+        pev->weaponmodel = ALLOC_STRING("models/v_glock.mdl");
+        pev->currentammo = 99.0;
+    }
+    else if ( pev->weapon == WEAPON_MP5 )
+    {
+        pev->weaponmodel = ALLOC_STRING("models/v_mp5.mdl");
+        pev->currentammo = 99.0;
+
+        // Seed MP5 grenades if the player has none.
+        if (pev->ammo_4 <= 0)
+            pev->ammo_4 = 3;
+    }
+    else
+    {
+        pev->weaponmodel = 0;
+        pev->currentammo = 0;
+    }
 }
 
 void CBasePlayer::ImpulseCommands()
@@ -471,34 +475,43 @@ void CBasePlayer::W_WeaponFrame(void)
 			if (pev->weapons)
 				pev->weapon = (pev->weapon & 0xFF0000u) >> 16; // not sure if this'll work
 		}
-		else if (pev->button & IN_ATTACK2)
-		{
-			if (pev->weapons && !firegrenade)
-			{
-				//shootgrenade()
-				pev->button &= ~IN_ATTACK2;
-				firegrenade = 1;
-				return;
-			}
-			if (pev->weapon == 4 && pev->pSystemGlobals->time > nextgrenade)
-			{
-				firegrenade = 1;
-				UTIL_MakeVectors(pev->v_angle);
-				pev->pSystemGlobals->msg_entity = OFFSET(pev);
-				WRITE_BYTE(1, SVC_WEAPONANIM);
-				WRITE_BYTE(1, 2);
-				pev->pSystemGlobals->msg_entity = 0;
-				if (UTIL_RandomFloat(0.0, 1.0) < 0.5)
-					EMIT_SOUND(ENT(pev), CHAN_WEAPON, "weapons/glauncher.wav", 0.75, ATTN_NORM);
-				else
-					EMIT_SOUND(ENT(pev), CHAN_WEAPON, "weapons/glauncher2.wav", 0.75, ATTN_NORM);
-				
-				CBaseGrenade* grenade = GetClassPtr((CBaseGrenade*)NULL);
-				ShootGrenade(grenade, pev, pev->origin + pev->view_ofs, (pev->pSystemGlobals->v_forward * 800));
-				pev->button &= ~IN_ATTACK2;
-				nextgrenade = pev->pSystemGlobals->time + 1.0;
-			}
-		}
+else if (pev->button & IN_ATTACK2)
+{
+    // ... keep existing early-return logic above
+
+    if (pev->weapon == WEAPON_MP5 && pev->pSystemGlobals->time > nextgrenade)
+    {
+        // Out of grenades? Block fire and give minimal feedback.
+        if (pev->ammo_4 <= 0)
+        {
+            pev->button &= ~IN_ATTACK2;
+            ALERT(at_console, "Out of MP5 grenades\n");
+            return;
+        }
+
+        firegrenade = 1;
+
+        UTIL_MakeVectors(pev->v_angle);
+
+        pev->pSystemGlobals->msg_entity = OFFSET(pev);
+        WRITE_BYTE(1, SVC_WEAPONANIM);
+        WRITE_BYTE(1, 2);
+        pev->pSystemGlobals->msg_entity = 0;
+
+        if (UTIL_RandomFloat(0.0, 1.0) < 0.5)
+            EMIT_SOUND(ENT(pev), CHAN_WEAPON, "weapons/glauncher.wav", 0.75, ATTN_NORM);
+        else
+            EMIT_SOUND(ENT(pev), CHAN_WEAPON, "weapons/glauncher2.wav", 0.75, ATTN_NORM);
+
+        CBaseGrenade* grenade = GetClassPtr((CBaseGrenade*)NULL);
+        ShootGrenade(grenade, pev, pev->origin + pev->view_ofs, (pev->pSystemGlobals->v_forward * 800));
+
+        // Consume one grenade and set cooldown.
+        pev->ammo_4 -= 1;
+        pev->button &= ~IN_ATTACK2;
+        nextgrenade = pev->pSystemGlobals->time + 1.0;
+    }
+}
 		else
 			firegrenade = 0;
 		if ((pev->button & IN_ATTACK) != 0)
