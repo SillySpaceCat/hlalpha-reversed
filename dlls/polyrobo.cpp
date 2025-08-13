@@ -67,25 +67,42 @@ void CPolyRobo::Pain(float flDamage)
 
 void CPolyRobo::Think()
 {
-	pev->nextthink = pgv->time + 0.1;
-	if (m_fSequenceFinished)
-	{
-		if (pev->sequence >= 1 && pev->sequence <= 3)
-		{
-			pev->sequence = stand;
-			pev->frame = 0;
-		}
-		ResetSequenceInfo(0.1);
-	}
-	DispatchAnimEvents(0.1);
-	StudioFrameAdvance(0.1);
-	BoneController(0, (int)(pgv->time * 10) % 45);
-	Vector oldangles = pev->angles;
-	if (pev->enemy)
-	{
-		edict_t *enemy = ENT(pev->enemy);
-		Vector origin = enemy->v.origin - pev->origin;
-		pev->angles.y = UTIL_VecToYaw(origin);
-	}
-	BoneController(0, pev->angles.y - oldangles.y);
+    pev->nextthink = pgv->time + 0.1;
+
+    if (m_fSequenceFinished)
+    {
+        if (pev->sequence >= 1 && pev->sequence <= 3)
+        {
+            pev->sequence = stand;
+            pev->frame = 0;
+        }
+        ResetSequenceInfo(0.1);
+    }
+
+    DispatchAnimEvents(0.1);
+    StudioFrameAdvance(0.1);
+
+    // Default: no head turn
+    float headYawDelta = 0.0f;
+
+    if (pev->enemy)
+    {
+        Vector toEnemy = ENT(pev->enemy)->v.origin - pev->origin;
+        float targetYaw = UTIL_VecToYaw(toEnemy);
+
+        // Work out shortest signed angular difference to target
+        float delta = targetYaw - pev->angles.y;
+        while (delta > 180) delta -= 360;
+        while (delta < -180) delta += 360;
+
+        headYawDelta = delta;
+    }
+    else
+    {
+        // idle scan when no enemy, e.g. slow sinusoidal sweep
+        headYawDelta = 30.0f * sinf(pgv->time);
+    }
+
+    // Map −180..180 to 0..255 for controller 0
+    BoneController(0, (headYawDelta / 360.0f) * 255.0f);
 }
