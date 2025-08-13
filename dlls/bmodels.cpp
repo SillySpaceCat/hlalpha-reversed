@@ -453,3 +453,139 @@ void CFuncPushable::Touch(entvars_t* pActivator)
 		}
 	}
 }
+
+/* =================== PATH_CORNER (Alpha style) =================== */
+
+#define SF_CORNER_WAITFORTRIG   1
+#define SF_CORNER_TELEPORT      2
+#define SF_CORNER_FIREONCE      4
+
+class CPathCorner : public CBaseEntity
+{
+public:
+    void Spawn(void)
+    {
+        pev->solid    = SOLID_NOT;
+        pev->movetype = MOVETYPE_NONE;
+    }
+
+    void KeyValue(KeyValueData* pkvd)
+    {
+        if (FStrEq(pkvd->szKeyName, "target"))
+        {
+            pev->target = ALLOC_STRING(pkvd->szValue);
+            pkvd->fHandled = TRUE;
+        }
+        else if (FStrEq(pkvd->szKeyName, "message"))
+        {
+            pev->message = ALLOC_STRING(pkvd->szValue);
+            pkvd->fHandled = TRUE;
+        }
+    }
+};
+LINK_ENTITY_TO_CLASS(path_corner, CPathCorner);
+
+
+/* =================== FUNC_TRAIN (Alpha style) =================== */
+
+#define SF_TRAIN_START_ON    1
+#define SF_TRAIN_TOGGLE      2
+
+class CFuncTrain : public CBaseEntity
+{
+public:
+    CPathCorner* m_pNextCorner;
+    float   m_flWait;
+    float   m_flSpeed;
+    float   m_flDamage;
+
+    void Spawn(void)
+    {
+        pev->movetype = MOVETYPE_PUSH;
+        pev->solid    = SOLID_BSP;
+        SET_MODEL(ENT(pev), STRING(pev->model));
+
+        if (!m_flSpeed)  m_flSpeed  = 100;
+        if (!m_flDamage) m_flDamage = 2;
+
+        m_pNextCorner = NULL;
+
+        SetThink(&CFuncTrain::NextThink);
+        SetBlocked(&CFuncTrain::Blocked);
+        SetUse(&CFuncTrain::Use);
+
+        if (FBitSet(pev->spawnflags, SF_TRAIN_START_ON))
+            pev->nextthink = gpGlobals->time + 0.1f;
+    }
+
+    void KeyValue(KeyValueData* pkvd)
+    {
+        if (FStrEq(pkvd->szKeyName, "speed"))
+        {
+            m_flSpeed = atof(pkvd->szValue);
+            pkvd->fHandled = TRUE;
+        }
+        else if (FStrEq(pkvd->szKeyName, "wait"))
+        {
+            m_flWait = atof(pkvd->szValue);
+            pkvd->fHandled = TRUE;
+        }
+        else if (FStrEq(pkvd->szKeyName, "dmg"))
+        {
+            m_flDamage = atof(pkvd->szValue);
+            pkvd->fHandled = TRUE;
+        }
+        else if (FStrEq(pkvd->szKeyName, "target"))
+        {
+            pev->target = ALLOC_STRING(pkvd->szValue);
+            pkvd->fHandled = TRUE;
+        }
+    }
+
+    void Use(entvars_t* pActivator)
+    {
+        if (FBitSet(pev->spawnflags, SF_TRAIN_TOGGLE))
+        {
+            if (pev->nextthink > 0)
+                pev->nextthink = 0;
+            else
+                pev->nextthink = gpGlobals->time + 0.1f;
+        }
+        else
+        {
+            pev->nextthink = gpGlobals->time + 0.1f;
+        }
+    }
+
+    void Blocked(entvars_t* pOther)
+    {
+        CBaseEntity* pEnt = CBaseEntity::Instance(ENT(pOther));
+        if (pEnt && m_flDamage > 0)
+            pEnt->TakeDamage(pev, m_flDamage);
+    }
+
+    void NextThink(void)
+    {
+        if (!m_pNextCorner)
+            m_pNextCorner = FindNextCorner();
+
+        if (m_pNextCorner)
+            GoTo(m_pNextCorner);
+    }
+
+    CPathCorner* FindNextCorner(void)
+    {
+        return (CPathCorner*)UTIL_FindEntityByTargetname(NULL, STRING(pev->target));
+    }
+
+    void GoTo(CPathCorner* pDest)
+    {
+        if (!pDest) return;
+        Vector vecDest = pDest->pev->origin - (pev->mins + pev->maxs) * 0.5;
+        Vector vecMove = vecDest - pev->origin;
+
+        pev->velocity = vecMove.Normalize() * m_flSpeed;
+        m_pNextCorner = (CPathCorner*)UTIL_FindEntityByTargetname(NULL, STRING(pDest->pev->target));
+    }
+};
+LINK_ENTITY_TO_CLASS(func_train, CFuncTrain);
