@@ -37,18 +37,30 @@ extern void set_suicide_frame(entvars_t *pev);
 DLL_GLOBAL EOFFSET g_eoLastSpawn;
 
 
-/*
-===========
-ClientConnect
-
-called when a player connects to a server
-============
-*/
-void DLLEXPORT ClientConnect( globalvars_t *pgv )
+/* =========== ClientConnect
+   called when a player connects to a server
+   ============ */
+void DLLEXPORT ClientConnect(globalvars_t *pgv)
 {
+    entvars_t *pev = VARS(pgv->self);
 
+    // Example: announce to server console/log
+    ALERT(at_console, "Client \"%s\" connected\n", STRING(pev->netname));
+
+    // Example: initialize default spawn parms for a fresh join
+    SetNewParms(pgv);
+
+    // If you wanted to reject the client under some condition:
+    // if ( !IsAllowedToJoin(pev) )
+    // {
+    //     // send a rejection message back, if engine supports it
+    //     return; // early out means they won't enter the game
+    // }
+
+    // At this point you could also send them a welcome message
+    CLIENT_PRINTF(ENT(pev), print_chat,
+                  UTIL_VarArgs("Welcome, %s!\n", STRING(pev->netname)));
 }
-
 
 /*
 ===========
@@ -66,7 +78,7 @@ void DLLEXPORT ClientDisconnect( globalvars_t *pgv )
 	if ( !g_fGameOver )
 	{
 		EMIT_SOUND(ENT(pev), CHAN_BODY, "player/tornoff2.wav", 1, ATTN_NONE);
-		set_suicide_frame( pev );
+                set_suicide_frame(pev);
 	}
 }
 
@@ -244,4 +256,54 @@ void DLLEXPORT StartFrame( globalvars_t *pgv )
 	pgv->teamplay = CVAR_GET_FLOAT("teamplay");
 	g_iSkillLevel = CVAR_GET_FLOAT("skill");
 	g_ulFrameCount++;
+}
+
+/* =========== PlayerPreThink
+   called before physics/inputs are processed this frame
+   ============ */
+void DLLEXPORT PlayerPreThink(globalvars_t* pgv)
+{
+    entvars_t* pev = VARS(pgv->self);
+    if (!pev)
+        return;
+
+    edict_t* pEdict = ENT(pev);
+    if (FNullEnt(pEdict))
+        return;
+
+    // Retrieve the C++ player instance created in PutClientInServer
+    CBasePlayer* pPlayer = (CBasePlayer*)GET_PRIVATE(pEdict);
+    if (!pPlayer)
+    {
+        // Fallback: ensure the class instance exists
+        pPlayer = GetClassPtr((CBasePlayer*)pev);
+        if (!pPlayer)
+            return;
+    }
+
+    pPlayer->PreThink();
+}
+
+/* =========== PlayerPostThink
+   called after physics/inputs are processed this frame
+   ============ */
+void DLLEXPORT PlayerPostThink(globalvars_t* pgv)
+{
+    entvars_t* pev = VARS(pgv->self);
+    if (!pev)
+        return;
+
+    edict_t* pEdict = ENT(pev);
+    if (FNullEnt(pEdict))
+        return;
+
+    CBasePlayer* pPlayer = (CBasePlayer*)GET_PRIVATE(pEdict);
+    if (!pPlayer)
+    {
+        pPlayer = GetClassPtr((CBasePlayer*)pev);
+        if (!pPlayer)
+            return;
+    }
+
+    pPlayer->PostThink();
 }
